@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Typed from 'react-typed';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
