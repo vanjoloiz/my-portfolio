@@ -24,8 +24,9 @@ export default function MyApp(props: MyAppProps) {
       toggleColorMode: () => {
         setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
       },
+      mode,
     }),
-    []
+    [mode]
   );
 
   const theme = React.useMemo(
@@ -46,6 +47,7 @@ export default function MyApp(props: MyAppProps) {
       <Head>
         <title>Salvador Loiz</title>
         <meta name='viewport' content='initial-scale=1, width=device-width' />
+        <meta name='description' content='Salvador Loiz' />
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <ColorModeContext.Provider value={colorMode}>

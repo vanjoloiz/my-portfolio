@@ -9,12 +9,12 @@ import FacebookLogo from '@/assets/facebook.svg';
 import GithubLogo from '@/assets/github.svg';
 import Link from '@mui/material/Link';
 
-const Landing = () => {
+const Landing: React.FC = () => {
   return (
-    <Box mt={25}>
+    <Box mt={25} pb={32}>
       <Grid container>
         <Grid item md={6}>
-          <Typography variant='h1' component='div' gutterBottom>
+          <Typography variant='h1' gutterBottom>
             Hi, I&apos;m Salvador
           </Typography>
           <Typed
@@ -55,13 +55,7 @@ const Landing = () => {
           </div>
         </Grid>
         <Grid item md={6}>
-          <Image
-            src='/dev-image.png'
-            layout='fixed'
-            width={450}
-            height={350}
-            alt='Image'
-          />
+          <Image src='/dev-image.png' width={600} height={500} alt='Image' />
         </Grid>
       </Grid>
     </Box>

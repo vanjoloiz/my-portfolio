@@ -4,16 +4,25 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import IconButton from '@mui/material/IconButton';
+import BrightnessHighIcon from '@mui/icons-material/BrightnessHigh';
+import useScrollTrigger from '@mui/material/useScrollTrigger';
 
 export const ColorModeContext = React.createContext({
   toggleColorMode: () => {},
+  mode: '',
 });
 
-const NavBar = () => {
+const NavBar: React.FC = () => {
   const colorMode = React.useContext(ColorModeContext);
 
+  const trigger = useScrollTrigger({ disableHysteresis: true });
+
   return (
-    <AppBar position='fixed' sx={{ boxShadow: 'none' }} color='transparent'>
+    <AppBar
+      color={!trigger ? 'transparent' : 'inherit'}
+      position='fixed'
+      sx={{ boxShadow: 'none' }}
+    >
       <Toolbar>
         <Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
           Salvador Loiz
@@ -27,7 +36,11 @@ const NavBar = () => {
           sx={{ mr: 2 }}
           onClick={colorMode.toggleColorMode}
         >
-          <Brightness4Icon />
+          {colorMode.mode === 'light' ? (
+            <Brightness4Icon />
+          ) : (
+            <BrightnessHighIcon />
+          )}
         </IconButton>
       </Toolbar>
     </AppBar>
