@@ -11,7 +11,7 @@ import Link from '@mui/material/Link';
 
 const Landing: React.FC = () => {
   return (
-    <Box mt={25} pb={32}>
+    <Box mt={25} pb={35}>
       <Grid container>
         <Grid item md={6}>
           <Typography variant='h1' gutterBottom>
