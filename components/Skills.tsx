@@ -35,6 +35,7 @@ const Skills: React.FC = () => {
             width={500}
             height={500}
             alt='Image'
+            priority
           />
         </Grid>
         <Grid container item md={6} direction='column'>
