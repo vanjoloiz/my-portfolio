@@ -1,4 +1,7 @@
 import React from 'react';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
+import Zoom from '@mui/material/Zoom';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -23,14 +26,25 @@ import RestLogo from '@/assets/rest.svg';
 import NestJSLogo from '@/assets/nestjs.svg';
 import Image from 'next/image';
 import Tooltip from '@mui/material/Tooltip';
+import useAnimate from '@/lib/useAnimate';
 
 const Skills: React.FC = () => {
+  const theme = useTheme();
+
+  const mdDown = useMediaQuery(theme.breakpoints.down('md'));
+  const align = mdDown ? 'center' : 'flex-end';
+  const textAlign = mdDown ? 'center' : 'right';
+  const justify = mdDown ? 'center' : 'flex-end';
+
+  const animRef = React.useRef(null);
+  const animate = useAnimate(animRef);
+
   return (
     <Box pb={30}>
-      <Grid container>
-        <Grid item sm={12} md={6}>
+      <Grid container justifyContent='center' alignItems='center'>
+        <Grid item xs={12} lg={6}>
           <Image
-            layout='fixed'
+            layout='responsive'
             src='/dev2-image.png'
             width={500}
             height={500}
@@ -38,124 +52,208 @@ const Skills: React.FC = () => {
             priority
           />
         </Grid>
-        <Grid container item md={6} direction='column'>
-          <Box>
-            <Typography paragraph align='right' sx={{ fontSize: '42px' }}>
+        <Grid
+          container
+          item
+          lg={6}
+          direction='column'
+          alignItems={align}
+          ref={animRef}
+        >
+          <Grid item alignItems='center' sx={{ marginBottom: '32px' }}>
+            <Typography paragraph sx={{ fontSize: '42px' }} align={textAlign}>
               Languages known
             </Typography>
-            <Box
-              style={{
-                display: 'flex',
-                gap: '10px',
-                justifyContent: 'flex-end',
-                marginTop: '10px',
-              }}
+            <Grid
+              container
+              item
+              spacing={1}
+              direction='row'
+              justifyContent={justify}
             >
-              <Tooltip title='Javascript'>
-                <JavascriptLogo />
-              </Tooltip>
+              <Grid item>
+                <Zoom in={animate} style={{ transitionDelay: `${150 * 0}ms` }}>
+                  <Tooltip title='Javascript'>
+                    <JavascriptLogo />
+                  </Tooltip>
+                </Zoom>
+              </Grid>
 
-              <Tooltip title='Typescript'>
-                <TypeScriptLogo />
-              </Tooltip>
+              <Grid item>
+                <Zoom in={animate} style={{ transitionDelay: `${150 * 1}ms` }}>
+                  <Tooltip title='Typescript'>
+                    <TypeScriptLogo />
+                  </Tooltip>
+                </Zoom>
+              </Grid>
 
-              <Tooltip title='HTML'>
-                <Html5Logo />
-              </Tooltip>
+              <Grid item>
+                <Zoom in={animate} style={{ transitionDelay: `${150 * 2}ms` }}>
+                  <Tooltip title='HTML'>
+                    <Html5Logo />
+                  </Tooltip>
+                </Zoom>
+              </Grid>
 
-              <Tooltip title='CSS'>
-                <Css3Logo />
-              </Tooltip>
-            </Box>
-          </Box>
+              <Grid item>
+                <Zoom in={animate} style={{ transitionDelay: `${150 * 3}ms` }}>
+                  <Tooltip title='CSS'>
+                    <Css3Logo />
+                  </Tooltip>
+                </Zoom>
+              </Grid>
+            </Grid>
+          </Grid>
 
-          <Box mt={5}>
-            <Typography paragraph align='right' sx={{ fontSize: '42px' }}>
+          <Grid item alignItems='center' sx={{ marginBottom: '32px' }}>
+            <Typography paragraph align={textAlign} sx={{ fontSize: '42px' }}>
               Frontend
             </Typography>
-            <Box
-              style={{
-                display: 'flex',
-                gap: '10px',
-                justifyContent: 'flex-end',
-                marginTop: '10px',
-              }}
+
+            <Grid
+              container
+              item
+              spacing={1}
+              direction='row'
+              justifyContent={justify}
             >
-              <Tooltip title='React'>
-                <ReactLogo />
-              </Tooltip>
+              <Grid item>
+                <Zoom in={animate} style={{ transitionDelay: `${150 * 4}ms` }}>
+                  <Tooltip title='React'>
+                    <ReactLogo />
+                  </Tooltip>
+                </Zoom>
+              </Grid>
 
-              <Tooltip title='Next.js'>
-                <NextjsLogo />
-              </Tooltip>
+              <Grid item>
+                <Zoom in={animate} style={{ transitionDelay: `${150 * 5}ms` }}>
+                  <Tooltip title='Next.js'>
+                    <NextjsLogo />
+                  </Tooltip>
+                </Zoom>
+              </Grid>
 
-              <Tooltip title='Apollo Client'>
-                <ApolloLogo />
-              </Tooltip>
+              <Grid item>
+                <Zoom in={animate} style={{ transitionDelay: `${150 * 6}ms` }}>
+                  <Tooltip title='Apollo Client'>
+                    <ApolloLogo />
+                  </Tooltip>
+                </Zoom>
+              </Grid>
 
-              <Tooltip title='Redux'>
-                <ReduxLogo />
-              </Tooltip>
+              <Grid item>
+                <Zoom in={animate} style={{ transitionDelay: `${150 * 7}ms` }}>
+                  <Tooltip title='Redux'>
+                    <ReduxLogo />
+                  </Tooltip>
+                </Zoom>
+              </Grid>
 
-              <Tooltip title='Material UI'>
-                <MUILogo />
-              </Tooltip>
+              <Grid item>
+                <Zoom in={animate} style={{ transitionDelay: `${150 * 8}ms` }}>
+                  <Tooltip title='Material UI'>
+                    <MUILogo />
+                  </Tooltip>
+                </Zoom>
+              </Grid>
 
-              <Tooltip title='Bootstrap'>
-                <BootstrapLogo />
-              </Tooltip>
+              <Grid item>
+                <Zoom in={animate} style={{ transitionDelay: `${150 * 9}ms` }}>
+                  <Tooltip title='Bootstrap'>
+                    <BootstrapLogo />
+                  </Tooltip>
+                </Zoom>
+              </Grid>
 
-              <Tooltip title='Ant Design'>
-                <AntdLogo />
-              </Tooltip>
-            </Box>
-          </Box>
+              <Grid item>
+                <Zoom in={animate} style={{ transitionDelay: `${150 * 10}ms` }}>
+                  <Tooltip title='Ant Design'>
+                    <AntdLogo />
+                  </Tooltip>
+                </Zoom>
+              </Grid>
+            </Grid>
+          </Grid>
 
-          <Box mt={5}>
-            <Typography paragraph align='right' sx={{ fontSize: '42px' }}>
+          <Grid item alignItems='center'>
+            <Typography paragraph sx={{ fontSize: '42px' }} align={textAlign}>
               Backend, Database and Cloud
             </Typography>
-            <Box
-              style={{
-                display: 'flex',
-                gap: '10px',
-                justifyContent: 'flex-end',
-                marginTop: '10px',
-              }}
+            <Grid
+              container
+              item
+              spacing={1}
+              direction='row'
+              justifyContent={justify}
             >
-              <Tooltip title='Node.js'>
-                <NodeJsLogo />
-              </Tooltip>
+              <Grid item>
+                <Zoom in={animate} style={{ transitionDelay: `${150 * 11}ms` }}>
+                  <Tooltip title='Node.js'>
+                    <NodeJsLogo />
+                  </Tooltip>
+                </Zoom>
+              </Grid>
 
-              <Tooltip title='Express.js'>
-                <ExpressLogo />
-              </Tooltip>
+              <Grid item>
+                <Tooltip title='Express.js'>
+                  <Zoom
+                    in={animate}
+                    style={{ transitionDelay: `${150 * 12}ms` }}
+                  >
+                    <ExpressLogo />
+                  </Zoom>
+                </Tooltip>
+              </Grid>
 
-              <Tooltip title='Nest.js'>
-                <NestJSLogo />
-              </Tooltip>
+              <Grid item>
+                <Zoom in={animate} style={{ transitionDelay: `${150 * 13}ms` }}>
+                  <Tooltip title='Nest.js'>
+                    <NestJSLogo />
+                  </Tooltip>
+                </Zoom>
+              </Grid>
 
-              <Tooltip title='MongoDB'>
-                <MongodbLogo />
-              </Tooltip>
+              <Grid item>
+                <Zoom in={animate} style={{ transitionDelay: `${150 * 14}ms` }}>
+                  <Tooltip title='MongoDB'>
+                    <MongodbLogo />
+                  </Tooltip>
+                </Zoom>
+              </Grid>
 
-              <Tooltip title='Postgres'>
-                <PostGresLogo />
-              </Tooltip>
+              <Grid item>
+                <Zoom in={animate} style={{ transitionDelay: `${150 * 15}ms` }}>
+                  <Tooltip title='Postgres'>
+                    <PostGresLogo />
+                  </Tooltip>
+                </Zoom>
+              </Grid>
 
-              <Tooltip title='REST API'>
-                <RestLogo />
-              </Tooltip>
+              <Grid item>
+                <Zoom in={animate} style={{ transitionDelay: `${150 * 16}ms` }}>
+                  <Tooltip title='REST API'>
+                    <RestLogo />
+                  </Tooltip>
+                </Zoom>
+              </Grid>
 
-              <Tooltip title='GraphQL API'>
-                <GraphQLLogo />
-              </Tooltip>
+              <Grid item>
+                <Zoom in={animate} style={{ transitionDelay: `${150 * 17}ms` }}>
+                  <Tooltip title='GraphQL API'>
+                    <GraphQLLogo />
+                  </Tooltip>
+                </Zoom>
+              </Grid>
 
-              <Tooltip title='Heroku'>
-                <HerokuLogo />
-              </Tooltip>
-            </Box>
-          </Box>
+              <Grid item>
+                <Zoom in={animate} style={{ transitionDelay: `${150 * 18}ms` }}>
+                  <Tooltip title='Heroku'>
+                    <HerokuLogo />
+                  </Tooltip>
+                </Zoom>
+              </Grid>
+            </Grid>
+          </Grid>
         </Grid>
       </Grid>
     </Box>
