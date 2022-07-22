@@ -2,6 +2,7 @@ import React from 'react';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 import Zoom from '@mui/material/Zoom';
+import Hidden from '@mui/material/Hidden';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -31,10 +32,10 @@ import useAnimate from '@/lib/useAnimate';
 const Skills: React.FC = () => {
   const theme = useTheme();
 
-  const mdDown = useMediaQuery(theme.breakpoints.down('md'));
-  const align = mdDown ? 'center' : 'flex-end';
-  const textAlign = mdDown ? 'center' : 'right';
-  const justify = mdDown ? 'center' : 'flex-end';
+  const lgDown = useMediaQuery(theme.breakpoints.down('lg'));
+  const align = lgDown ? 'center' : 'flex-end';
+  const textAlign = lgDown ? 'center' : 'right';
+  const justify = lgDown ? 'center' : 'flex-end';
 
   const animRef = React.useRef(null);
   const animate = useAnimate(animRef);
@@ -43,14 +44,22 @@ const Skills: React.FC = () => {
     <Box pb={30}>
       <Grid container justifyContent='center' alignItems='center'>
         <Grid item xs={12} lg={6}>
-          <Image
-            layout='responsive'
-            src='/dev2-image.png'
-            width={500}
-            height={500}
-            alt='Image'
-            priority
-          />
+          <Hidden lgDown>
+            <Image
+              layout='responsive'
+              src='/dev2-image.png'
+              width={500}
+              height={500}
+              alt='Image'
+              priority
+            />
+          </Hidden>
+
+          {lgDown && (
+            <Typography variant='h1' gutterBottom align='center'>
+              Skills
+            </Typography>
+          )}
         </Grid>
         <Grid
           container
