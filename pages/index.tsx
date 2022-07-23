@@ -2,6 +2,7 @@ import type { NextPage } from 'next';
 import NavBar from '@/components/NavBar';
 import Landing from '@/components/Landing';
 import Skills from '@/components/Skills';
+import Footer from '@/components/Footer';
 import Container from '@mui/material/Container';
 
 const Home: NextPage = () => {
@@ -11,6 +12,7 @@ const Home: NextPage = () => {
       <Container>
         <Landing />
         <Skills />
+        <Footer />
       </Container>
     </>
   );

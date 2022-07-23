@@ -1,4 +1,5 @@
 import React from 'react';
+import Fade from '@mui/material/Fade';
 import Typed from 'react-typed';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
@@ -55,7 +56,16 @@ const Landing: React.FC = () => {
           </div>
         </Grid>
         <Grid item md={6}>
-          <Image src='/dev-image.png' width={600} height={500} alt='Image' />
+          <Fade in={true} style={{ transitionDelay: '100ms' }}>
+            <div>
+              <Image
+                src='/dev-image.png'
+                width={600}
+                height={500}
+                alt='Image'
+              />
+            </div>
+          </Fade>
         </Grid>
       </Grid>
     </Box>

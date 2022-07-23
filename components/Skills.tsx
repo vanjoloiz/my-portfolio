@@ -2,6 +2,7 @@ import React from 'react';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 import Zoom from '@mui/material/Zoom';
+import Fade from '@mui/material/Fade';
 import Hidden from '@mui/material/Hidden';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
@@ -25,6 +26,8 @@ import HerokuLogo from '@/assets/heroku.svg';
 import GraphQLLogo from '@/assets/graphql.svg';
 import RestLogo from '@/assets/rest.svg';
 import NestJSLogo from '@/assets/nestjs.svg';
+import DenoLogo from '@/assets/deno.svg';
+import SCSSLogo from '@/assets/scss.svg';
 import Image from 'next/image';
 import Tooltip from '@mui/material/Tooltip';
 import useAnimate from '@/lib/useAnimate';
@@ -45,14 +48,18 @@ const Skills: React.FC = () => {
       <Grid container justifyContent='center' alignItems='center'>
         <Grid item xs={12} lg={6}>
           <Hidden lgDown>
-            <Image
-              layout='responsive'
-              src='/dev2-image.png'
-              width={500}
-              height={500}
-              alt='Image'
-              priority
-            />
+            <Fade in={animate} style={{ transitionDelay: '100ms' }}>
+              <div>
+                <Image
+                  layout='responsive'
+                  src='/dev2-image.png'
+                  width={500}
+                  height={500}
+                  alt='Image'
+                  priority
+                />
+              </div>
+            </Fade>
           </Hidden>
 
           {lgDown && (
@@ -181,6 +188,14 @@ const Skills: React.FC = () => {
                   </Tooltip>
                 </Zoom>
               </Grid>
+
+              <Grid item>
+                <Zoom in={animate} style={{ transitionDelay: `${150 * 11}ms` }}>
+                  <Tooltip title='SCSS'>
+                    <SCSSLogo />
+                  </Tooltip>
+                </Zoom>
+              </Grid>
             </Grid>
           </Grid>
 
@@ -196,7 +211,7 @@ const Skills: React.FC = () => {
               justifyContent={justify}
             >
               <Grid item>
-                <Zoom in={animate} style={{ transitionDelay: `${150 * 11}ms` }}>
+                <Zoom in={animate} style={{ transitionDelay: `${150 * 12}ms` }}>
                   <Tooltip title='Node.js'>
                     <NodeJsLogo />
                   </Tooltip>
@@ -207,7 +222,7 @@ const Skills: React.FC = () => {
                 <Tooltip title='Express.js'>
                   <Zoom
                     in={animate}
-                    style={{ transitionDelay: `${150 * 12}ms` }}
+                    style={{ transitionDelay: `${150 * 13}ms` }}
                   >
                     <ExpressLogo />
                   </Zoom>
@@ -215,7 +230,7 @@ const Skills: React.FC = () => {
               </Grid>
 
               <Grid item>
-                <Zoom in={animate} style={{ transitionDelay: `${150 * 13}ms` }}>
+                <Zoom in={animate} style={{ transitionDelay: `${150 * 14}ms` }}>
                   <Tooltip title='Nest.js'>
                     <NestJSLogo />
                   </Tooltip>
@@ -223,7 +238,15 @@ const Skills: React.FC = () => {
               </Grid>
 
               <Grid item>
-                <Zoom in={animate} style={{ transitionDelay: `${150 * 14}ms` }}>
+                <Zoom in={animate} style={{ transitionDelay: `${150 * 15}ms` }}>
+                  <Tooltip title='Deno'>
+                    <DenoLogo />
+                  </Tooltip>
+                </Zoom>
+              </Grid>
+
+              <Grid item>
+                <Zoom in={animate} style={{ transitionDelay: `${150 * 16}ms` }}>
                   <Tooltip title='MongoDB'>
                     <MongodbLogo />
                   </Tooltip>
@@ -231,7 +254,7 @@ const Skills: React.FC = () => {
               </Grid>
 
               <Grid item>
-                <Zoom in={animate} style={{ transitionDelay: `${150 * 15}ms` }}>
+                <Zoom in={animate} style={{ transitionDelay: `${150 * 17}ms` }}>
                   <Tooltip title='Postgres'>
                     <PostGresLogo />
                   </Tooltip>
@@ -239,7 +262,7 @@ const Skills: React.FC = () => {
               </Grid>
 
               <Grid item>
-                <Zoom in={animate} style={{ transitionDelay: `${150 * 16}ms` }}>
+                <Zoom in={animate} style={{ transitionDelay: `${150 * 18}ms` }}>
                   <Tooltip title='REST API'>
                     <RestLogo />
                   </Tooltip>
@@ -247,7 +270,7 @@ const Skills: React.FC = () => {
               </Grid>
 
               <Grid item>
-                <Zoom in={animate} style={{ transitionDelay: `${150 * 17}ms` }}>
+                <Zoom in={animate} style={{ transitionDelay: `${150 * 19}ms` }}>
                   <Tooltip title='GraphQL API'>
                     <GraphQLLogo />
                   </Tooltip>
@@ -255,7 +278,7 @@ const Skills: React.FC = () => {
               </Grid>
 
               <Grid item>
-                <Zoom in={animate} style={{ transitionDelay: `${150 * 18}ms` }}>
+                <Zoom in={animate} style={{ transitionDelay: `${150 * 20}ms` }}>
                   <Tooltip title='Heroku'>
                     <HerokuLogo />
                   </Tooltip>
