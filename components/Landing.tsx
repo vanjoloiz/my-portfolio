@@ -1,6 +1,4 @@
 import React from 'react';
-import { useTheme } from '@mui/material/styles';
-import useMediaQuery from '@mui/material/useMediaQuery';
 import Fade from '@mui/material/Fade';
 import Typed from 'react-typed';
 import Grid from '@mui/material/Grid';
@@ -14,10 +12,6 @@ import Link from '@mui/material/Link';
 import Hidden from '@mui/material/Hidden';
 
 const Landing: React.FC = () => {
-  const theme = useTheme();
-
-  const lgDown = useMediaQuery(theme.breakpoints.down('lg'));
-
   return (
     <Box mt={25} pb={35}>
       <Grid container>
