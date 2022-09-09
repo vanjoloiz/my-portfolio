@@ -28,9 +28,13 @@ const Projects = () => {
         <Grid container item md={12} lg={6} spacing={2} ref={animRef}>
           <Grid item xs={12} lg={6}>
             <Fade in={animate} style={{ transitionDelay: `${200 * 0}ms` }}>
-              <Link href='https://ipostitph.herokuapp.com' target='_blank'>
+              <Link
+                href='https://ipostitph.herokuapp.com'
+                target='_blank'
+                sx={{ textDecoration: 'none' }}
+              >
                 <CardActionArea>
-                  <Card>
+                  <Card elevation={3}>
                     <CardContent>
                       <Typography variant='h5' gutterBottom mb={5}>
                         iPostItPH
@@ -62,9 +66,13 @@ const Projects = () => {
 
           <Grid item xs={12} lg={6}>
             <Fade in={animate} style={{ transitionDelay: `${200 * 1}ms` }}>
-              <Link href='https://loizapp.herokuapp.com' target='_blank'>
+              <Link
+                href='https://loizapp.herokuapp.com'
+                target='_blank'
+                sx={{ textDecoration: 'none' }}
+              >
                 <CardActionArea>
-                  <Card>
+                  <Card elevation={3}>
                     <CardContent>
                       <Typography variant='h5' gutterBottom mb={5}>
                         LApp
@@ -98,7 +106,7 @@ const Projects = () => {
         <Grid container item md={6}>
           <Hidden lgDown>
             <Grid item md={12}>
-              <Typography align='center' variant='h1'>
+              <Typography align='center' paragraph sx={{ fontSize: '58px' }}>
                 Projects
               </Typography>
               <Fade in={animate} style={{ transitionDelay: '100ms' }}>
@@ -107,7 +115,7 @@ const Projects = () => {
                     layout='fixed'
                     src='/dev3-image.png'
                     width={800}
-                    height={600}
+                    height={500}
                     alt='Image'
                     priority
                   />
