@@ -1,4 +1,6 @@
 import React from 'react';
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import Fade from '@mui/material/Fade';
 import Typed from 'react-typed';
 import Grid from '@mui/material/Grid';
@@ -9,8 +11,13 @@ import LinkedInLogo from '@/assets/linkedin.svg';
 import FacebookLogo from '@/assets/facebook.svg';
 import GithubLogo from '@/assets/github.svg';
 import Link from '@mui/material/Link';
+import Hidden from '@mui/material/Hidden';
 
 const Landing: React.FC = () => {
+  const theme = useTheme();
+
+  const lgDown = useMediaQuery(theme.breakpoints.down('lg'));
+
   return (
     <Box mt={25} pb={35}>
       <Grid container>
@@ -56,16 +63,18 @@ const Landing: React.FC = () => {
           </div>
         </Grid>
         <Grid item md={6}>
-          <Fade in={true} style={{ transitionDelay: '100ms' }}>
-            <div>
-              <Image
-                src='/dev-image.png'
-                width={600}
-                height={500}
-                alt='Image'
-              />
-            </div>
-          </Fade>
+          <Hidden lgDown>
+            <Fade in={true} style={{ transitionDelay: '100ms' }}>
+              <div>
+                <Image
+                  src='/dev-image.png'
+                  width={600}
+                  height={500}
+                  alt='Image'
+                />
+              </div>
+            </Fade>
+          </Hidden>
         </Grid>
       </Grid>
     </Box>

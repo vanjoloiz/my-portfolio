@@ -51,7 +51,6 @@ const Skills: React.FC = () => {
             <Fade in={animate} style={{ transitionDelay: '100ms' }}>
               <div>
                 <Image
-                  layout='responsive'
                   src='/dev2-image.png'
                   width={500}
                   height={500}
