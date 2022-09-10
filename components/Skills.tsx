@@ -44,7 +44,7 @@ const Skills: React.FC = () => {
   const animate = useAnimate(animRef);
 
   return (
-    <Box pb={30}>
+    <Box pb={35}>
       <Grid container justifyContent='center' alignItems='center'>
         <Grid item xs={12} lg={6}>
           <Hidden lgDown>
