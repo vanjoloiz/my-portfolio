@@ -83,15 +83,15 @@ const Projects = () => {
                       </Typography>
 
                       <Grid container spacing={1}>
-                        <Grid item md={4}>
+                        <Grid item>
                           <Chip label='Express' />
                         </Grid>
 
-                        <Grid item md={4}>
-                          <Chip label='NodeJS' />
+                        <Grid item>
+                          <Chip label='Socket.io' />
                         </Grid>
 
-                        <Grid item md={5}>
+                        <Grid item>
                           <Chip label='MongoDB' />
                         </Grid>
                       </Grid>
