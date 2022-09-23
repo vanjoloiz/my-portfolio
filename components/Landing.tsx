@@ -22,7 +22,7 @@ const Landing: React.FC = () => {
           <Typed
             style={{ fontSize: '32px' }}
             strings={[
-              'Full-stack Developer 🌐',
+              'Full-stack Developer. 🌐',
               'Love JavaScript Development. 🚀',
               'React Developer. ⚛️',
               'Node.js Developer. 💻',
