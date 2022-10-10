@@ -79,7 +79,7 @@ const Projects = () => {
                       </Typography>
 
                       <Typography variant='body2' color='text.secondary' mb={5}>
-                        Blogging Post platform for filipino users.
+                        Blogging Application for people love to write blogs.
                       </Typography>
 
                       <Grid container spacing={1}>
