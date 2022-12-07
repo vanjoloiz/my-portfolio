@@ -31,6 +31,7 @@ import SCSSLogo from '@/assets/scss.svg';
 import Image from 'next/image';
 import Tooltip from '@mui/material/Tooltip';
 import useAnimate from '@/lib/useAnimate';
+import srcImage from '../public/dev2-image.jpeg';
 
 const Skills: React.FC = () => {
   const theme = useTheme();
@@ -51,11 +52,12 @@ const Skills: React.FC = () => {
             <Fade in={animate} style={{ transitionDelay: '100ms' }}>
               <div>
                 <Image
-                  src='/dev2-image.png'
+                  src={srcImage}
                   width={500}
                   height={500}
                   alt='Image'
                   priority
+                  placeholder='blur'
                 />
               </div>
             </Fade>

@@ -10,6 +10,7 @@ import FacebookLogo from '@/assets/facebook.svg';
 import GithubLogo from '@/assets/github.svg';
 import Link from '@mui/material/Link';
 import Hidden from '@mui/material/Hidden';
+import srcImage from '../public/dev-image.jpeg';
 
 const Landing: React.FC = () => {
   return (
@@ -61,10 +62,12 @@ const Landing: React.FC = () => {
             <Fade in={true} style={{ transitionDelay: '100ms' }}>
               <div>
                 <Image
-                  src='/dev-image.png'
+                  src={srcImage}
                   width={600}
                   height={500}
                   alt='Image'
+                  placeholder='blur'
+                  priority
                 />
               </div>
             </Fade>

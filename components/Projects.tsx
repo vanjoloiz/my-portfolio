@@ -11,6 +11,7 @@ import Image from 'next/image';
 import Hidden from '@mui/material/Hidden';
 import Fade from '@mui/material/Fade';
 import useAnimate from '@/lib/useAnimate';
+import srcImage from '../public/dev3-image.jpeg';
 
 const Projects = () => {
   const animRef = React.useRef(null);
@@ -113,11 +114,12 @@ const Projects = () => {
                 <div>
                   <Image
                     layout='fixed'
-                    src='/dev3-image.png'
+                    src={srcImage}
                     width={800}
                     height={500}
                     alt='Image'
                     priority
+                    placeholder='blur'
                   />
                 </div>
               </Fade>
