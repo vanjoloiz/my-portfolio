@@ -49,7 +49,7 @@ const Landing: React.FC = () => {
             </Link>
 
             <Link
-              href='https://github.com/MarshallLoiz'
+              href='https://github.com/vanjoloiz'
               target='_blank'
               rel='noopener'
             >
