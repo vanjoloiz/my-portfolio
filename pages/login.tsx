@@ -54,8 +54,8 @@ const Login = () => {
     <>
       <NavBar />
       <main style={{ marginTop: '150px' }}>
-        <Container maxWidth='md'>
-          <Box sx={{ width: '600px', display: 'block', margin: 'auto' }}>
+        <Container maxWidth='sm'>
+          <Box sx={{ display: 'block', margin: 'auto' }}>
             <Paper elevation={3}>
               <Box p={6}>
                 {error.isShow && (
