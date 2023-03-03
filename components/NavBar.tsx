@@ -30,10 +30,10 @@ const NavBar: React.FC = () => {
         <Typography
           variant='h6'
           component='div'
-          sx={{ flexGrow: 1, cursor: 'pointer' }}
+          sx={{ flexGrow: 1 }}
           onClick={() => router.push('/')}
         >
-          Salvador Loiz
+          <span style={{ cursor: 'pointer' }}>Salvador Loiz</span>
         </Typography>
 
         <IconButton
