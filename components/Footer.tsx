@@ -5,7 +5,7 @@ const Footer: React.FC = () => {
   return (
     <footer>
       <Typography variant='subtitle1' align='center' gutterBottom>
-        Copyright © Loiz. 2022.
+        Copyright © Salvador Loiz. 2023.
       </Typography>
     </footer>
   );

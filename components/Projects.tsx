@@ -18,7 +18,7 @@ const Projects = () => {
   const animate = useAnimate(animRef);
 
   return (
-    <Box pb={30}>
+    <Box pb={15}>
       <Hidden lgUp>
         <Typography align='center' variant='h1' gutterBottom>
           Projects

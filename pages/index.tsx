@@ -4,20 +4,30 @@ import Landing from '@/components/Landing';
 import Skills from '@/components/Skills';
 import Footer from '@/components/Footer';
 import Projects from '@/components/Projects';
+import Reviews from '@/components/Reviews';
 import Container from '@mui/material/Container';
 
 const Home: NextPage = () => {
   return (
     <>
       <NavBar />
-      <Container>
-        <Landing />
-        <Skills />
-        <Projects />
-        <Footer />
-      </Container>
+      <main>
+        <Container>
+          <Landing />
+          <Skills />
+          <Projects />
+          {/* <Reviews /> */}
+          <Footer />
+        </Container>
+      </main>
     </>
   );
+};
+
+export const getServerSideProps = async () => {
+  return {
+    props: {},
+  };
 };
 
 export default Home;

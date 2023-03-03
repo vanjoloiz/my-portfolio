@@ -1,4 +1,5 @@
 import React from 'react';
+import { useRouter } from 'next/router';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
@@ -13,6 +14,8 @@ export const ColorModeContext = React.createContext({
 });
 
 const NavBar: React.FC = () => {
+  const router = useRouter();
+
   const colorMode = React.useContext(ColorModeContext);
 
   const trigger = useScrollTrigger({ disableHysteresis: true });
@@ -24,7 +27,12 @@ const NavBar: React.FC = () => {
       sx={{ boxShadow: 'none' }}
     >
       <Toolbar>
-        <Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
+        <Typography
+          variant='h6'
+          component='div'
+          sx={{ flexGrow: 1, cursor: 'pointer' }}
+          onClick={() => router.push('/')}
+        >
           Salvador Loiz
         </Typography>
 
