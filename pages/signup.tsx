@@ -85,7 +85,9 @@ const SignUp = () => {
                     <Form>
                       <Box
                         sx={{
-                          '& .MuiTextField-root': { width: '49%' },
+                          '& .MuiTextField-root': { width: '48%' },
+                          display: 'flex',
+                          gap: '10px',
                         }}
                       >
                         <Field
@@ -93,7 +95,6 @@ const SignUp = () => {
                           color='secondary'
                           label='First name'
                           margin='dense'
-                          width='auto'
                           id='firstName'
                           sx={{ mr: 1 }}
                           error={touched.firstName && Boolean(errors.firstName)}
