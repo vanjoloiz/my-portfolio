@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "nodemon server.ts",
-    "build": "yarn install --include=dev && next build",
+    "build": "yarn install && next build",
     "start": "cross-env NODE_ENV=production ts-node server.ts",
     "heroku-postbuild": "npm run build",
     "postinstall": "tsc",
@@ -31,7 +31,8 @@
     "react-typed": "^1.2.0",
     "swr": "^2.0.3",
     "validator": "^13.9.0",
-    "yup": "^1.0.2"
+    "yup": "^1.0.2",
+    "zustand": "^4.3.5"
   },
   "devDependencies": {
     "@svgr/webpack": "^6.3.0",
