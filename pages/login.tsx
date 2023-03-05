@@ -37,9 +37,10 @@ const Login = () => {
 
       Cookie.set('token', data);
 
-      setIsLoading(false);
-
       router.push('/');
+      router.events.on('routeChangeComplete', () => {
+        setIsLoading(false);
+      });
     } catch (err: any) {
       setError({
         isShow: true,
