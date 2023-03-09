@@ -32,8 +32,7 @@
     "sharp": "^0.31.3",
     "swr": "^2.0.3",
     "validator": "^13.9.0",
-    "yup": "^1.0.2",
-    "zustand": "^4.3.5"
+    "yup": "^1.0.2"
   },
   "devDependencies": {
     "@svgr/webpack": "^6.3.0",
