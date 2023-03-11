@@ -6,12 +6,12 @@ export const loginValidationSchema = yup.object({
 });
 
 export const signupValidationSchema = yup.object({
-  firstName: yup.string().required('Please enter your First name.'),
-  lastName: yup.string().required('Please enter your Last name.'),
-  username: yup.string().required('Please enter your Username.'),
+  firstName: yup.string().required('Please enter your first name.'),
+  lastName: yup.string().required('Please enter your last name.'),
+  username: yup.string().required('Please enter your username.'),
   password: yup
     .string()
-    .required('Please enter your Password.')
+    .required('Please enter your password.')
     .min(8, 'Password must be at least 8 characters.'),
   confirmPassword: yup
     .string()
