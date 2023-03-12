@@ -67,7 +67,7 @@ const Landing: React.FC = () => {
                   height={500}
                   alt='Image'
                   placeholder='blur'
-                  blurDataURL='./public/dev-image.jpeg'
+                  blurDataURL='./dev-image.jpeg'
                   priority
                 />
               </div>
