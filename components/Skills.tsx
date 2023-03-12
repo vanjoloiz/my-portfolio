@@ -58,6 +58,7 @@ const Skills: React.FC = () => {
                   alt='Image'
                   priority
                   placeholder='blur'
+                  blurDataURL='./public/dev-2-image.jpeg'
                 />
               </div>
             </Fade>

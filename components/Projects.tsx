@@ -120,6 +120,7 @@ const Projects = () => {
                     alt='Image'
                     priority
                     placeholder='blur'
+                    blurDataURL='./public/dev-3-image.jpeg'
                   />
                 </div>
               </Fade>
