@@ -4,9 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "nodemon server.ts",
-    "build": "yarn install && next build",
-    "start": "cross-env NODE_ENV=production ts-node server.ts",
-    "postinstall": "tsc",
+    "build": "next build",
+    "start": "npm start -H 0.0.0.0",
     "lint": "next lint"
   },
   "dependencies": {
