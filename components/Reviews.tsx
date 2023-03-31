@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, FC, Fragment } from "react";
 import { useRouter } from "next/router";
 import useSWRInfinite from "swr/infinite";
 import List from "@mui/material/List";
@@ -24,7 +24,11 @@ interface Review {
   updatedAt: string;
 }
 
-const Reviews = () => {
+interface ReviewProps {
+  reviewsInitialValue: Review[][];
+}
+
+const Reviews: FC<ReviewProps> = ({ reviewsInitialValue }) => {
   const router = useRouter();
 
   const PAGE_SIZE = 5;
@@ -50,6 +54,7 @@ const Reviews = () => {
   } = useSWRInfinite<Review[]>(getKey, {
     revalidateFirstPage: false,
     revalidateOnMount: true,
+    fallbackData: reviewsInitialValue,
   });
 
   const isLoadingInitialData = !reviews && !error;
@@ -89,8 +94,8 @@ const Reviews = () => {
             }}
           >
             {paginateReviews?.map((data) => (
-              <>
-                <ListItem key={data._id} alignItems="flex-start">
+              <Fragment key={data._id}>
+                <ListItem alignItems="flex-start">
                   <ListItemAvatar>
                     <Avatar>
                       {getInitials(
@@ -120,7 +125,7 @@ const Reviews = () => {
                   />
                 </ListItem>
                 <Divider variant="inset" component="li" />
-              </>
+              </Fragment>
             ))}
           </List>
         </Fade>

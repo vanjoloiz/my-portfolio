@@ -6,17 +6,19 @@ import Footer from "@/components/Footer";
 import Projects from "@/components/Projects";
 import Reviews from "@/components/Reviews";
 import Container from "@mui/material/Container";
+import axios from "axios";
+import { BASE_URL } from "@utils/baseUrl";
 
-const Home: NextPage = ({ user }: any) => {
+const Home: NextPage = ({ user, reviews }: any) => {
   return (
     <>
-      <NavBar isLoggedIn={user !== undefined} />
+      <NavBar isLoggedIn={false} />
       <main>
         <Container>
           <Landing />
           <Skills />
           <Projects />
-          <Reviews />
+          <Reviews reviewsInitialValue={reviews} />
           <Footer />
         </Container>
       </main>
@@ -25,8 +27,12 @@ const Home: NextPage = ({ user }: any) => {
 };
 
 export const getServerSideProps = async () => {
+  const { data } = await axios.get(`${BASE_URL}/api/v1/review?pageNumber=1`);
+
   return {
-    props: {},
+    props: {
+      reviews: data,
+    },
   };
 };
 
