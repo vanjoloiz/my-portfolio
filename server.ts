@@ -28,11 +28,11 @@ nextApp.prepare().then(() => {
   app.use("/api/v1/auth", authRouter);
   app.use("/api/v1/review", reviewRouter);
 
-  app.all("*", (req: any, res: any) => handler(req, res));
-
   app.get("/health", (req, res) => {
     res.status(200).send("Ok");
   });
+
+  app.all("*", (req: any, res: any) => handler(req, res));
 
   server.listen(PORT, (err: any) => {
     if (err) throw err;
