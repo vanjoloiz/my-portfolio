@@ -20,7 +20,7 @@ const ReviewSchema = new mongoose.Schema<Review>(
 
     isApproved: {
       type: Boolean,
-      default: true,
+      default: false,
     },
   },
   { timestamps: true }
