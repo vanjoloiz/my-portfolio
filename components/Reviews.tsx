@@ -1,105 +1,161 @@
-import { useRouter } from 'next/router';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import Divider from '@mui/material/Divider';
-import ListItemText from '@mui/material/ListItemText';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
-import Avatar from '@mui/material/Avatar';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
+import { useRef } from "react";
+import { useRouter } from "next/router";
+import useSWRInfinite from "swr/infinite";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import Divider from "@mui/material/Divider";
+import ListItemText from "@mui/material/ListItemText";
+import ListItemAvatar from "@mui/material/ListItemAvatar";
+import Avatar from "@mui/material/Avatar";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Fade from "@mui/material/Fade";
+import useAnimate from "@/lib/useAnimate";
+
+interface Review {
+  _id: string;
+  profile: {
+    _id: string;
+    firstName: string;
+    lastName: string;
+  };
+  text: string;
+  updatedAt: string;
+}
 
 const Reviews = () => {
   const router = useRouter();
 
-  return (
-    <Box pb={25}>
-      <List
-        sx={{
-          width: '100%',
-          bgcolor: 'background.paper',
-          paddingBottom: '25px',
-        }}
-      >
-        <ListItem alignItems='flex-start'>
-          <ListItemAvatar>
-            <Avatar alt='Remy Sharp' src='/static/images/avatar/1.jpg' />
-          </ListItemAvatar>
-          <ListItemText
-            primary='Brunch this weekend?'
-            secondary={
-              <>
-                <Typography
-                  sx={{ display: 'inline' }}
-                  component='span'
-                  variant='body2'
-                  color='text.primary'
-                >
-                  Ali Connors
-                </Typography>
-                {" — I'll be in your neighborhood doing errands this…"}
-              </>
-            }
-          />
-        </ListItem>
-        <Divider variant='inset' component='li' />
-        <ListItem alignItems='flex-start'>
-          <ListItemAvatar>
-            <Avatar alt='Travis Howard' src='/static/images/avatar/2.jpg' />
-          </ListItemAvatar>
-          <ListItemText
-            primary='Summer BBQ'
-            secondary={
-              <>
-                <Typography
-                  sx={{ display: 'inline' }}
-                  component='span'
-                  variant='body2'
-                  color='text.primary'
-                >
-                  to Scott, Alex, Jennifer
-                </Typography>
-                {" — Wish I could come, but I'm out of town this…"}
-              </>
-            }
-          />
-        </ListItem>
-        <Divider variant='inset' component='li' />
-        <ListItem alignItems='flex-start'>
-          <ListItemAvatar>
-            <Avatar alt='Cindy Baker' src='/static/images/avatar/3.jpg' />
-          </ListItemAvatar>
-          <ListItemText
-            primary='Oui Oui'
-            secondary={
-              <>
-                <Typography
-                  sx={{ display: 'inline' }}
-                  component='span'
-                  variant='body2'
-                  color='text.primary'
-                >
-                  Sandra Adams
-                </Typography>
-                {' — Do you have Paris recommendations? Have you ever…'}
-              </>
-            }
-          />
-        </ListItem>
-      </List>
+  const PAGE_SIZE = 5;
 
-      <Button
-        color='secondary'
-        variant='contained'
-        disableElevation
-        disableFocusRipple
-        onClick={() => {
-          router.push('/create-review');
-        }}
-      >
-        Add review
-      </Button>
-    </Box>
+  const animRef = useRef(null);
+
+  const animate = useAnimate(animRef);
+
+  const getKey = (pageIndex: number, previousPageData: Review[]) => {
+    if (previousPageData && !previousPageData.length) return null;
+
+    if (previousPageData && previousPageData.length === PAGE_SIZE)
+      return `/api/v1/review?pageNumber=${pageIndex + 1}`;
+
+    return "/api/v1/review?pageNumber=1";
+  };
+
+  const {
+    data: reviews,
+    error,
+    size,
+    setSize,
+  } = useSWRInfinite<Review[]>(getKey, {
+    revalidateFirstPage: false,
+    revalidateOnMount: true,
+  });
+
+  const isLoadingInitialData = !reviews && !error;
+
+  const isLoadingMore =
+    isLoadingInitialData ||
+    (reviews && typeof reviews[size - 1] === "undefined");
+
+  const isEmpty = reviews?.[0]?.length === 0;
+
+  const isReachingEnd =
+    isEmpty || (reviews && reviews[reviews.length - 1]?.length < PAGE_SIZE);
+
+  const paginateReviews = reviews ? reviews.flat() : [];
+
+  const getInitials = (firstName: string, lastName: string) => {
+    const firstInitial = firstName.charAt(0);
+    const lastWords = lastName.split(" ");
+
+    const lastInitial = lastWords[lastWords.length - 1].charAt(0);
+
+    return `${firstInitial}${lastInitial}`;
+  };
+
+  return (
+    <>
+      <Typography component="span" variant="h3">
+        Reviews
+      </Typography>
+      <Box pb={25} mt={1} ref={animRef}>
+        <Fade in={animate} style={{ transitionDelay: "100ms" }}>
+          <List
+            sx={{
+              width: "100%",
+              bgcolor: "background.paper",
+              paddingBottom: "25px",
+            }}
+          >
+            {paginateReviews?.map((data) => (
+              <>
+                <ListItem key={data._id} alignItems="flex-start">
+                  <ListItemAvatar>
+                    <Avatar>
+                      {getInitials(
+                        data.profile.firstName,
+                        data.profile.lastName
+                      )}
+                    </Avatar>
+                  </ListItemAvatar>
+                  <ListItemText
+                    primary={
+                      <Typography component="span" variant="subtitle2">
+                        {data.profile.firstName} {data.profile.lastName}
+                      </Typography>
+                    }
+                    secondary={
+                      <>
+                        <Typography
+                          sx={{ display: "inline" }}
+                          component="span"
+                          variant="subtitle1"
+                          color="text.primary"
+                        >
+                          {`${data.text}`}
+                        </Typography>
+                      </>
+                    }
+                  />
+                </ListItem>
+                <Divider variant="inset" component="li" />
+              </>
+            ))}
+          </List>
+        </Fade>
+
+        <Fade in={animate} style={{ transitionDelay: "100ms" }}>
+          <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+            <Button
+              sx={{ ml: 1 }}
+              color="secondary"
+              variant="contained"
+              disableElevation
+              disableFocusRipple
+              onClick={() => {
+                router.push("/create-review");
+              }}
+            >
+              Add review
+            </Button>
+
+            <Button
+              disabled={isReachingEnd || isLoadingMore}
+              color="secondary"
+              variant="contained"
+              disableElevation
+              disableFocusRipple
+              onClick={() => {
+                setSize(size + 1);
+              }}
+            >
+              {isLoadingMore ? "loading..." : "view more"}
+            </Button>
+          </Box>
+        </Fade>
+      </Box>
+    </>
   );
 };
 

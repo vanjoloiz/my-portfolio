@@ -1,4 +1,4 @@
-import mongoose, { Schema, Types } from 'mongoose';
+import mongoose, { Schema, Types } from "mongoose";
 
 interface Review {
   profile: Types.ObjectId;
@@ -10,7 +10,7 @@ const ReviewSchema = new mongoose.Schema<Review>(
   {
     profile: {
       type: Schema.Types.ObjectId,
-      ref: 'Profile',
+      ref: "Profile",
     },
 
     text: {
@@ -20,12 +20,12 @@ const ReviewSchema = new mongoose.Schema<Review>(
 
     isApproved: {
       type: Boolean,
-      default: false,
+      default: true,
     },
   },
   { timestamps: true }
 );
 
-const ReviewModel = mongoose.model('Review', ReviewSchema);
+const ReviewModel = mongoose.model("Review", ReviewSchema);
 
 export default ReviewModel;

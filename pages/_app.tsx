@@ -1,24 +1,24 @@
-import * as React from 'react';
-import { SWRConfig } from 'swr';
-import Router from 'next/router';
-import Head from 'next/head';
-import { parseCookies } from 'nookies';
-import axios from 'axios';
-import Cookie from 'js-cookie';
-import { AppProps, AppContext } from 'next/app';
-import { ThemeProvider } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
-import { CacheProvider, EmotionCache } from '@emotion/react';
-import { createTheme } from '@mui/material/styles';
-import createEmotionCache from '@/lib/createEmotionCache';
-import { ColorModeContext } from '@/components/NavBar';
-import { BASE_URL } from '@utils/baseUrl';
+import * as React from "react";
+import { SWRConfig } from "swr";
+import Router from "next/router";
+import Head from "next/head";
+import { parseCookies } from "nookies";
+import axios from "axios";
+import Cookie from "js-cookie";
+import { AppProps, AppContext } from "next/app";
+import { ThemeProvider } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
+import { CacheProvider, EmotionCache } from "@emotion/react";
+import { createTheme } from "@mui/material/styles";
+import createEmotionCache from "@/lib/createEmotionCache";
+import { ColorModeContext } from "@/components/NavBar";
+import { BASE_URL } from "@utils/baseUrl";
 
 const clientSideEmotionCache = createEmotionCache();
 
 const fetcher = (url: string) =>
   axios
-    .get(url, { headers: { Authorization: Cookie.get('token') } })
+    .get(url, { headers: { Authorization: Cookie.get("token") } })
     .then((res) => res.data);
 
 interface MyAppProps extends AppProps {
@@ -28,12 +28,12 @@ interface MyAppProps extends AppProps {
 export default function MyApp(props: MyAppProps) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
 
-  const [mode, setMode] = React.useState<'light' | 'dark'>('light');
+  const [mode, setMode] = React.useState<"light" | "dark">("light");
 
   const colorMode = React.useMemo(
     () => ({
       toggleColorMode: () => {
-        setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
+        setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
       },
       mode,
     }),
@@ -45,7 +45,7 @@ export default function MyApp(props: MyAppProps) {
       createTheme({
         palette: {
           primary: {
-            main: '#FFFFFF',
+            main: "#FFFFFF",
           },
           mode,
         },
@@ -57,9 +57,9 @@ export default function MyApp(props: MyAppProps) {
     <CacheProvider value={emotionCache}>
       <Head>
         <title>Salvador Loiz</title>
-        <meta name='viewport' content='initial-scale=1, width=device-width' />
-        <meta name='description' content='Salvador Loiz' />
-        <link rel='icon' href='/favicon.ico' />
+        <meta name="viewport" content="initial-scale=1, width=device-width" />
+        <meta name="description" content="Salvador Loiz" />
+        <link rel="icon" href="/favicon.ico" />
       </Head>
       <SWRConfig value={{ fetcher }}>
         <ColorModeContext.Provider value={colorMode}>
@@ -76,26 +76,26 @@ export default function MyApp(props: MyAppProps) {
 MyApp.getInitialProps = async ({ ctx }: AppContext) => {
   const { token } = parseCookies(ctx);
 
-  const protectedRoutes = ctx.pathname === '/create-review';
+  const protectedRoutes = ctx.pathname === "/create-review";
 
   let user;
 
   if (token === undefined) {
     if (protectedRoutes) {
       if (ctx?.req) {
-        ctx.res?.writeHead(302, { Location: '/login' });
+        ctx.res?.writeHead(302, { Location: "/login" });
         ctx.res?.end();
       } else {
-        Router.push('/login');
+        Router.push("/login");
       }
     }
   } else {
-    if (!protectedRoutes && ctx.pathname !== '/') {
+    if (!protectedRoutes && ctx.pathname !== "/") {
       if (ctx.req) {
-        ctx.res?.writeHead(302, { location: '/' });
+        ctx.res?.writeHead(302, { location: "/" });
         ctx.res?.end();
       } else {
-        Router.push('/');
+        Router.push("/");
       }
     }
 
@@ -109,10 +109,8 @@ MyApp.getInitialProps = async ({ ctx }: AppContext) => {
   }
 
   return {
-    props: {
-      fallback: {
-        '/api/v1/auth': user,
-      },
+    pageProps: {
+      user,
     },
   };
 };
