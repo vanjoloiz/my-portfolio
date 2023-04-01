@@ -1,4 +1,4 @@
 export const BASE_URL =
   process.env.NODE_ENV === "production"
-    ? "https://salvadorloizjr.up.railway.app/"
+    ? "https://salvadorloizjr.onrender.com"
     : "http://localhost:3000";
