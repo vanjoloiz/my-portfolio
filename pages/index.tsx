@@ -12,7 +12,7 @@ import { BASE_URL } from "@utils/baseUrl";
 const Home: NextPage = ({ user, reviews }: any) => {
   return (
     <>
-      <NavBar isLoggedIn={false} />
+      <NavBar isLoggedIn={user} />
       <main>
         <Container>
           <Landing />
