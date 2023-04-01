@@ -1,22 +1,22 @@
-import * as React from 'react';
-import Document, { Html, Head, Main, NextScript } from 'next/document';
-import createEmotionServer from '@emotion/server/create-instance';
-import theme from '@/assets/theme';
-import createEmotionCache from '@/lib/createEmotionCache';
+import * as React from "react";
+import Document, { Html, Head, Main, NextScript } from "next/document";
+import createEmotionServer from "@emotion/server/create-instance";
+import theme from "@/assets/theme";
+import createEmotionCache from "@/lib/createEmotionCache";
 
 export default class MyDocument extends Document {
   render() {
     return (
-      <Html lang='en' style={{ overflowX: 'hidden' }}>
+      <Html lang="en" style={{ overflowX: "hidden" }}>
         <Head>
           {/* PWA primary color */}
-          <meta name='theme-color' content={theme.palette.primary.main} />
-          <link rel='shortcut icon' href='/static/favicon.ico' />
+          <meta name="theme-color" content={theme.palette.primary.main} />
+          {/* <link rel='shortcut icon' href='/static/favicon.ico' /> */}
           <link
-            rel='stylesheet'
-            href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap'
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
           />
-          <meta name='emotion-insertion-point' content='' />
+          <meta name="emotion-insertion-point" content="" />
           {(this.props as any).emotionStyleTags}
         </Head>
         <body>
@@ -47,7 +47,7 @@ MyDocument.getInitialProps = async (ctx) => {
   const emotionStyles = extractCriticalToChunks(initialProps.html);
   const emotionStyleTags = emotionStyles.styles.map((style) => (
     <style
-      data-emotion={`${style.key} ${style.ids.join(' ')}`}
+      data-emotion={`${style.key} ${style.ids.join(" ")}`}
       key={style.key}
       dangerouslySetInnerHTML={{ __html: style.css }}
     />

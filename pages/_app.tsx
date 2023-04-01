@@ -58,8 +58,8 @@ export default function MyApp(props: MyAppProps) {
       <Head>
         <title>Salvador Loiz</title>
         <meta name="viewport" content="initial-scale=1, width=device-width" />
-        <meta name="description" content="Salvador Loiz" />
-        <link rel="icon" href="/favicon.ico" />
+        <meta name="Salvador Loiz portfolio website" content="Salvador Loiz" />
+        {/* <link rel="icon" href="/favicon.ico" /> */}
       </Head>
       <SWRConfig value={{ fetcher }}>
         <ColorModeContext.Provider value={colorMode}>
