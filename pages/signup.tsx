@@ -15,6 +15,10 @@ import axios from "axios";
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
 import { signupValidationSchema } from "@utils/formValidationSchema";
+import IconButton from "@mui/material/IconButton";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import InputAdornment from "@mui/material/InputAdornment";
 
 interface FormValues {
   firstName: string;
@@ -24,11 +28,31 @@ interface FormValues {
   confirmPassword: string;
 }
 
-const SignUp = ({ user }: any) => {
+const SignUp = () => {
   const router = useRouter();
 
   const [error, setError] = useState({ isShow: false, message: "" });
+
   const [isLoading, setIsLoading] = useState(false);
+
+  const [isShowPassword, setIsShowPassword] = useState({
+    password: false,
+    confirmPassword: false,
+  });
+
+  const handleShowPasswordClick = () => {
+    setIsShowPassword({
+      ...isShowPassword,
+      password: !isShowPassword.password,
+    });
+  };
+
+  const handleShowConfirmPasswordClick = () => {
+    setIsShowPassword({
+      ...isShowPassword,
+      confirmPassword: !isShowPassword.confirmPassword,
+    });
+  };
 
   const handleSubmit = async (values: FormValues) => {
     try {
@@ -132,12 +156,28 @@ const SignUp = ({ user }: any) => {
                         color="secondary"
                         label="Password"
                         margin="dense"
-                        type="password"
+                        type={isShowPassword.password ? "text" : "password"}
                         id="password"
                         fullWidth
                         onChange={handleChange}
                         error={touched.password && Boolean(errors.password)}
                         helperText={touched.password && errors.password}
+                        InputProps={{
+                          endAdornment: (
+                            <InputAdornment position="end">
+                              <IconButton
+                                onClick={handleShowPasswordClick}
+                                edge="end"
+                              >
+                                {isShowPassword.password ? (
+                                  <VisibilityOff />
+                                ) : (
+                                  <Visibility />
+                                )}
+                              </IconButton>
+                            </InputAdornment>
+                          ),
+                        }}
                       />
 
                       <Field
@@ -146,7 +186,9 @@ const SignUp = ({ user }: any) => {
                         label="Confirm password"
                         margin="dense"
                         id="confirmPassword"
-                        type="password"
+                        type={
+                          isShowPassword.confirmPassword ? "text" : "password"
+                        }
                         fullWidth
                         onChange={handleChange}
                         error={
@@ -156,6 +198,22 @@ const SignUp = ({ user }: any) => {
                         helperText={
                           touched.confirmPassword && errors.confirmPassword
                         }
+                        InputProps={{
+                          endAdornment: (
+                            <InputAdornment position="end">
+                              <IconButton
+                                onClick={handleShowConfirmPasswordClick}
+                                edge="end"
+                              >
+                                {isShowPassword.confirmPassword ? (
+                                  <VisibilityOff />
+                                ) : (
+                                  <Visibility />
+                                )}
+                              </IconButton>
+                            </InputAdornment>
+                          ),
+                        }}
                       />
 
                       <Button
