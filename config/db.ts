@@ -10,16 +10,22 @@ const MONGO_URI = process.env.MONGO_URI?.replace(
 mongoose.set("strictQuery", true);
 
 const connectDb = async () => {
-  const con = await mongoose.connect(MONGO_URI!, {
-    //@ts-ignore
-    useUnifiedTopology: true,
-    useNewUrlParser: true,
-    // useCreateIndex: true,
-    // useFindAndModify: false,
-  });
+  try {
+    const con: any = await mongoose.connect(MONGO_URI!, {
+      //@ts-ignore
+      useUnifiedTopology: true,
+      useNewUrlParser: true,
+      // useCreateIndex: true,
+      // useFindAndModify: false,
+      serverSelectionTimeoutMS: 60000,
+      family: 4,
+    });
 
-  //@ts-ignore
-  console.log(`MongoDB Connected: ${con.connection.host}`);
+    console.log(`MongoDB Connected: ${con.connection.host}`);
+  } catch (error: any) {
+    console.error(`Error: ${error.message}`);
+    // process.exit(1);
+  }
 };
 
 export default connectDb;
