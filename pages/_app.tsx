@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useState, useMemo } from "react";
 import { SWRConfig } from "swr";
 import Router from "next/router";
 import Head from "next/head";
@@ -28,9 +28,9 @@ interface MyAppProps extends AppProps {
 export default function MyApp(props: MyAppProps) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
 
-  const [mode, setMode] = React.useState<"light" | "dark">("light");
+  const [mode, setMode] = useState<"light" | "dark">("light");
 
-  const colorMode = React.useMemo(
+  const colorMode = useMemo(
     () => ({
       toggleColorMode: () => {
         setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
@@ -40,7 +40,7 @@ export default function MyApp(props: MyAppProps) {
     [mode]
   );
 
-  const theme = React.useMemo(
+  const theme = useMemo(
     () =>
       createTheme({
         palette: {

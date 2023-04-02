@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState, forwardRef } from "react";
 import { Form, Formik, Field } from "formik";
 import useSWR from "swr";
 import axios from "axios";
@@ -16,7 +16,7 @@ import MuiAlert, { AlertProps } from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
 import { createReviewValidationSchema } from "@utils/formValidationSchema";
 
-const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
+const Alert = forwardRef<HTMLDivElement, AlertProps>(function Alert(
   props,
   ref
 ) {

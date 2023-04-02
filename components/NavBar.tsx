@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { FC, createContext, useContext } from "react";
 import { useRouter } from "next/router";
 import Cookie from "js-cookie";
 import AppBar from "@mui/material/AppBar";
@@ -9,7 +9,7 @@ import IconButton from "@mui/material/IconButton";
 import BrightnessHighIcon from "@mui/icons-material/BrightnessHigh";
 import useScrollTrigger from "@mui/material/useScrollTrigger";
 
-export const ColorModeContext = React.createContext({
+export const ColorModeContext = createContext({
   toggleColorMode: () => {},
   mode: "",
 });
@@ -21,7 +21,7 @@ interface NavBarProps {
 const NavBar: FC<NavBarProps> = ({ isLoggedIn }) => {
   const router = useRouter();
 
-  const colorMode = React.useContext(ColorModeContext);
+  const colorMode = useContext(ColorModeContext);
 
   const trigger = useScrollTrigger({ disableHysteresis: true });
 
