@@ -10,6 +10,8 @@ import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
+import Backdrop from "@mui/material/Backdrop";
+import CircularProgress from "@mui/material/CircularProgress";
 import Button from "@mui/material/Button";
 import Footer from "@/components/Footer";
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
@@ -136,7 +138,7 @@ const CreateReview = ({ user }: any) => {
                           disableFocusRipple
                           type="submit"
                         >
-                          {isCreateReviewLoading ? "submitting..." : "submit"}
+                          submit
                         </Button>
                       </Box>
                     </Form>
@@ -150,6 +152,12 @@ const CreateReview = ({ user }: any) => {
           </Box>
         </Container>
       </main>
+      <Backdrop
+        sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={isCreateReviewLoading}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
     </>
   );
 };
