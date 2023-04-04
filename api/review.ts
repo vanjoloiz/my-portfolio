@@ -18,7 +18,14 @@ router.get("/", async (req, res) => {
 });
 
 router.get("/admin", authMiddleware, adminMiddleware, async (req, res) => {
-  const reviews = await Review.find().populate("profile", "firstName lastName");
+  const pageSize = 10;
+  const page = Number(req.query.pageNumber) || 1;
+
+  const reviews = await Review.find()
+    .limit(pageSize)
+    .skip(pageSize * (page - 1))
+    .sort("-updatedAt")
+    .populate("profile", "firstName lastName");
 
   return res.status(201).json(reviews);
 });
@@ -74,6 +81,7 @@ router.put("/edit/:reviewId", authMiddleware, async (req: any, res: any) => {
     }
 
     review.text = text;
+    review.isApproved = false;
 
     res.status(200).json(review);
   } catch (err) {

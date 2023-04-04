@@ -1,28 +1,21 @@
 import type { NextPage } from "next";
-import NavBar from "@/components/NavBar";
+import axios from "axios";
 import Landing from "@/components/Landing";
 import Skills from "@/components/Skills";
-import Footer from "@/components/Footer";
 import Projects from "@/components/Projects";
 import Reviews from "@/components/Reviews";
 import Container from "@mui/material/Container";
-import axios from "axios";
+
 import { BASE_URL } from "@utils/baseUrl";
 
-const Home: NextPage = ({ user, reviews }: any) => {
+const Home: NextPage = ({ reviews }: any) => {
   return (
-    <>
-      <NavBar isLoggedIn={user} />
-      <main>
-        <Container>
-          <Landing />
-          <Skills />
-          <Projects />
-          <Reviews reviewsInitialValue={reviews} />
-          <Footer />
-        </Container>
-      </main>
-    </>
+    <Container>
+      <Landing />
+      <Skills />
+      <Projects />
+      <Reviews reviewsInitialValue={reviews} />
+    </Container>
   );
 };
 

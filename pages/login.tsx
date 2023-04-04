@@ -17,8 +17,6 @@ import { loginValidationSchema } from "@utils/formValidationSchema";
 import IconButton from "@mui/material/IconButton";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import NavBar from "@/components/NavBar";
-import Footer from "@/components/Footer";
 
 interface FormValues {
   username: string;
@@ -61,104 +59,98 @@ const Login = () => {
   };
 
   return (
-    <>
-      <NavBar />
-      <main style={{ marginTop: "150px" }}>
-        <Container maxWidth="sm">
-          <Box sx={{ display: "block", margin: "auto" }}>
-            <Paper elevation={3}>
-              <Box p={6}>
-                {error.isShow && (
-                  <Alert severity="error" sx={{ mb: 2 }}>
-                    {error.message}
-                  </Alert>
+    <div style={{ marginTop: "150px" }}>
+      <Container maxWidth="sm">
+        <Box sx={{ display: "block", margin: "auto" }}>
+          <Paper elevation={3}>
+            <Box p={6}>
+              {error.isShow && (
+                <Alert severity="error" sx={{ mb: 2 }}>
+                  {error.message}
+                </Alert>
+              )}
+              <Typography variant="h4" mb={2}>
+                Login
+              </Typography>
+              <Formik
+                initialValues={{ username: "", password: "" }}
+                onSubmit={handleSubmit}
+                validationSchema={loginValidationSchema}
+              >
+                {({ touched, errors, handleChange, values }) => (
+                  <Form>
+                    <Field
+                      component={TextField}
+                      color="secondary"
+                      label="Username"
+                      fullWidth
+                      margin="dense"
+                      id="username"
+                      error={touched.username && Boolean(errors.username)}
+                      helperText={touched.username && errors.username}
+                      onChange={handleChange}
+                      value={values.username || ""}
+                    />
+
+                    <Field
+                      component={TextField}
+                      color="secondary"
+                      label="Password"
+                      fullWidth
+                      type={isShowPassword ? "text" : "password"}
+                      margin="dense"
+                      id="password"
+                      error={touched.password && Boolean(errors.password)}
+                      helperText={touched.password && errors.password}
+                      onChange={handleChange}
+                      value={values.password || ""}
+                      InputProps={{
+                        endAdornment: (
+                          <InputAdornment position="end">
+                            <IconButton
+                              onClick={handleShowPasswordClick}
+                              edge="end"
+                            >
+                              {isShowPassword ? (
+                                <VisibilityOff />
+                              ) : (
+                                <Visibility />
+                              )}
+                            </IconButton>
+                          </InputAdornment>
+                        ),
+                      }}
+                    />
+
+                    <Button
+                      sx={{ mt: 2, mb: 2 }}
+                      fullWidth
+                      color="secondary"
+                      variant="contained"
+                      disableElevation
+                      disableFocusRipple
+                      type="submit"
+                      disabled={isLoading}
+                    >
+                      {isLoading && (
+                        <CircularProgress
+                          sx={{ position: "absolute", right: "50px" }}
+                          size={17}
+                        />
+                      )}
+                      Login
+                    </Button>
+                  </Form>
                 )}
-                <Typography variant="h4" mb={2}>
-                  Login
-                </Typography>
-                <Formik
-                  initialValues={{ username: "", password: "" }}
-                  onSubmit={handleSubmit}
-                  validationSchema={loginValidationSchema}
-                >
-                  {({ touched, errors, handleChange, values }) => (
-                    <Form>
-                      <Field
-                        component={TextField}
-                        color="secondary"
-                        label="Username"
-                        fullWidth
-                        margin="dense"
-                        id="username"
-                        error={touched.username && Boolean(errors.username)}
-                        helperText={touched.username && errors.username}
-                        onChange={handleChange}
-                        value={values.username || ""}
-                      />
-
-                      <Field
-                        component={TextField}
-                        color="secondary"
-                        label="Password"
-                        fullWidth
-                        type={isShowPassword ? "text" : "password"}
-                        margin="dense"
-                        id="password"
-                        error={touched.password && Boolean(errors.password)}
-                        helperText={touched.password && errors.password}
-                        onChange={handleChange}
-                        value={values.password || ""}
-                        InputProps={{
-                          endAdornment: (
-                            <InputAdornment position="end">
-                              <IconButton
-                                onClick={handleShowPasswordClick}
-                                edge="end"
-                              >
-                                {isShowPassword ? (
-                                  <VisibilityOff />
-                                ) : (
-                                  <Visibility />
-                                )}
-                              </IconButton>
-                            </InputAdornment>
-                          ),
-                        }}
-                      />
-
-                      <Button
-                        sx={{ mt: 2, mb: 2 }}
-                        fullWidth
-                        color="secondary"
-                        variant="contained"
-                        disableElevation
-                        disableFocusRipple
-                        type="submit"
-                        disabled={isLoading}
-                      >
-                        {isLoading && (
-                          <CircularProgress
-                            sx={{ position: "absolute", right: "50px" }}
-                            size={17}
-                          />
-                        )}
-                        Login
-                      </Button>
-                    </Form>
-                  )}
-                </Formik>
-                <Link href="/signup" color="inherit">
-                  Don&apos; t have an account? Sign Up
-                </Link>
-              </Box>
-            </Paper>
-          </Box>
-          <div style={{ marginTop: "10px" }}>
-            <Footer />
-          </div>
-        </Container>
-      </main>
-    </>
+              </Formik>
+              <Link href="/signup" color="inherit">
+                Don&apos; t have an account? Sign Up
+              </Link>
+            </Box>
+          </Paper>
+        </Box>
+      </Container>
+    </div>
   );
 };
 

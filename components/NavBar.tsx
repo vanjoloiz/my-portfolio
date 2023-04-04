@@ -16,9 +16,10 @@ export const ColorModeContext = createContext({
 
 interface NavBarProps {
   isLoggedIn?: boolean;
+  isAdmin?: boolean;
 }
 
-const NavBar: FC<NavBarProps> = ({ isLoggedIn }) => {
+const NavBar: FC<NavBarProps> = ({ isLoggedIn, isAdmin }) => {
   const router = useRouter();
 
   const colorMode = useContext(ColorModeContext);
@@ -40,6 +41,19 @@ const NavBar: FC<NavBarProps> = ({ isLoggedIn }) => {
         >
           <span style={{ cursor: "pointer" }}>Salvador Loiz</span>
         </Typography>
+
+        {isAdmin && (
+          <Typography
+            sx={{ cursor: "pointer", marginRight: "15px" }}
+            variant="h6"
+            component="span"
+            onClick={() => {
+              router.push("/admin/reviews");
+            }}
+          >
+            Reviews
+          </Typography>
+        )}
 
         {isLoggedIn && (
           <Typography

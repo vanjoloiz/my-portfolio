@@ -4,7 +4,6 @@ import useSWR from "swr";
 import axios from "axios";
 import { useRouter } from "next/router";
 import Cookie from "js-cookie";
-import NavBar from "@/components/NavBar";
 import Container from "@mui/material/Container";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
@@ -13,7 +12,6 @@ import Typography from "@mui/material/Typography";
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
 import Button from "@mui/material/Button";
-import Footer from "@/components/Footer";
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
 import { createReviewValidationSchema } from "@utils/formValidationSchema";
@@ -25,7 +23,7 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(function Alert(
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-const CreateReview = ({ user }: any) => {
+const CreateReview = () => {
   const router = useRouter();
 
   const { data: reviews, mutate } = useSWR("/api/v1/review?pageNumber=1`");
@@ -64,101 +62,95 @@ const CreateReview = ({ user }: any) => {
   };
 
   return (
-    <>
-      <NavBar isLoggedIn={user !== undefined} />
-      <main style={{ marginTop: "150px" }}>
-        <Snackbar
-          open={isOpenSnackbar}
-          autoHideDuration={2500}
+    <div style={{ marginTop: "150px" }}>
+      <Snackbar
+        open={isOpenSnackbar}
+        autoHideDuration={2500}
+        onClose={handleSnackbarOnClose}
+      >
+        <Alert
           onClose={handleSnackbarOnClose}
+          severity="success"
+          sx={{ width: "100%" }}
         >
-          <Alert
-            onClose={handleSnackbarOnClose}
-            severity="success"
-            sx={{ width: "100%" }}
-          >
-            Review successfully submitted!
-          </Alert>
-        </Snackbar>
-        <Container maxWidth="md">
-          <Box sx={{ display: "block", margin: "auto" }}>
-            <Paper elevation={3}>
-              <Box sx={{ p: 5 }}>
-                <Typography variant="h4" mb={2}>
-                  Create a review
-                </Typography>
+          Review successfully submitted!
+        </Alert>
+      </Snackbar>
+      <Container maxWidth="md">
+        <Box sx={{ display: "block", margin: "auto" }}>
+          <Paper elevation={3}>
+            <Box sx={{ p: 5 }}>
+              <Typography variant="h4" mb={2}>
+                Create a review
+              </Typography>
 
-                <Formik
-                  initialValues={{
-                    text: "",
-                  }}
-                  onSubmit={handleOnSubmit}
-                  validationSchema={createReviewValidationSchema}
-                >
-                  {({ touched, errors, handleChange, values }) => (
-                    <Form>
-                      <Field
-                        component={TextField}
-                        fullWidth
-                        value={values.text || ""}
+              <Formik
+                initialValues={{
+                  text: "",
+                }}
+                onSubmit={handleOnSubmit}
+                validationSchema={createReviewValidationSchema}
+              >
+                {({ touched, errors, handleChange, values }) => (
+                  <Form>
+                    <Field
+                      component={TextField}
+                      fullWidth
+                      value={values.text || ""}
+                      color="secondary"
+                      id="text"
+                      multiline
+                      minRows={15}
+                      error={touched.text && Boolean(errors.text)}
+                      helperText={touched.text && errors.text}
+                      onChange={handleChange}
+                    />
+
+                    <Box
+                      sx={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                      }}
+                    >
+                      <Button
+                        onClick={() =>
+                          router.replace("/", undefined, { scroll: false })
+                        }
+                        sx={{ mt: 2 }}
+                        size="large"
                         color="secondary"
-                        id="text"
-                        multiline
-                        minRows={15}
-                        error={touched.text && Boolean(errors.text)}
-                        helperText={touched.text && errors.text}
-                        onChange={handleChange}
-                      />
-
-                      <Box
-                        sx={{
-                          display: "flex",
-                          justifyContent: "space-between",
-                        }}
+                        variant="contained"
+                        disableElevation
+                        disableFocusRipple
                       >
-                        <Button
-                          onClick={() =>
-                            router.replace("/", undefined, { scroll: false })
-                          }
-                          sx={{ mt: 2 }}
-                          size="large"
-                          color="secondary"
-                          variant="contained"
-                          disableElevation
-                          disableFocusRipple
-                        >
-                          Back
-                        </Button>
+                        Back
+                      </Button>
 
-                        <Button
-                          sx={{ mt: 2 }}
-                          color="secondary"
-                          variant="contained"
-                          disableElevation
-                          disableFocusRipple
-                          type="submit"
-                        >
-                          submit
-                        </Button>
-                      </Box>
-                    </Form>
-                  )}
-                </Formik>
-              </Box>
-            </Paper>
-            <div style={{ marginTop: "10px" }}>
-              <Footer />
-            </div>
-          </Box>
-        </Container>
-      </main>
+                      <Button
+                        sx={{ mt: 2 }}
+                        color="secondary"
+                        variant="contained"
+                        disableElevation
+                        disableFocusRipple
+                        type="submit"
+                      >
+                        submit
+                      </Button>
+                    </Box>
+                  </Form>
+                )}
+              </Formik>
+            </Box>
+          </Paper>
+        </Box>
+      </Container>
       <Backdrop
         sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
         open={isCreateReviewLoading}
       >
         <CircularProgress color="inherit" />
       </Backdrop>
-    </>
+    </div>
   );
 };
 

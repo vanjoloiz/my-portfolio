@@ -13,6 +13,7 @@ import { createTheme } from "@mui/material/styles";
 import createEmotionCache from "@/lib/createEmotionCache";
 import { ColorModeContext } from "@/components/NavBar";
 import { BASE_URL } from "@utils/baseUrl";
+import Layout from "@/components/Layout";
 
 const clientSideEmotionCache = createEmotionCache();
 
@@ -65,7 +66,9 @@ export default function MyApp(props: MyAppProps) {
         <ColorModeContext.Provider value={colorMode}>
           <ThemeProvider theme={theme}>
             <CssBaseline />
-            <Component {...pageProps} />
+            <Layout {...pageProps}>
+              <Component {...pageProps} />
+            </Layout>
           </ThemeProvider>
         </ColorModeContext.Provider>
       </SWRConfig>
@@ -76,7 +79,10 @@ export default function MyApp(props: MyAppProps) {
 MyApp.getInitialProps = async ({ ctx }: AppContext) => {
   const { token } = parseCookies(ctx);
 
-  const protectedRoutes = ctx.pathname === "/create-review";
+  const protectedRoutes =
+    ctx.pathname === "/create-review" || ctx.pathname === "/admin/reviews";
+
+  const adminProtectedRoutes = ctx.pathname === "/admin/reviews";
 
   let user;
 
@@ -104,6 +110,17 @@ MyApp.getInitialProps = async ({ ctx }: AppContext) => {
         Authorization: token,
       },
     });
+
+    if (adminProtectedRoutes) {
+      if (!data.isAdmin) {
+        if (ctx?.req) {
+          ctx.res?.writeHead(302, { Location: "/" });
+          ctx.res?.end();
+        } else {
+          Router.push("/");
+        }
+      }
+    }
 
     user = data;
   }
