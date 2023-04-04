@@ -40,17 +40,15 @@ const CreateReview = () => {
   ) => {
     setIsCreateReviewLoading(true);
 
-    try {
-      const { data } = await axios.post("/api/v1/review", values, {
-        headers: {
-          Authorization: token,
-        },
-      });
+    const { data } = await axios.post("/api/v1/review", values, {
+      headers: {
+        Authorization: token,
+      },
+    });
 
-      await mutate([...reviews, data], true);
-      setIsCreateReviewLoading(false);
-      setIsOpenSnackBar(true);
-    } catch {}
+    await mutate([...reviews, data], true);
+    setIsCreateReviewLoading(false);
+    setIsOpenSnackBar(true);
 
     resetForm({});
 

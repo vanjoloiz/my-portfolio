@@ -1,4 +1,4 @@
-import type { NextPage } from "next";
+import { FC } from "react";
 import axios from "axios";
 import Landing from "@/components/Landing";
 import Skills from "@/components/Skills";
@@ -8,7 +8,22 @@ import Container from "@mui/material/Container";
 
 import { BASE_URL } from "@utils/baseUrl";
 
-const Home: NextPage = ({ reviews }: any) => {
+interface Review {
+  _id: string;
+  profile: {
+    _id: string;
+    firstName: string;
+    lastName: string;
+  };
+  text: string;
+  updatedAt: string;
+}
+
+interface ReviewProps {
+  reviewsInitialValue: Review[][];
+}
+
+const Home: FC<ReviewProps> = ({ reviewsInitialValue: reviews }) => {
   return (
     <Container>
       <Landing />

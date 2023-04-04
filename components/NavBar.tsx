@@ -10,7 +10,9 @@ import BrightnessHighIcon from "@mui/icons-material/BrightnessHigh";
 import useScrollTrigger from "@mui/material/useScrollTrigger";
 
 export const ColorModeContext = createContext({
-  toggleColorMode: () => {},
+  toggleColorMode: () => {
+    return;
+  },
   mode: "",
 });
 
