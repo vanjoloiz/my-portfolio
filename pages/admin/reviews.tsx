@@ -1,11 +1,7 @@
 import React from "react";
 
 const AdminReviews = () => {
-  return (
-    <div>
-      <main></main>
-    </div>
-  );
+  return <div></div>;
 };
 
 export default AdminReviews;

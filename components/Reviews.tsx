@@ -142,7 +142,7 @@ const Reviews: FC<ReviewProps> = ({ reviewsInitialValue }) => {
               disableElevation
               disableFocusRipple
               onClick={() => {
-                router.push("create-review");
+                router.push("/create-review");
               }}
             >
               Add review

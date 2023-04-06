@@ -86,13 +86,17 @@ MyApp.getInitialProps = async ({ ctx }: AppContext) => {
 
   let user;
 
-  if (token === undefined) {
+  if (!token) {
     if (protectedRoutes) {
       if (ctx?.req) {
         ctx.res?.writeHead(302, { Location: "/login" });
         ctx.res?.end();
       } else {
-        Router.push("/login?redirect=create-review");
+        if (ctx.pathname === "/create-review") {
+          return Router.push("/login?redirect=create-review");
+        } else {
+          return Router.push("/login");
+        }
       }
     }
   } else {
