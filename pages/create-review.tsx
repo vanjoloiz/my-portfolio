@@ -1,4 +1,4 @@
-import { useState, forwardRef, useEffect } from "react";
+import { useState, forwardRef } from "react";
 import { Form, Formik, Field } from "formik";
 import useSWR from "swr";
 import axios from "axios";
@@ -26,8 +26,6 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(function Alert(
 const CreateReview = () => {
   const router = useRouter();
 
-  const isLoggedIn = Cookie.get("token") !== undefined;
-
   const { data: reviews, mutate } = useSWR("/api/v1/review?pageNumber=1`");
 
   const token = Cookie.get("token");
@@ -35,12 +33,6 @@ const CreateReview = () => {
   const [isCreateReviewLoading, setIsCreateReviewLoading] = useState(false);
 
   const [isOpenSnackbar, setIsOpenSnackBar] = useState(false);
-
-  useEffect(() => {
-    if (!isLoggedIn) {
-      router.push("/login?redirect=create-review");
-    }
-  }, [isLoggedIn, router]);
 
   const handleOnSubmit = async (
     values: { text: string },
