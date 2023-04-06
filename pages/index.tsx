@@ -20,16 +20,16 @@ interface Review {
 }
 
 interface ReviewProps {
-  reviewsInitialValue: Review[][];
+  reviews: Review[][];
 }
 
-const Home: FC<ReviewProps> = ({ reviewsInitialValue: reviews }) => {
+const Home: FC<ReviewProps> = ({ reviews: reviewsInitialValue }) => {
   return (
     <Container>
       <Landing />
       <Skills />
       <Projects />
-      <Reviews reviewsInitialValue={reviews} />
+      <Reviews reviewsInitialValue={reviewsInitialValue} />
     </Container>
   );
 };

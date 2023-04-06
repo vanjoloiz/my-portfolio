@@ -1,4 +1,4 @@
-import { useState, forwardRef } from "react";
+import { useState, forwardRef, useEffect } from "react";
 import { Form, Formik, Field } from "formik";
 import useSWR from "swr";
 import axios from "axios";
@@ -26,6 +26,8 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(function Alert(
 const CreateReview = () => {
   const router = useRouter();
 
+  const isLoggedIn = Cookie.get("token") !== undefined;
+
   const { data: reviews, mutate } = useSWR("/api/v1/review?pageNumber=1`");
 
   const token = Cookie.get("token");
@@ -34,6 +36,12 @@ const CreateReview = () => {
 
   const [isOpenSnackbar, setIsOpenSnackBar] = useState(false);
 
+  useEffect(() => {
+    if (!isLoggedIn) {
+      router.push("/login?redirect=create-review");
+    }
+  }, [isLoggedIn, router]);
+
   const handleOnSubmit = async (
     values: { text: string },
     { resetForm }: any
@@ -41,9 +49,7 @@ const CreateReview = () => {
     setIsCreateReviewLoading(true);
 
     const { data } = await axios.post("/api/v1/review", values, {
-      headers: {
-        Authorization: token,
-      },
+      headers: { Authorization: token },
     });
 
     await mutate([...reviews, data], true);
@@ -79,7 +85,7 @@ const CreateReview = () => {
           <Paper elevation={3}>
             <Box sx={{ p: 5 }}>
               <Typography variant="h4" mb={2}>
-                Create a review
+                Create review
               </Typography>
 
               <Formik

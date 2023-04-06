@@ -27,9 +27,14 @@ const Login = () => {
   const router = useRouter();
 
   const [error, setError] = useState({ isShow: false, message: "" });
+
   const [isLoading, setIsLoading] = useState(false);
 
   const [isShowPassword, setIsShowPassword] = useState(false);
+
+  const isRedirectToQuery = router.query.redirect !== "";
+
+  const redirect = isRedirectToQuery ? String(router.query.redirect) : "/";
 
   const handleShowPasswordClick = () => setIsShowPassword(!isShowPassword);
 
@@ -43,7 +48,7 @@ const Login = () => {
 
       Cookie.set("token", data);
 
-      router.push("/");
+      router.push(redirect);
       router.events.on("routeChangeComplete", () => {
         setIsLoading(false);
       });

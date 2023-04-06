@@ -1,17 +1,17 @@
-import { useRef, FC, Fragment } from 'react';
-import { useRouter } from 'next/router';
-import useSWRInfinite from 'swr/infinite';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import Divider from '@mui/material/Divider';
-import ListItemText from '@mui/material/ListItemText';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
-import Avatar from '@mui/material/Avatar';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Fade from '@mui/material/Fade';
-import useAnimate from '@/lib/useAnimate';
+import { useRef, FC, Fragment } from "react";
+import { useRouter } from "next/router";
+import useSWRInfinite from "swr/infinite";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import Divider from "@mui/material/Divider";
+import ListItemText from "@mui/material/ListItemText";
+import ListItemAvatar from "@mui/material/ListItemAvatar";
+import Avatar from "@mui/material/Avatar";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Fade from "@mui/material/Fade";
+import useAnimate from "@/lib/useAnimate";
 
 interface Review {
   _id: string;
@@ -43,7 +43,7 @@ const Reviews: FC<ReviewProps> = ({ reviewsInitialValue }) => {
     if (previousPageData && previousPageData.length === PAGE_SIZE)
       return `/api/v1/review?pageNumber=${pageIndex + 1}`;
 
-    return '/api/v1/review?pageNumber=1';
+    return "/api/v1/review?pageNumber=1";
   };
 
   const {
@@ -61,7 +61,7 @@ const Reviews: FC<ReviewProps> = ({ reviewsInitialValue }) => {
 
   const isLoadingMore =
     isLoadingInitialData ||
-    (reviews && typeof reviews[size - 1] === 'undefined');
+    (reviews && typeof reviews[size - 1] === "undefined");
 
   const isEmpty = reviews?.[0]?.length === 0;
 
@@ -72,7 +72,8 @@ const Reviews: FC<ReviewProps> = ({ reviewsInitialValue }) => {
 
   const getInitials = (firstName: string, lastName: string) => {
     const firstInitial = firstName.charAt(0);
-    const lastWords = lastName.split(' ');
+
+    const lastWords = lastName.split(" ");
 
     const lastInitial = lastWords[lastWords.length - 1].charAt(0);
 
@@ -83,21 +84,21 @@ const Reviews: FC<ReviewProps> = ({ reviewsInitialValue }) => {
 
   return (
     <>
-      <Typography component='span' variant='h3'>
+      <Typography component="span" variant="h3">
         Reviews
       </Typography>
       <Box pb={25} mt={1} ref={animRef}>
-        <Fade in={animate} style={{ transitionDelay: '100ms' }}>
+        <Fade in={animate} style={{ transitionDelay: "100ms" }}>
           <List
             sx={{
-              width: '100%',
-              bgcolor: 'background.paper',
-              paddingBottom: '25px',
+              width: "100%",
+              bgcolor: "background.paper",
+              paddingBottom: "25px",
             }}
           >
             {paginateReviews?.map((data) => (
               <Fragment key={data._id}>
-                <ListItem alignItems='flex-start'>
+                <ListItem alignItems="flex-start">
                   <ListItemAvatar>
                     <Avatar>
                       {getInitials(
@@ -108,17 +109,17 @@ const Reviews: FC<ReviewProps> = ({ reviewsInitialValue }) => {
                   </ListItemAvatar>
                   <ListItemText
                     primary={
-                      <Typography component='span' variant='subtitle2'>
+                      <Typography component="span" variant="subtitle2">
                         {data.profile.firstName} {data.profile.lastName}
                       </Typography>
                     }
                     secondary={
                       <>
                         <Typography
-                          sx={{ display: 'inline' }}
-                          component='span'
-                          variant='subtitle1'
-                          color='text.primary'
+                          sx={{ display: "inline" }}
+                          component="span"
+                          variant="subtitle1"
+                          color="text.primary"
                         >
                           {`${data.text}`}
                         </Typography>
@@ -126,22 +127,22 @@ const Reviews: FC<ReviewProps> = ({ reviewsInitialValue }) => {
                     }
                   />
                 </ListItem>
-                <Divider variant='inset' component='li' />
+                <Divider variant="inset" component="li" />
               </Fragment>
             ))}
           </List>
         </Fade>
 
-        <Fade in={animate} style={{ transitionDelay: '100ms' }}>
-          <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+        <Fade in={animate} style={{ transitionDelay: "100ms" }}>
+          <Box sx={{ display: "flex", justifyContent: "space-between" }}>
             <Button
               sx={{ ml: 1 }}
-              color='secondary'
-              variant='contained'
+              color="secondary"
+              variant="contained"
               disableElevation
               disableFocusRipple
               onClick={() => {
-                router.push('/create-review');
+                router.push("create-review");
               }}
             >
               Add review
@@ -150,15 +151,15 @@ const Reviews: FC<ReviewProps> = ({ reviewsInitialValue }) => {
             {isShowViewMoreButton && (
               <Button
                 disabled={isReachingEnd || isLoadingMore}
-                color='secondary'
-                variant='contained'
+                color="secondary"
+                variant="contained"
                 disableElevation
                 disableFocusRipple
                 onClick={() => {
                   setSize(size + 1);
                 }}
               >
-                {isLoadingMore ? 'loading...' : 'view more'}
+                {isLoadingMore ? "loading..." : "view more"}
               </Button>
             )}
           </Box>

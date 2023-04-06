@@ -26,6 +26,8 @@ interface MyAppProps extends AppProps {
   emotionCache?: EmotionCache;
 }
 
+console.log(Cookie.get("token"));
+
 export default function MyApp(props: MyAppProps) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
 
@@ -91,8 +93,6 @@ MyApp.getInitialProps = async ({ ctx }: AppContext) => {
       if (ctx?.req) {
         ctx.res?.writeHead(302, { Location: "/login" });
         ctx.res?.end();
-      } else {
-        Router.push("/login");
       }
     }
   } else {
