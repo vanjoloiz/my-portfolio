@@ -38,6 +38,14 @@ const SignUp = () => {
     confirmPassword: false,
   });
 
+  const isRedirectToQuery = router.query.redirect !== undefined;
+
+  const redirect = isRedirectToQuery ? String(router.query.redirect) : "/";
+
+  const loginAnchorRedirect = isRedirectToQuery
+    ? `/login?redirect=${String(router.query.redirect)}`
+    : "/login";
+
   const handleShowPasswordClick = () => {
     setIsShowPassword({
       ...isShowPassword,
@@ -62,7 +70,7 @@ const SignUp = () => {
 
       Cookie.set("token", data);
 
-      router.push("/");
+      router.push(redirect);
       router.events.on("routeChangeComplete", () => {
         setIsLoading(false);
       });
@@ -233,7 +241,7 @@ const SignUp = () => {
                   </Form>
                 )}
               </Formik>
-              <Link href="/login" color="inherit">
+              <Link href={loginAnchorRedirect} color="inherit">
                 Already have an account? Sign in
               </Link>
             </Box>

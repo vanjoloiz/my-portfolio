@@ -32,9 +32,13 @@ const Login = () => {
 
   const [isShowPassword, setIsShowPassword] = useState(false);
 
-  const isRedirectToQuery = router.query.redirect !== "";
+  const isRedirectToQuery = router.query.redirect !== undefined;
 
   const redirect = isRedirectToQuery ? String(router.query.redirect) : "/";
+
+  const signUpAnchorRedirect = isRedirectToQuery
+    ? `/signup?redirect=${String(router.query.redirect)}`
+    : "/signup";
 
   const handleShowPasswordClick = () => setIsShowPassword(!isShowPassword);
 
@@ -148,7 +152,7 @@ const Login = () => {
                   </Form>
                 )}
               </Formik>
-              <Link href="/signup" color="inherit">
+              <Link href={signUpAnchorRedirect} color="inherit">
                 Don&apos; t have an account? Sign Up
               </Link>
             </Box>
