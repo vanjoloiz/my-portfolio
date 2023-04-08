@@ -11,7 +11,6 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { CacheProvider, EmotionCache } from "@emotion/react";
 import { createTheme } from "@mui/material/styles";
 import createEmotionCache from "@/lib/createEmotionCache";
-// import { ColorModeContext } from "@/components/NavBar";
 import { BASE_URL } from "@utils/baseUrl";
 import Layout from "@/components/Layout";
 import { useThemeStore } from "../lib/useThemeStore";
