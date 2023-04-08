@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useEffect } from "react";
 import { SWRConfig } from "swr";
 import Router from "next/router";
 import Head from "next/head";
@@ -11,9 +11,10 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { CacheProvider, EmotionCache } from "@emotion/react";
 import { createTheme } from "@mui/material/styles";
 import createEmotionCache from "@/lib/createEmotionCache";
-import { ColorModeContext } from "@/components/NavBar";
+// import { ColorModeContext } from "@/components/NavBar";
 import { BASE_URL } from "@utils/baseUrl";
 import Layout from "@/components/Layout";
+import { useThemeStore } from "../lib/useThemeStore";
 
 const clientSideEmotionCache = createEmotionCache();
 
@@ -29,30 +30,19 @@ interface MyAppProps extends AppProps {
 export default function MyApp(props: MyAppProps) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
 
+  const isDarkMode = useThemeStore((state: any) => state.isDarkMode);
+
   const [mode, setMode] = useState<"light" | "dark">("light");
 
-  const colorMode = useMemo(
-    () => ({
-      toggleColorMode: () => {
-        setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
-      },
-      mode,
-    }),
-    [mode]
-  );
+  useEffect(() => {
+    setMode(isDarkMode ? "dark" : "light");
+  }, [isDarkMode]);
 
-  const theme = useMemo(
-    () =>
-      createTheme({
-        palette: {
-          primary: {
-            main: "#FFFFFF",
-          },
-          mode,
-        },
-      }),
-    [mode]
-  );
+  const muiTheme = createTheme({
+    palette: {
+      mode,
+    },
+  });
 
   return (
     <CacheProvider value={emotionCache}>
@@ -63,14 +53,12 @@ export default function MyApp(props: MyAppProps) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <SWRConfig value={{ fetcher }}>
-        <ColorModeContext.Provider value={colorMode}>
-          <ThemeProvider theme={theme}>
-            <CssBaseline />
-            <Layout {...pageProps}>
-              <Component {...pageProps} />
-            </Layout>
-          </ThemeProvider>
-        </ColorModeContext.Provider>
+        <ThemeProvider theme={muiTheme}>
+          <CssBaseline />
+          <Layout {...pageProps}>
+            <Component {...pageProps} />
+          </Layout>
+        </ThemeProvider>
       </SWRConfig>
     </CacheProvider>
   );

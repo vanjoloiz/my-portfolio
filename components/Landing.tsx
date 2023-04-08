@@ -23,10 +23,10 @@ const Landing: FC = () => {
           <Typed
             style={{ fontSize: "32px" }}
             strings={[
-              "Full-stack Developer. 🌐",
-              "Love JavaScript Development. 🚀",
+              "Full stack Developer. 🌐",
               "React Developer. ⚛️",
-              "Node.js Developer. 💻",
+              "Node js Developer. 💻",
+              "Passionate about coding, and making my client ideas come true. 🌐",
             ]}
             typeSpeed={40}
             backSpeed={50}

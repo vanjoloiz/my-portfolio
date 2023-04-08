@@ -1,4 +1,4 @@
-import { FC, createContext, useContext } from "react";
+import { FC, useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Cookie from "js-cookie";
 import AppBar from "@mui/material/AppBar";
@@ -8,13 +8,7 @@ import Brightness4Icon from "@mui/icons-material/Brightness4";
 import IconButton from "@mui/material/IconButton";
 import BrightnessHighIcon from "@mui/icons-material/BrightnessHigh";
 import useScrollTrigger from "@mui/material/useScrollTrigger";
-
-export const ColorModeContext = createContext({
-  toggleColorMode: () => {
-    return;
-  },
-  mode: "",
-});
+import { useThemeStore } from "../lib/useThemeStore";
 
 interface NavBarProps {
   isLoggedIn?: boolean;
@@ -24,7 +18,15 @@ interface NavBarProps {
 const NavBar: FC<NavBarProps> = ({ isLoggedIn, isAdmin }) => {
   const router = useRouter();
 
-  const colorMode = useContext(ColorModeContext);
+  const { toggleTheme }: any = useThemeStore();
+
+  const isDarkMode = useThemeStore((state: any) => state.isDarkMode);
+
+  const [mode, setMode] = useState<"light" | "dark">("light");
+
+  useEffect(() => {
+    setMode(isDarkMode ? "dark" : "light");
+  }, [isDarkMode]);
 
   const trigger = useScrollTrigger({ disableHysteresis: true });
 
@@ -78,13 +80,9 @@ const NavBar: FC<NavBarProps> = ({ isLoggedIn, isAdmin }) => {
           color="inherit"
           aria-label="menu"
           sx={{ mr: 2 }}
-          onClick={colorMode.toggleColorMode}
+          onClick={toggleTheme}
         >
-          {colorMode.mode === "light" ? (
-            <Brightness4Icon />
-          ) : (
-            <BrightnessHighIcon />
-          )}
+          {mode === "dark" ? <Brightness4Icon /> : <BrightnessHighIcon />}
         </IconButton>
       </Toolbar>
     </AppBar>
