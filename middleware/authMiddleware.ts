@@ -1,7 +1,19 @@
 import jwt from "jsonwebtoken";
+import { Request, Response, NextFunction } from "express";
 import Profile from "../models/Profile";
 
-export const authMiddleware = async (req: any, res: any, next: any) => {
+interface CustomRequest extends Request {
+  userId?: string;
+  user?: {
+    isAdmin: boolean;
+  } | null;
+}
+
+export const authMiddleware = async (
+  req: CustomRequest,
+  res: Response,
+  next: NextFunction
+) => {
   let token;
 
   try {
@@ -23,7 +35,11 @@ export const authMiddleware = async (req: any, res: any, next: any) => {
   }
 };
 
-export const adminMiddleware = (req: any, res: any, next: any) => {
+export const adminMiddleware = (
+  req: CustomRequest,
+  res: Response,
+  next: NextFunction
+) => {
   if (req.user && req.user.isAdmin) {
     next();
   } else {

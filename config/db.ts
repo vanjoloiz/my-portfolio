@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
+import dotenv from "dotenv";
 
-require("dotenv").config({ path: "./config.env" });
+dotenv.config({ path: "./config.env" });
 
 const MONGO_URI = process.env.MONGO_URI?.replace(
   "<PASSWORD>",
@@ -11,12 +12,7 @@ mongoose.set("strictQuery", true);
 
 const connectDb = async () => {
   try {
-    const con: any = await mongoose.connect(MONGO_URI!, {
-      //@ts-ignore
-      useUnifiedTopology: true,
-      useNewUrlParser: true,
-      // useCreateIndex: true,
-      // useFindAndModify: false,
+    const con = await mongoose.connect(MONGO_URI!, {
       serverSelectionTimeoutMS: 60000,
       family: 4,
     });
@@ -24,7 +20,7 @@ const connectDb = async () => {
     console.log(`MongoDB Connected: ${con.connection.host}`);
   } catch (error: any) {
     console.error(`Error: ${error.message}`);
-    // process.exit(1);
+    process.exit(1);
   }
 };
 

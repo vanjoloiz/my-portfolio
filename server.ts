@@ -1,5 +1,7 @@
 import express from "express";
+import http from "http";
 import next from "next";
+import dotenv from "dotenv";
 
 import connectDb from "./config/db";
 import authRouter from "./api/auth";
@@ -7,7 +9,7 @@ import reviewRouter from "./api/review";
 
 const app = express();
 
-const server = require("http").createServer(app);
+const server = http.createServer(app);
 
 const dev = process.env.NODE_ENV !== "production";
 
@@ -15,7 +17,7 @@ const nextApp = next({ dev });
 
 const handler = nextApp.getRequestHandler();
 
-require("dotenv").config({ path: "./config.env" });
+dotenv.config({ path: "./config.env" });
 
 const PORT = process.env.PORT || 3000;
 
@@ -32,9 +34,9 @@ nextApp.prepare().then(() => {
     res.status(200).send("Ok");
   });
 
-  app.all("*", (req: any, res: any) => handler(req, res));
+  app.all("*", (req, res) => handler(req, res));
 
-  server.listen(PORT, (err: any) => {
+  server.listen(PORT, (err: void | boolean) => {
     if (err) throw err;
     console.log(`Express server running on ${PORT}`);
   });

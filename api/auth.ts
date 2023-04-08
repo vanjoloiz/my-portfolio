@@ -1,4 +1,5 @@
 import express from "express";
+import { Request } from "express";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import { authMiddleware } from "../middleware/authMiddleware";
@@ -6,7 +7,11 @@ import Profile from "../models/Profile";
 
 const router = express.Router();
 
-router.get("/", authMiddleware, async (req: any, res: any) => {
+interface CustomRequest extends Request {
+  userId?: string;
+}
+
+router.get("/", authMiddleware, async (req: CustomRequest, res) => {
   const user = await Profile.findById(req.userId).select("-password");
 
   res.status(200).json(user);
@@ -44,7 +49,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.post("/signup", async (req: any, res: any) => {
+router.post("/signup", async (req: CustomRequest, res) => {
   const { firstName, lastName, username, password, confirmPassword } = req.body;
 
   if (password.length < 8) {

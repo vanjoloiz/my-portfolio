@@ -1,6 +1,11 @@
 import express from "express";
+import { Request } from "express";
 import { authMiddleware, adminMiddleware } from "../middleware/authMiddleware";
 import Review from "../models/Review";
+
+interface CustomRequest extends Request {
+  userId?: string;
+}
 
 const router = express.Router();
 
@@ -30,7 +35,7 @@ router.get("/admin", authMiddleware, adminMiddleware, async (req, res) => {
   return res.status(201).json(reviews);
 });
 
-router.post("/", authMiddleware, async (req: any, res: any) => {
+router.post("/", authMiddleware, async (req: CustomRequest, res) => {
   const { text } = req.body;
 
   try {
@@ -64,29 +69,33 @@ router.put(
   }
 );
 
-router.put("/edit/:reviewId", authMiddleware, async (req: any, res: any) => {
-  const { reviewId } = req.params;
+router.put(
+  "/edit/:reviewId",
+  authMiddleware,
+  async (req: CustomRequest, res) => {
+    const { reviewId } = req.params;
 
-  const { text } = req.body;
+    const { text } = req.body;
 
-  try {
-    const review = await Review.findById(reviewId);
+    try {
+      const review = await Review.findById(reviewId);
 
-    if (!review) {
-      return res.status(401).json("Review ID not found.");
+      if (!review) {
+        return res.status(401).json("Review ID not found.");
+      }
+
+      if (req.userId === String(review.profile)) {
+        res.status(401).json("This review is not yours.");
+      }
+
+      review.text = text;
+      review.isApproved = false;
+
+      res.status(200).json(review);
+    } catch (err) {
+      console.error(err);
     }
-
-    if (req.userId === review!.profile) {
-      res.status(401).json("This review is not yours.");
-    }
-
-    review.text = text;
-    review.isApproved = false;
-
-    res.status(200).json(review);
-  } catch (err) {
-    console.error(err);
   }
-});
+);
 
 export default router;
