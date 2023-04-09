@@ -1,7 +1,7 @@
 import express from "express";
 import { Request, Response } from "express";
 import nodemailer from "nodemailer";
-import sendGridTransport from "nodemailer-sendgrid-transport";
+import sendGridTransport from "nodemailer-sendgrid";
 
 const router = express.Router();
 
@@ -10,9 +10,7 @@ router.post("/", async (req: Request, res: Response) => {
 
   const transporter = nodemailer.createTransport(
     sendGridTransport({
-      auth: {
-        api_key: process.env.SENDGRID_API_KEY,
-      },
+      apiKey: process.env.SENDGRID_API_KEY!,
     })
   );
 
