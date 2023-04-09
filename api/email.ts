@@ -1,0 +1,39 @@
+import express from "express";
+import { Request, Response } from "express";
+import nodemailer from "nodemailer";
+import sendGridTransport from "nodemailer-sendgrid-transport";
+
+const router = express.Router();
+
+router.post("/", async (req: Request, res: Response) => {
+  const { firstName, lastName, email, message } = req.body;
+
+  const transporter = nodemailer.createTransport(
+    sendGridTransport({
+      auth: {
+        api_key: process.env.SENDGRID_API_KEY,
+      },
+    })
+  );
+
+  try {
+    await transporter.sendMail({
+      from: "vanjoloizdev@gmail.com",
+      to: "vanjoloiz01@gmail.com",
+      replyTo: email,
+      subject: "Message from my website",
+      text: message,
+      html: `<p>Hi Vanjo!</p>
+             <p>I am ${firstName} ${lastName}</p>
+             <p>${message}</p>
+      `,
+    });
+
+    res.status(200).send("Email sent.");
+  } catch (err) {
+    res.status(500).send("Email sending failed.");
+    console.error(err);
+  }
+});
+
+export default router;

@@ -22,3 +22,13 @@ export const signupValidationSchema = yup.object({
 export const createReviewValidationSchema = yup.object({
   text: yup.string().required("Please enter your review."),
 });
+
+export const getInTouchFormValidationSchema = yup.object({
+  firstName: yup.string().required("Please enter your first name."),
+  lastName: yup.string().required("Please enter your last name."),
+  email: yup
+    .string()
+    .required("Please enter your email.")
+    .email("Please provide a valid email."),
+  message: yup.string().required("Please enter your message."),
+});

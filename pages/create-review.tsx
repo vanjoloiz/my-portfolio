@@ -48,7 +48,7 @@ const CreateReview = () => {
     setIsCreateReviewLoading(false);
     setIsOpenSnackBar(true);
 
-    resetForm({});
+    resetForm();
 
     setIsCreateReviewLoading(false);
   };

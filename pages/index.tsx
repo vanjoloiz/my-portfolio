@@ -5,6 +5,7 @@ import Skills from "@/components/Skills";
 import Projects from "@/components/Projects";
 import Reviews from "@/components/Reviews";
 import Container from "@mui/material/Container";
+import Contact from "@/components/Contact";
 
 import { BASE_URL } from "@utils/baseUrl";
 
@@ -30,6 +31,7 @@ const Home: FC<ReviewProps> = ({ reviews: reviewsInitialValue }) => {
       <Skills />
       <Projects />
       <Reviews reviewsInitialValue={reviewsInitialValue} />
+      <Contact />
     </Container>
   );
 };

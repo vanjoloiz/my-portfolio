@@ -84,10 +84,8 @@ const Reviews: FC<ReviewProps> = ({ reviewsInitialValue }) => {
 
   return (
     <>
-      <Typography component="span" variant="h3">
-        Reviews
-      </Typography>
-      <Box pb={25} mt={1} ref={animRef}>
+      <Typography variant="h3">Reviews</Typography>
+      <Box pb={15} mt={1} ref={animRef}>
         <Fade in={animate} style={{ transitionDelay: "100ms" }}>
           <List
             sx={{

@@ -6,6 +6,7 @@ import dotenv from "dotenv";
 import connectDb from "./config/db";
 import authRouter from "./api/auth";
 import reviewRouter from "./api/review";
+import emailRouter from "./api/email";
 
 const app = express();
 
@@ -29,6 +30,7 @@ nextApp.prepare().then(() => {
 
   app.use("/api/v1/auth", authRouter);
   app.use("/api/v1/review", reviewRouter);
+  app.use("/api/v1/email", emailRouter);
 
   app.get("/health", (req, res) => {
     res.status(200).send("Ok");

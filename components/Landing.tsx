@@ -14,7 +14,7 @@ import srcImage from "../public/dev-image.jpeg";
 
 const Landing: FC = () => {
   return (
-    <Box mt={25} pb={35}>
+    <Box pt={25} pb={35}>
       <Grid container>
         <Grid item md={6}>
           <Typography variant="h1" gutterBottom>
@@ -26,7 +26,7 @@ const Landing: FC = () => {
               "Full stack Developer. 🌐",
               "React Developer. ⚛️",
               "Node js Developer. 💻",
-              "Passionate about coding, and making my client ideas come true. 🌐",
+              "Passionate about coding, and making my client ideas come true. ❤️",
             ]}
             typeSpeed={40}
             backSpeed={50}
