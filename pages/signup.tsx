@@ -3,6 +3,8 @@ import { useRouter } from "next/router";
 import Cookie from "js-cookie";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useTheme } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
@@ -29,6 +31,10 @@ interface FormValues {
 
 const SignUp = () => {
   const router = useRouter();
+
+  const theme = useTheme();
+
+  const isSmall = useMediaQuery(theme.breakpoints.down("md"));
 
   const [error, setError] = useState({ isShow: false, message: "" });
 
@@ -114,7 +120,7 @@ const SignUp = () => {
                 {({ touched, errors, handleChange }) => (
                   <Form>
                     <Grid container>
-                      <Grid container item spacing={2}>
+                      <Grid container item spacing={isSmall ? 0 : 2}>
                         <Grid item xs={12} md={6}>
                           <Field
                             component={TextField}
