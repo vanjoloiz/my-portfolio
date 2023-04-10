@@ -10,6 +10,7 @@ import Button from "@mui/material/Button";
 import Link from "@mui/material/Link";
 import Alert from "@mui/material/Alert";
 import CircularProgress from "@mui/material/CircularProgress";
+import Grid from "@mui/material/Grid";
 import { Form, Formik, Field } from "formik";
 import axios from "axios";
 import { signupValidationSchema } from "@utils/formValidationSchema";
@@ -112,132 +113,136 @@ const SignUp = () => {
               >
                 {({ touched, errors, handleChange }) => (
                   <Form>
-                    <Box
-                      sx={{
-                        "& .MuiTextField-root": { width: "48%" },
-                        display: "flex",
-                        gap: "10px",
-                      }}
-                    >
+                    <Grid container>
+                      <Grid container item spacing={2}>
+                        <Grid item xs={12} md={6}>
+                          <Field
+                            component={TextField}
+                            color="secondary"
+                            label="First name"
+                            margin="dense"
+                            id="firstName"
+                            sx={{ mr: 1 }}
+                            error={
+                              touched.firstName && Boolean(errors.firstName)
+                            }
+                            helperText={touched.firstName && errors.firstName}
+                            onChange={handleChange}
+                            fullWidth
+                          />
+                        </Grid>
+
+                        <Grid item xs={12} md={6}>
+                          <Field
+                            component={TextField}
+                            color="secondary"
+                            label="Last name"
+                            id="lastName"
+                            margin="dense"
+                            onChange={handleChange}
+                            error={touched.lastName && Boolean(errors.lastName)}
+                            helperText={touched.lastName && errors.lastName}
+                            fullWidth
+                          />
+                        </Grid>
+                      </Grid>
+
                       <Field
                         component={TextField}
                         color="secondary"
-                        label="First name"
+                        label="Username"
                         margin="dense"
-                        id="firstName"
-                        sx={{ mr: 1 }}
-                        error={touched.firstName && Boolean(errors.firstName)}
-                        helperText={touched.firstName && errors.firstName}
+                        id="username"
+                        fullWidth
                         onChange={handleChange}
+                        error={touched.username && Boolean(errors.username)}
+                        helperText={touched.username && errors.username}
                       />
 
                       <Field
                         component={TextField}
                         color="secondary"
-                        label="Last name"
-                        id="lastName"
+                        label="Password"
                         margin="dense"
+                        type={isShowPassword.password ? "text" : "password"}
+                        id="password"
+                        fullWidth
                         onChange={handleChange}
-                        error={touched.lastName && Boolean(errors.lastName)}
-                        helperText={touched.lastName && errors.lastName}
+                        error={touched.password && Boolean(errors.password)}
+                        helperText={touched.password && errors.password}
+                        InputProps={{
+                          endAdornment: (
+                            <InputAdornment position="end">
+                              <IconButton
+                                onClick={handleShowPasswordClick}
+                                edge="end"
+                              >
+                                {isShowPassword.password ? (
+                                  <VisibilityOff />
+                                ) : (
+                                  <Visibility />
+                                )}
+                              </IconButton>
+                            </InputAdornment>
+                          ),
+                        }}
                       />
-                    </Box>
 
-                    <Field
-                      component={TextField}
-                      color="secondary"
-                      label="Username"
-                      margin="dense"
-                      id="username"
-                      fullWidth
-                      onChange={handleChange}
-                      error={touched.username && Boolean(errors.username)}
-                      helperText={touched.username && errors.username}
-                    />
+                      <Field
+                        component={TextField}
+                        color="secondary"
+                        label="Confirm password"
+                        margin="dense"
+                        id="confirmPassword"
+                        type={
+                          isShowPassword.confirmPassword ? "text" : "password"
+                        }
+                        fullWidth
+                        onChange={handleChange}
+                        error={
+                          touched.confirmPassword &&
+                          Boolean(errors.confirmPassword)
+                        }
+                        helperText={
+                          touched.confirmPassword && errors.confirmPassword
+                        }
+                        InputProps={{
+                          endAdornment: (
+                            <InputAdornment position="end">
+                              <IconButton
+                                onClick={handleShowConfirmPasswordClick}
+                                edge="end"
+                              >
+                                {isShowPassword.confirmPassword ? (
+                                  <VisibilityOff />
+                                ) : (
+                                  <Visibility />
+                                )}
+                              </IconButton>
+                            </InputAdornment>
+                          ),
+                        }}
+                      />
 
-                    <Field
-                      component={TextField}
-                      color="secondary"
-                      label="Password"
-                      margin="dense"
-                      type={isShowPassword.password ? "text" : "password"}
-                      id="password"
-                      fullWidth
-                      onChange={handleChange}
-                      error={touched.password && Boolean(errors.password)}
-                      helperText={touched.password && errors.password}
-                      InputProps={{
-                        endAdornment: (
-                          <InputAdornment position="end">
-                            <IconButton
-                              onClick={handleShowPasswordClick}
-                              edge="end"
-                            >
-                              {isShowPassword.password ? (
-                                <VisibilityOff />
-                              ) : (
-                                <Visibility />
-                              )}
-                            </IconButton>
-                          </InputAdornment>
-                        ),
-                      }}
-                    />
-
-                    <Field
-                      component={TextField}
-                      color="secondary"
-                      label="Confirm password"
-                      margin="dense"
-                      id="confirmPassword"
-                      type={
-                        isShowPassword.confirmPassword ? "text" : "password"
-                      }
-                      fullWidth
-                      onChange={handleChange}
-                      error={
-                        touched.confirmPassword &&
-                        Boolean(errors.confirmPassword)
-                      }
-                      helperText={
-                        touched.confirmPassword && errors.confirmPassword
-                      }
-                      InputProps={{
-                        endAdornment: (
-                          <InputAdornment position="end">
-                            <IconButton
-                              onClick={handleShowConfirmPasswordClick}
-                              edge="end"
-                            >
-                              {isShowPassword.confirmPassword ? (
-                                <VisibilityOff />
-                              ) : (
-                                <Visibility />
-                              )}
-                            </IconButton>
-                          </InputAdornment>
-                        ),
-                      }}
-                    />
-
-                    <Button
-                      sx={{ mt: 2, mb: 2 }}
-                      fullWidth
-                      color="secondary"
-                      variant="contained"
-                      disableElevation
-                      disableFocusRipple
-                      disabled={isLoading}
-                      type="submit"
-                    >
-                      Sign up
-                      {isLoading && (
-                        <CircularProgress
-                          sx={{ position: "absolute", right: "50px" }}
-                          size={17}
-                        />
-                      )}
-                    </Button>
+                      <Button
+                        sx={{ mt: 2, mb: 2 }}
+                        fullWidth
+                        color="secondary"
+                        variant="contained"
+                        disableElevation
+                        disableFocusRipple
+                        disabled={isLoading}
+                        type="submit"
+                      >
+                        Sign up
+                        {isLoading && (
+                          <CircularProgress
+                            sx={{ position: "absolute", right: "50px" }}
+                            size={17}
+                          />
+                        )}
+                      </Button>
+                    </Grid>
                   </Form>
                 )}
               </Formik>
