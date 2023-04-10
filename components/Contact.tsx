@@ -97,7 +97,7 @@ const Contact = () => {
                     <Grid item xs={12} md={6}>
                       <Field
                         component={Textfield}
-                        label="First Name"
+                        label="First name"
                         color="secondary"
                         fullWidth
                         margin="dense"
@@ -112,7 +112,7 @@ const Contact = () => {
                     <Grid item xs={12} md={6}>
                       <Field
                         component={Textfield}
-                        label="Last Name"
+                        label="Last name"
                         color="secondary"
                         fullWidth
                         margin="dense"
