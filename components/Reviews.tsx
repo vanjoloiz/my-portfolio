@@ -1,6 +1,7 @@
 import { useRef, FC, Fragment } from "react";
 import { useRouter } from "next/router";
 import useSWRInfinite from "swr/infinite";
+import Container from "@mui/material/Container";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import Divider from "@mui/material/Divider";
@@ -83,7 +84,7 @@ const Reviews: FC<ReviewProps> = ({ reviewsInitialValue }) => {
   const isShowViewMoreButton = paginateReviews.length >= PAGE_SIZE;
 
   return (
-    <>
+    <Container maxWidth="lg">
       <Typography variant="h3">Reviews</Typography>
       <Box pb={15} mt={1} ref={animRef}>
         <Fade in={animate} style={{ transitionDelay: "100ms" }}>
@@ -163,7 +164,7 @@ const Reviews: FC<ReviewProps> = ({ reviewsInitialValue }) => {
           </Box>
         </Fade>
       </Box>
-    </>
+    </Container>
   );
 };
 
