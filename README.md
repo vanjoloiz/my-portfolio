@@ -8,8 +8,6 @@ This is my personal portfolio website showcasing my skills and projects.
 - Next.js - React framework for building server-side rendered web applications
 - Material-UI - React UI framework
 - Zustand - State management library for React
-- Jest - JavaScript testing framework
-- React Testing Library - Testing utilities for React
 
 ## Features
 
@@ -18,7 +16,6 @@ This is my personal portfolio website showcasing my skills and projects.
 - Smooth scrolling with scroll-to-top button
 - Optimized for search engines (SEO)
 - Cross-browser compatible
-- Accessible (a11y)
 
 ## Installation
 
