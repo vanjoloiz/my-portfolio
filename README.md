@@ -1,34 +1,39 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# My Portfolio Website
 
-## Getting Started
+This is my personal portfolio website showcasing my skills and projects.
 
-First, run the development server:
+## Technologies Used
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+- React - JavaScript library for building user interfaces
+- Next.js - React framework for building server-side rendered web applications
+- Material-UI - React UI framework
+- Zustand - State management library for React
+- Jest - JavaScript testing framework
+- React Testing Library - Testing utilities for React
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Features
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+- Dark mode support
+- Responsive design
+- Smooth scrolling with scroll-to-top button
+- Optimized for search engines (SEO)
+- Cross-browser compatible
+- Accessible (a11y)
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+## Installation
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+1. Clone the repository: `git clone https://github.com/vanjoloiz/my-portfolio.git`
+2. Install dependencies: `npm install` or `yarn install`
+3. Run the development server: `npm run dev` or `yarn dev`
 
-## Learn More
+## Usage
 
-To learn more about Next.js, take a look at the following resources:
+Visit the website at [http://localhost:3000](http://localhost:3000) to view the homepage.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Contributing
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Contributions are always welcome! If you find any issues or want to add a new feature, feel free to open a pull request.
 
-## Deploy on Vercel
+## License
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+This project is licensed under the [MIT License](https://opensource.org/licenses/MIT).
