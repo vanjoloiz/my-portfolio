@@ -8,6 +8,8 @@ This is my personal portfolio website showcasing my skills and projects.
 - Next.js - React framework for building server-side rendered web applications
 - Material-UI - React UI framework
 - Zustand - State management library for React
+- MongoDB - A NoSQL Database
+- Sendgrid - Email Delivery platform
 
 ## Features
 
@@ -22,6 +24,14 @@ This is my personal portfolio website showcasing my skills and projects.
 1. Clone the repository: `git clone https://github.com/vanjoloiz/my-portfolio.git`
 2. Install dependencies: `npm install` or `yarn install`
 3. Run the development server: `npm run dev` or `yarn dev`
+4. Create a config.env file in the root and add the following
+
+```
+DB_PASSWORD={dbpassword}
+MONGO_URI={mongouri}
+JWT_SECRET={jwtsecret}
+SENDGRID_API_KEY={sendgridapikey}
+```
 
 ## Usage
 
