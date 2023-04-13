@@ -1,6 +1,10 @@
 /** @type {import('next').NextConfig} */
-module.exports = {
-  reactStrictMode: true,
+
+const withBundleAnalyzer = require("@next/bundle-analyzer")({
+  enabled: process.env.ANALYZE === "true",
+});
+
+module.exports = withBundleAnalyzer({
   // swcMinify: true,
   webpack(config) {
     config.module.rules.push({
@@ -11,4 +15,4 @@ module.exports = {
 
     return config;
   },
-};
+});
