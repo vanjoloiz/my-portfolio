@@ -37,7 +37,9 @@ const Home: FC<ReviewProps> = ({ reviews: reviewsInitialValue }) => {
 };
 
 export const getServerSideProps = async () => {
-  const { data } = await axios.get(`${BASE_URL}/api/v1/review?pageNumber=1`);
+  const { data } = await axios.get<Review[]>(
+    `${BASE_URL}/api/v1/review?pageNumber=1`
+  );
 
   return {
     props: {
