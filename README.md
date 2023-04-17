@@ -8,6 +8,7 @@ This is my personal portfolio website showcasing my skills and projects.
 - Next.js - React framework for building server-side rendered web applications
 - Material-UI - React UI framework
 - Zustand - State management library for React
+- Express - Fast, unopinionated, minimalist web framework for Node.js
 - MongoDB - A NoSQL Database
 - Sendgrid - Email Delivery platform
 
@@ -18,6 +19,8 @@ This is my personal portfolio website showcasing my skills and projects.
 - Smooth scrolling with scroll-to-top button
 - Optimized for search engines (SEO)
 - Cross-browser compatible
+- Login/Sign up system
+- Adding reviews
 
 ## Installation
 
