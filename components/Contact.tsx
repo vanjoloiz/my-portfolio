@@ -98,7 +98,6 @@ const Contact = () => {
                       <Field
                         component={Textfield}
                         label="First name"
-                        color="secondary"
                         fullWidth
                         margin="dense"
                         id="firstName"
@@ -113,7 +112,6 @@ const Contact = () => {
                       <Field
                         component={Textfield}
                         label="Last name"
-                        color="secondary"
                         fullWidth
                         margin="dense"
                         id="lastName"
@@ -129,7 +127,6 @@ const Contact = () => {
                     component={Textfield}
                     fullWidth
                     label="Email"
-                    color="secondary"
                     margin="dense"
                     id="email"
                     error={touched.email && Boolean(errors.email)}
@@ -142,7 +139,6 @@ const Contact = () => {
                     component={Textfield}
                     fullWidth
                     label="Message"
-                    color="secondary"
                     margin="dense"
                     multiline
                     minRows={8}
@@ -158,7 +154,6 @@ const Contact = () => {
                   fullWidth
                   disableElevation
                   disableRipple
-                  color="secondary"
                   variant="contained"
                   sx={{ mt: "5px" }}
                   type="submit"

@@ -90,7 +90,6 @@ const Login = () => {
                   <Form>
                     <Field
                       component={TextField}
-                      color="secondary"
                       label="Username"
                       fullWidth
                       margin="dense"
@@ -103,7 +102,6 @@ const Login = () => {
 
                     <Field
                       component={TextField}
-                      color="secondary"
                       label="Password"
                       fullWidth
                       type={isShowPassword ? "text" : "password"}
@@ -134,7 +132,6 @@ const Login = () => {
                     <Button
                       sx={{ mt: 2, mb: 2 }}
                       fullWidth
-                      color="secondary"
                       variant="contained"
                       disableElevation
                       disableFocusRipple

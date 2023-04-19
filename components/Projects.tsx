@@ -43,11 +43,7 @@ const Projects = () => {
                           iPostItPH
                         </Typography>
 
-                        <Typography
-                          variant="body2"
-                          color="text.secondary"
-                          mb={5}
-                        >
+                        <Typography variant="body2" mb={5}>
                           Social media platform for filipino users.
                         </Typography>
 
@@ -85,11 +81,7 @@ const Projects = () => {
                           LApp
                         </Typography>
 
-                        <Typography
-                          variant="body2"
-                          color="text.secondary"
-                          mb={5}
-                        >
+                        <Typography variant="body2" mb={5}>
                           Blogging Application for people love to write blogs.
                         </Typography>
 

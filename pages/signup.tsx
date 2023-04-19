@@ -124,7 +124,6 @@ const SignUp = () => {
                         <Grid item xs={12} md={6}>
                           <Field
                             component={TextField}
-                            color="secondary"
                             label="First name"
                             margin="dense"
                             id="firstName"
@@ -141,7 +140,6 @@ const SignUp = () => {
                         <Grid item xs={12} md={6}>
                           <Field
                             component={TextField}
-                            color="secondary"
                             label="Last name"
                             id="lastName"
                             margin="dense"
@@ -155,7 +153,6 @@ const SignUp = () => {
 
                       <Field
                         component={TextField}
-                        color="secondary"
                         label="Username"
                         margin="dense"
                         id="username"
@@ -167,7 +164,6 @@ const SignUp = () => {
 
                       <Field
                         component={TextField}
-                        color="secondary"
                         label="Password"
                         margin="dense"
                         type={isShowPassword.password ? "text" : "password"}
@@ -196,7 +192,6 @@ const SignUp = () => {
 
                       <Field
                         component={TextField}
-                        color="secondary"
                         label="Confirm password"
                         margin="dense"
                         id="confirmPassword"
@@ -233,7 +228,6 @@ const SignUp = () => {
                       <Button
                         sx={{ mt: 2, mb: 2 }}
                         fullWidth
-                        color="secondary"
                         variant="contained"
                         disableElevation
                         disableFocusRipple

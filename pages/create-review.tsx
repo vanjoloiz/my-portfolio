@@ -57,6 +57,10 @@ const CreateReview = () => {
     setIsOpenSnackBar(false);
   };
 
+  const handleBackClick = () => {
+    router.replace("/", undefined, { scroll: false });
+  };
+
   return (
     <div style={{ marginTop: "150px" }}>
       <Snackbar
@@ -93,7 +97,6 @@ const CreateReview = () => {
                       component={TextField}
                       fullWidth
                       value={values.text || ""}
-                      color="secondary"
                       id="text"
                       multiline
                       minRows={15}
@@ -109,12 +112,9 @@ const CreateReview = () => {
                       }}
                     >
                       <Button
-                        onClick={() =>
-                          router.replace("/", undefined, { scroll: false })
-                        }
+                        onClick={handleBackClick}
                         sx={{ mt: 2 }}
                         size="large"
-                        color="secondary"
                         variant="contained"
                         disableElevation
                         disableFocusRipple
@@ -124,7 +124,6 @@ const CreateReview = () => {
 
                       <Button
                         sx={{ mt: 2 }}
-                        color="secondary"
                         variant="contained"
                         disableElevation
                         disableFocusRipple

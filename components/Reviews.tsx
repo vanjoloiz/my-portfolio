@@ -136,7 +136,6 @@ const Reviews: FC<ReviewProps> = ({ reviewsInitialValue }) => {
           <Box sx={{ display: "flex", justifyContent: "space-between" }}>
             <Button
               sx={{ ml: 1 }}
-              color="secondary"
               variant="contained"
               disableElevation
               disableFocusRipple
@@ -150,7 +149,6 @@ const Reviews: FC<ReviewProps> = ({ reviewsInitialValue }) => {
             {isShowViewMoreButton && (
               <Button
                 disabled={isReachingEnd || isLoadingMore}
-                color="secondary"
                 variant="contained"
                 disableElevation
                 disableFocusRipple
