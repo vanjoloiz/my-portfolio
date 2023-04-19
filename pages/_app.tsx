@@ -14,6 +14,7 @@ import createEmotionCache from "@/lib/createEmotionCache";
 import { BASE_URL } from "@utils/baseUrl";
 import Layout from "@/components/Layout";
 import { useThemeStore } from "../lib/useThemeStore";
+import "../styles/main.css";
 
 const clientSideEmotionCache = createEmotionCache();
 

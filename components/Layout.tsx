@@ -1,4 +1,6 @@
 import { FC, ReactNode } from "react";
+import Router from "next/router";
+import NProgress from "nprogress";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
 
@@ -15,6 +17,18 @@ interface LayoutProps {
 
 const Layout: FC<LayoutProps> = ({ children, user }) => {
   const isLoggedIn = user !== undefined;
+
+  Router.events.on("routeChangeStart", () => {
+    NProgress.start();
+  });
+
+  Router.events.on("routeChangeComplete", () => {
+    NProgress.done();
+  });
+
+  Router.events.on("routeChangeError", () => {
+    NProgress.done();
+  });
 
   return (
     <>
