@@ -81,8 +81,6 @@ const Reviews: FC<ReviewProps> = ({ reviewsInitialValue }) => {
     return `${firstInitial}${lastInitial}`;
   };
 
-  const isShowViewMoreButton = paginateReviews.length >= PAGE_SIZE;
-
   return (
     <Container maxWidth="lg">
       <Typography variant="h3">Reviews</Typography>
@@ -146,7 +144,7 @@ const Reviews: FC<ReviewProps> = ({ reviewsInitialValue }) => {
               Add review
             </Button>
 
-            {isShowViewMoreButton && (
+            {!isReachingEnd && (
               <Button
                 disabled={isReachingEnd || isLoadingMore}
                 variant="contained"
