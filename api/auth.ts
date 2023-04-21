@@ -4,6 +4,7 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import { authMiddleware } from "../middleware/authMiddleware";
 import Profile from "../models/Profile";
+import { loginLimiter } from "../utils/limiter";
 
 const router = express.Router();
 
@@ -17,7 +18,7 @@ router.get("/", authMiddleware, async (req: CustomRequest, res) => {
   res.status(200).json(user);
 });
 
-router.post("/", async (req, res) => {
+router.post("/", loginLimiter, async (req, res) => {
   const { username, password } = req.body;
 
   try {
