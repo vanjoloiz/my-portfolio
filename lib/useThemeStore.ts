@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { persist } from "zustand/middleware";
+import { persist, createJSONStorage } from "zustand/middleware";
 
 type Theme = "light" | "dark";
 
@@ -17,7 +17,7 @@ export const useThemeStore = create<ThemeStore | any>(
     }),
     {
       name: "theme",
-      getStorage: () => sessionStorage,
+      storage: createJSONStorage(() => sessionStorage),
     }
   )
 );
