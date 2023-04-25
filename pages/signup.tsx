@@ -247,18 +247,6 @@ const SignUp = () => {
                         </Button>
                       </Grid>
                     </Form>
-
-                    <Button
-                      sx={{ mb: 2 }}
-                      fullWidth
-                      variant="contained"
-                      disableElevation
-                      disableFocusRipple
-                      disabled={isLoading}
-                      onClick={() => router.replace("/auth/linkedin")}
-                    >
-                      Sign up with linkedin
-                    </Button>
                   </>
                 )}
               </Formik>
