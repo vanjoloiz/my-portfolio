@@ -75,7 +75,7 @@ const SignUp = () => {
 
       setError({ isShow: false, message: "" });
 
-      Cookie.set("token", data);
+      Cookie.set("token", data, { expires: 7 });
 
       router.push(redirect);
       router.events.on("routeChangeComplete", () => {
@@ -118,132 +118,148 @@ const SignUp = () => {
                 validationSchema={signupValidationSchema}
               >
                 {({ touched, errors, handleChange }) => (
-                  <Form>
-                    <Grid container>
-                      <Grid container item spacing={isSmall ? 0 : 2}>
-                        <Grid item xs={12} md={6}>
-                          <Field
-                            component={TextField}
-                            label="First name"
-                            margin="dense"
-                            id="firstName"
-                            sx={{ mr: 1 }}
-                            error={
-                              touched.firstName && Boolean(errors.firstName)
-                            }
-                            helperText={touched.firstName && errors.firstName}
-                            onChange={handleChange}
-                            fullWidth
-                          />
+                  <>
+                    <Form>
+                      <Grid container>
+                        <Grid container item spacing={isSmall ? 0 : 2}>
+                          <Grid item xs={12} md={6}>
+                            <Field
+                              component={TextField}
+                              label="First name"
+                              margin="dense"
+                              id="firstName"
+                              sx={{ mr: 1 }}
+                              error={
+                                touched.firstName && Boolean(errors.firstName)
+                              }
+                              helperText={touched.firstName && errors.firstName}
+                              onChange={handleChange}
+                              fullWidth
+                            />
+                          </Grid>
+
+                          <Grid item xs={12} md={6}>
+                            <Field
+                              component={TextField}
+                              label="Last name"
+                              id="lastName"
+                              margin="dense"
+                              onChange={handleChange}
+                              error={
+                                touched.lastName && Boolean(errors.lastName)
+                              }
+                              helperText={touched.lastName && errors.lastName}
+                              fullWidth
+                            />
+                          </Grid>
                         </Grid>
 
-                        <Grid item xs={12} md={6}>
-                          <Field
-                            component={TextField}
-                            label="Last name"
-                            id="lastName"
-                            margin="dense"
-                            onChange={handleChange}
-                            error={touched.lastName && Boolean(errors.lastName)}
-                            helperText={touched.lastName && errors.lastName}
-                            fullWidth
-                          />
-                        </Grid>
+                        <Field
+                          component={TextField}
+                          label="Username"
+                          margin="dense"
+                          id="username"
+                          fullWidth
+                          onChange={handleChange}
+                          error={touched.username && Boolean(errors.username)}
+                          helperText={touched.username && errors.username}
+                        />
+
+                        <Field
+                          component={TextField}
+                          label="Password"
+                          margin="dense"
+                          type={isShowPassword.password ? "text" : "password"}
+                          id="password"
+                          fullWidth
+                          onChange={handleChange}
+                          error={touched.password && Boolean(errors.password)}
+                          helperText={touched.password && errors.password}
+                          InputProps={{
+                            endAdornment: (
+                              <InputAdornment position="end">
+                                <IconButton
+                                  onClick={handleShowPasswordClick}
+                                  edge="end"
+                                >
+                                  {isShowPassword.password ? (
+                                    <VisibilityOff />
+                                  ) : (
+                                    <Visibility />
+                                  )}
+                                </IconButton>
+                              </InputAdornment>
+                            ),
+                          }}
+                        />
+
+                        <Field
+                          component={TextField}
+                          label="Confirm password"
+                          margin="dense"
+                          id="confirmPassword"
+                          type={
+                            isShowPassword.confirmPassword ? "text" : "password"
+                          }
+                          fullWidth
+                          onChange={handleChange}
+                          error={
+                            touched.confirmPassword &&
+                            Boolean(errors.confirmPassword)
+                          }
+                          helperText={
+                            touched.confirmPassword && errors.confirmPassword
+                          }
+                          InputProps={{
+                            endAdornment: (
+                              <InputAdornment position="end">
+                                <IconButton
+                                  onClick={handleShowConfirmPasswordClick}
+                                  edge="end"
+                                >
+                                  {isShowPassword.confirmPassword ? (
+                                    <VisibilityOff />
+                                  ) : (
+                                    <Visibility />
+                                  )}
+                                </IconButton>
+                              </InputAdornment>
+                            ),
+                          }}
+                        />
+
+                        <Button
+                          sx={{ mt: 2, mb: 2 }}
+                          fullWidth
+                          variant="contained"
+                          disableElevation
+                          disableFocusRipple
+                          disabled={isLoading}
+                          type="submit"
+                        >
+                          Sign up
+                          {isLoading && (
+                            <CircularProgress
+                              sx={{ position: "absolute", right: "50px" }}
+                              size={17}
+                            />
+                          )}
+                        </Button>
                       </Grid>
+                    </Form>
 
-                      <Field
-                        component={TextField}
-                        label="Username"
-                        margin="dense"
-                        id="username"
-                        fullWidth
-                        onChange={handleChange}
-                        error={touched.username && Boolean(errors.username)}
-                        helperText={touched.username && errors.username}
-                      />
-
-                      <Field
-                        component={TextField}
-                        label="Password"
-                        margin="dense"
-                        type={isShowPassword.password ? "text" : "password"}
-                        id="password"
-                        fullWidth
-                        onChange={handleChange}
-                        error={touched.password && Boolean(errors.password)}
-                        helperText={touched.password && errors.password}
-                        InputProps={{
-                          endAdornment: (
-                            <InputAdornment position="end">
-                              <IconButton
-                                onClick={handleShowPasswordClick}
-                                edge="end"
-                              >
-                                {isShowPassword.password ? (
-                                  <VisibilityOff />
-                                ) : (
-                                  <Visibility />
-                                )}
-                              </IconButton>
-                            </InputAdornment>
-                          ),
-                        }}
-                      />
-
-                      <Field
-                        component={TextField}
-                        label="Confirm password"
-                        margin="dense"
-                        id="confirmPassword"
-                        type={
-                          isShowPassword.confirmPassword ? "text" : "password"
-                        }
-                        fullWidth
-                        onChange={handleChange}
-                        error={
-                          touched.confirmPassword &&
-                          Boolean(errors.confirmPassword)
-                        }
-                        helperText={
-                          touched.confirmPassword && errors.confirmPassword
-                        }
-                        InputProps={{
-                          endAdornment: (
-                            <InputAdornment position="end">
-                              <IconButton
-                                onClick={handleShowConfirmPasswordClick}
-                                edge="end"
-                              >
-                                {isShowPassword.confirmPassword ? (
-                                  <VisibilityOff />
-                                ) : (
-                                  <Visibility />
-                                )}
-                              </IconButton>
-                            </InputAdornment>
-                          ),
-                        }}
-                      />
-
-                      <Button
-                        sx={{ mt: 2, mb: 2 }}
-                        fullWidth
-                        variant="contained"
-                        disableElevation
-                        disableFocusRipple
-                        disabled={isLoading}
-                        type="submit"
-                      >
-                        Sign up
-                        {isLoading && (
-                          <CircularProgress
-                            sx={{ position: "absolute", right: "50px" }}
-                            size={17}
-                          />
-                        )}
-                      </Button>
-                    </Grid>
-                  </Form>
+                    <Button
+                      sx={{ mb: 2 }}
+                      fullWidth
+                      variant="contained"
+                      disableElevation
+                      disableFocusRipple
+                      disabled={isLoading}
+                      onClick={() => router.replace("/auth/linkedin")}
+                    >
+                      Sign up with linkedin
+                    </Button>
+                  </>
                 )}
               </Formik>
               <Link href={loginAnchorRedirect} color="inherit">
