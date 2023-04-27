@@ -41,7 +41,7 @@ router.post("/", loginLimiter, async (req, res) => {
     const payload = { userId: user._id };
 
     const token = jwt.sign(payload, process.env.JWT_SECRET!, {
-      expiresIn: "2d",
+      expiresIn: "7d",
     });
 
     return res.status(200).json(token);
@@ -86,7 +86,7 @@ router.post("/signup", async (req: CustomRequest, res) => {
     const payload = { userId: user._id };
 
     const token = jwt.sign(payload, process.env.JWT_SECRET!, {
-      expiresIn: "2d",
+      expiresIn: "7d",
     });
 
     return res.status(200).json(token);

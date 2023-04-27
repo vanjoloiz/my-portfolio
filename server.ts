@@ -55,6 +55,6 @@ nextApp.prepare().then(() => {
 
   server.listen(PORT, (err: void | boolean) => {
     if (err) throw err;
-    console.log(`Express server running on ${PORT}`);
+    console.log(`Express server running on PORT:${PORT}`);
   });
 });

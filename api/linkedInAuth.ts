@@ -35,9 +35,9 @@ passport.use(
 
           user = await Profile.findOne({ username: linkedInEmail });
 
-          userId = user!._id.toString();
-
           if (user) {
+            userId = user._id.toString();
+
             return done(null, profile);
           }
 
@@ -50,6 +50,8 @@ passport.use(
             confirmPassword:
               "$2b$10$PQg4LM9Pu1Rnk/nj1j3pf.reqVFjWOhIhADGui/0VisKkhnofWHTC",
           });
+
+          userId = user._id.toString();
 
           user.password = await bcrypt.hash(user.password, 10);
           user.confirmPassword = undefined;
@@ -75,10 +77,12 @@ router.get("/auth/linkedin/callback", (req, res, next) => {
       const payload = { userId };
 
       const token = jwt.sign(payload, process.env.JWT_SECRET!, {
-        expiresIn: "2d",
+        expiresIn: "7d",
       });
 
-      res.cookie("token", token);
+      res.cookie("token", token, {
+        maxAge: 7 * 24 * 60 * 60 * 1000,
+      });
 
       res.redirect("/");
     } else {
