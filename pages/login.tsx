@@ -9,6 +9,7 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Link from "@mui/material/Link";
 import Alert from "@mui/material/Alert";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import Cookie from "js-cookie";
 import axios from "axios";
 import InputAdornment from "@mui/material/InputAdornment";
@@ -87,66 +88,81 @@ const Login = () => {
                 validationSchema={loginValidationSchema}
               >
                 {({ touched, errors, handleChange, values }) => (
-                  <Form>
-                    <Field
-                      component={TextField}
-                      label="Username"
-                      fullWidth
-                      margin="dense"
-                      id="username"
-                      error={touched.username && Boolean(errors.username)}
-                      helperText={touched.username && errors.username}
-                      onChange={handleChange}
-                      value={values.username || ""}
-                    />
+                  <>
+                    <Form>
+                      <Field
+                        component={TextField}
+                        label="Username"
+                        fullWidth
+                        margin="dense"
+                        id="username"
+                        error={touched.username && Boolean(errors.username)}
+                        helperText={touched.username && errors.username}
+                        onChange={handleChange}
+                        value={values.username || ""}
+                      />
 
-                    <Field
-                      component={TextField}
-                      label="Password"
-                      fullWidth
-                      type={isShowPassword ? "text" : "password"}
-                      margin="dense"
-                      id="password"
-                      error={touched.password && Boolean(errors.password)}
-                      helperText={touched.password && errors.password}
-                      onChange={handleChange}
-                      value={values.password || ""}
-                      InputProps={{
-                        endAdornment: (
-                          <InputAdornment position="end">
-                            <IconButton
-                              onClick={handleShowPasswordClick}
-                              edge="end"
-                            >
-                              {isShowPassword ? (
-                                <VisibilityOff />
-                              ) : (
-                                <Visibility />
-                              )}
-                            </IconButton>
-                          </InputAdornment>
-                        ),
-                      }}
-                    />
+                      <Field
+                        component={TextField}
+                        label="Password"
+                        fullWidth
+                        type={isShowPassword ? "text" : "password"}
+                        margin="dense"
+                        id="password"
+                        error={touched.password && Boolean(errors.password)}
+                        helperText={touched.password && errors.password}
+                        onChange={handleChange}
+                        value={values.password || ""}
+                        InputProps={{
+                          endAdornment: (
+                            <InputAdornment position="end">
+                              <IconButton
+                                onClick={handleShowPasswordClick}
+                                edge="end"
+                              >
+                                {isShowPassword ? (
+                                  <VisibilityOff />
+                                ) : (
+                                  <Visibility />
+                                )}
+                              </IconButton>
+                            </InputAdornment>
+                          ),
+                        }}
+                      />
+
+                      <Button
+                        sx={{ mt: 2, mb: 2 }}
+                        fullWidth
+                        variant="contained"
+                        disableElevation
+                        disableFocusRipple
+                        type="submit"
+                        disabled={isLoading}
+                      >
+                        {isLoading && (
+                          <CircularProgress
+                            sx={{ position: "absolute", right: "50px" }}
+                            size={17}
+                          />
+                        )}
+                        Login
+                      </Button>
+                    </Form>
 
                     <Button
-                      sx={{ mt: 2, mb: 2 }}
+                      sx={{ mb: 2 }}
                       fullWidth
                       variant="contained"
                       disableElevation
                       disableFocusRipple
-                      type="submit"
                       disabled={isLoading}
+                      onClick={() => router.replace("/auth/linkedin")}
+                      endIcon={<LinkedInIcon />}
                     >
-                      {isLoading && (
-                        <CircularProgress
-                          sx={{ position: "absolute", right: "50px" }}
-                          size={17}
-                        />
-                      )}
-                      Login
+                      Log in with linkedin
                     </Button>
-                  </Form>
+                  </>
                 )}
               </Formik>
               <Link href={signUpAnchorRedirect} color="inherit">

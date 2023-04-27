@@ -2,8 +2,11 @@ import express from "express";
 import http from "http";
 import next from "next";
 import dotenv from "dotenv";
+import passport from "passport";
+import session from "express-session";
 
 import connectDb from "./config/db";
+import linkedInAuth from "./api/linkedInAuth";
 import authRouter from "./api/auth";
 import reviewRouter from "./api/review";
 import emailRouter from "./api/email";
@@ -28,6 +31,18 @@ nextApp.prepare().then(() => {
   app.use(express.urlencoded({ extended: false }));
   app.use(express.json());
 
+  app.use(
+    session({
+      resave: false,
+      saveUninitialized: true,
+      secret: process.env.SESSION_SECRET!,
+    })
+  );
+
+  app.use(passport.initialize());
+  app.use(passport.session());
+
+  app.use("/", linkedInAuth);
   app.use("/api/v1/auth", authRouter);
   app.use("/api/v1/review", reviewRouter);
   app.use("/api/v1/email", emailRouter);
