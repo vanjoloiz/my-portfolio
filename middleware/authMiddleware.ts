@@ -4,9 +4,11 @@ import Profile from "../models/Profile";
 
 interface CustomRequest extends Request {
   userId?: string;
-  user?: {
-    isAdmin: boolean;
-  } | null;
+  user?:
+    | {
+        isAdmin: boolean;
+      }
+    | any;
 }
 
 export const authMiddleware = async (
