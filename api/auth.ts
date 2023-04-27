@@ -27,7 +27,9 @@ router.post("/", loginLimiter, async (req, res) => {
     }).select("+password");
 
     if (!user) {
-      return res.status(401).send("P.");
+      return res
+        .status(401)
+        .send("Invalid login credentials. Please try again.");
     }
 
     const isPassword = await bcrypt.compare(password, user.password);
