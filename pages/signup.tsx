@@ -17,6 +17,7 @@ import { Form, Formik, Field } from "formik";
 import axios from "axios";
 import { signUpValidationSchema } from "@utils/formValidationSchema";
 import IconButton from "@mui/material/IconButton";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import InputAdornment from "@mui/material/InputAdornment";
@@ -113,6 +114,7 @@ const SignUp = () => {
                   username: "",
                   password: "",
                   confirmPassword: "",
+                  linkedInProfileUrl: "",
                 }}
                 onSubmit={handleSubmit}
                 validationSchema={signUpValidationSchema}
@@ -220,6 +222,31 @@ const SignUp = () => {
                                   <Visibility />
                                 )}
                               </IconButton>
+                            </InputAdornment>
+                          ),
+                        }}
+                      />
+
+                      <Field
+                        component={TextField}
+                        label="Linkedin (optional)"
+                        placeholder="Profile URL"
+                        margin="dense"
+                        id="linkedInProfileUrl"
+                        onChange={handleChange}
+                        fullWidth
+                        error={
+                          touched.linkedInProfileUrl &&
+                          Boolean(errors.linkedInProfileUrl)
+                        }
+                        helperText={
+                          touched.linkedInProfileUrl &&
+                          errors.linkedInProfileUrl
+                        }
+                        InputProps={{
+                          startAdornment: (
+                            <InputAdornment position="start">
+                              <LinkedInIcon />
                             </InputAdornment>
                           ),
                         }}

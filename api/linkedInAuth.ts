@@ -1,4 +1,5 @@
 import express from "express";
+import * as crypto from "crypto";
 import passport from "passport";
 import LinkedInStrategy from "passport-linkedin-oauth2";
 import jwt from "jsonwebtoken";
@@ -41,14 +42,15 @@ passport.use(
             return done(null, profile);
           }
 
+          const generatedPassword = crypto.randomBytes(32).toString("hex");
+
           user = new Profile({
             firstName: profile.name.givenName,
             lastName: profile.name.familyName,
             username: linkedInEmail,
-            password:
-              "$2b$10$PQg4LM9Pu1Rnk/nj1j3pf.reqVFjWOhIhADGui/0VisKkhnofWHTC",
-            confirmPassword:
-              "$2b$10$PQg4LM9Pu1Rnk/nj1j3pf.reqVFjWOhIhADGui/0VisKkhnofWHTC",
+            password: generatedPassword,
+            confirmPassword: generatedPassword,
+            linkedInProfilePicUrl: profile.photos[0].value,
           });
 
           userId = user._id.toString();

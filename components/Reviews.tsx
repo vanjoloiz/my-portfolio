@@ -9,6 +9,7 @@ import ListItemText from "@mui/material/ListItemText";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
+import Link from "@mui/material/Link";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Fade from "@mui/material/Fade";
@@ -20,6 +21,8 @@ interface Review {
     _id: string;
     firstName: string;
     lastName: string;
+    linkedInProfileUrl: string;
+    linkedInProfilePicUrl: string;
   };
   text: string;
   updatedAt: string;
@@ -97,18 +100,45 @@ const Reviews: FC<ReviewProps> = ({ reviewsInitialValue }) => {
               <Fragment key={data._id}>
                 <ListItem alignItems="flex-start">
                   <ListItemAvatar>
-                    <Avatar>
-                      {getInitials(
-                        data.profile.firstName,
-                        data.profile.lastName
-                      )}
-                    </Avatar>
+                    <Link
+                      href={data.profile.linkedInProfileUrl ?? undefined}
+                      rel="noopener"
+                      target="_blank"
+                      sx={{
+                        textDecoration: "none",
+                        cursor: "pointer",
+                      }}
+                    >
+                      <Avatar
+                        src={data.profile.linkedInProfilePicUrl ?? undefined}
+                      >
+                        {data.profile.linkedInProfilePicUrl ?? (
+                          <Typography>
+                            {getInitials(
+                              data.profile.firstName,
+                              data.profile.lastName
+                            )}
+                          </Typography>
+                        )}
+                      </Avatar>
+                    </Link>
                   </ListItemAvatar>
                   <ListItemText
                     primary={
-                      <Typography component="span" variant="subtitle2">
-                        {data.profile.firstName} {data.profile.lastName}
-                      </Typography>
+                      <Link
+                        href={data.profile.linkedInProfileUrl ?? undefined}
+                        rel="noopener"
+                        target="_blank"
+                        sx={{
+                          textDecoration: "none",
+                          cursor: "pointer",
+                          color: "black",
+                        }}
+                      >
+                        <Typography component="span" variant="subtitle2">
+                          {data.profile.firstName} {data.profile.lastName}
+                        </Typography>
+                      </Link>
                     }
                     secondary={
                       <>

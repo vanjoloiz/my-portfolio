@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 interface Profile {
   firstName: string;
@@ -6,6 +6,8 @@ interface Profile {
   username: string;
   password: string;
   confirmPassword?: string;
+  linkedInProfileUrl?: string;
+  linkedInProfilePicUrl?: string;
   isAdmin: boolean;
 }
 
@@ -35,6 +37,14 @@ const ProfileSchema = new mongoose.Schema<Profile>(
       type: String,
     },
 
+    linkedInProfileUrl: {
+      type: String,
+    },
+
+    linkedInProfilePicUrl: {
+      type: String,
+    },
+
     isAdmin: {
       type: Boolean,
       default: false,
@@ -43,6 +53,6 @@ const ProfileSchema = new mongoose.Schema<Profile>(
   { timestamps: true }
 );
 
-const ProfileModel = mongoose.model('Profile', ProfileSchema);
+const ProfileModel = mongoose.model("Profile", ProfileSchema);
 
 export default ProfileModel;

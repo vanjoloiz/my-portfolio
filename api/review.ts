@@ -17,7 +17,10 @@ router.get("/", async (req, res) => {
     .limit(pageSize)
     .skip(pageSize * (page - 1))
     .sort("-updatedAt")
-    .populate("profile", "firstName lastName");
+    .populate(
+      "profile",
+      "firstName lastName linkedInProfilePicUrl linkedInProfileUrl"
+    );
 
   return res.status(201).json(reviews);
 });
@@ -30,7 +33,10 @@ router.get("/admin", authMiddleware, adminMiddleware, async (req, res) => {
     .limit(pageSize)
     .skip(pageSize * (page - 1))
     .sort("-updatedAt")
-    .populate("profile", "firstName lastName");
+    .populate(
+      "profile",
+      "firstName lastName linkedInProfilePicUrl linkedInProfileUrl"
+    );
 
   return res.status(201).json(reviews);
 });

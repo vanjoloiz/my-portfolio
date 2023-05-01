@@ -53,7 +53,14 @@ router.post("/", loginLimiter, async (req, res) => {
 });
 
 router.post("/signup", async (req: CustomRequest, res) => {
-  const { firstName, lastName, username, password, confirmPassword } = req.body;
+  const {
+    firstName,
+    lastName,
+    username,
+    password,
+    confirmPassword,
+    linkedInProfileUrl,
+  } = req.body;
 
   if (password.length < 8) {
     return res.status(401).send("Password must be at least 8 characters.");
@@ -78,6 +85,7 @@ router.post("/signup", async (req: CustomRequest, res) => {
       username: username.toLowerCase(),
       password,
       confirmPassword,
+      linkedInProfileUrl,
     });
 
     user.password = await bcrypt.hash(user.password, 10);
