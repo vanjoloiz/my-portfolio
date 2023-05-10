@@ -132,7 +132,7 @@ const Reviews: FC<ReviewProps> = ({ reviewsInitialValue }) => {
                         sx={{
                           textDecoration: "none",
                           cursor: "pointer",
-                          color: "black",
+                          color: "inherit",
                         }}
                       >
                         <Typography component="span" variant="subtitle2">
