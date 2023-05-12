@@ -20,6 +20,7 @@ This is my personal portfolio website showcasing my skills and projects.
 - Optimized for search engines (SEO)
 - Cross-browser compatible
 - Login/Sign up system
+- Login with Linkedin
 - Adding reviews
 
 ## Installation
