@@ -32,7 +32,7 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(function Alert(
 const Contact = () => {
   const theme = useTheme();
 
-  const isSmall = useMediaQuery(theme.breakpoints.down("sm"));
+  const isMediumScreenSize = useMediaQuery(theme.breakpoints.down("md"));
 
   const [isOpenSnackbar, setIsOpenSnackBar] = useState(false);
 
@@ -93,7 +93,7 @@ const Contact = () => {
             <Container>
               <Form>
                 <Grid container>
-                  <Grid container item spacing={isSmall ? 0 : 2}>
+                  <Grid container item spacing={isMediumScreenSize ? 0 : 2}>
                     <Grid item xs={12} md={6}>
                       <Field
                         component={Textfield}
