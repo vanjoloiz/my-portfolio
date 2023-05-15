@@ -68,6 +68,8 @@ router.put(
 
       review!.isApproved = true;
 
+      await review?.save();
+
       res.status(200).json(review);
     } catch (err) {
       console.error(err);
