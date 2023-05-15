@@ -28,7 +28,7 @@ const Landing: FC = () => {
                 "Full stack Developer. 🌐",
                 "React Developer. ⚛️",
                 "Node js Developer. 💻",
-                "Passionate about coding, and making my client ideas come true. ❤️",
+                "Passionate about coding.",
               ]}
               typeSpeed={40}
               backSpeed={50}
