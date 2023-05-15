@@ -1,6 +1,5 @@
 import { useState, forwardRef } from "react";
 import { Form, Formik, Field } from "formik";
-import useSWR from "swr";
 import axios from "axios";
 import { useRouter } from "next/router";
 import Cookie from "js-cookie";
@@ -26,8 +25,6 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(function Alert(
 const CreateReview = () => {
   const router = useRouter();
 
-  const { data: reviews, mutate } = useSWR("/api/v1/review?pageNumber=1`");
-
   const token = Cookie.get("token");
 
   const [isCreateReviewLoading, setIsCreateReviewLoading] = useState(false);
@@ -40,11 +37,10 @@ const CreateReview = () => {
   ) => {
     setIsCreateReviewLoading(true);
 
-    const { data } = await axios.post("/api/v1/review", values, {
+    await axios.post("/api/v1/review", values, {
       headers: { Authorization: token },
     });
 
-    await mutate([...reviews, data], true);
     setIsCreateReviewLoading(false);
     setIsOpenSnackBar(true);
 
