@@ -70,7 +70,7 @@ const Projects = () => {
             <Grid item xs={12} lg={6}>
               <Fade in={animate} style={{ transitionDelay: `${200 * 1}ms` }}>
                 <Link
-                  href="https://loizapp.herokuapp.com"
+                  href="https://loizapp.onrender.com"
                   target="_blank"
                   sx={{ textDecoration: "none" }}
                 >
