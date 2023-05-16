@@ -64,7 +64,6 @@ const AdminReviews: FC<ReviewProps> = ({
     setSize,
     mutate,
   } = useSWRInfinite<Review[]>(getKey, {
-    revalidateFirstPage: false,
     revalidateOnMount: true,
     fallbackData: reviewsData,
   });

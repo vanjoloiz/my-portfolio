@@ -14,6 +14,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Fade from "@mui/material/Fade";
 import useAnimate from "@/lib/useAnimate";
+import SeeMoreSeeLess from "./SeeMoreSeeLess";
 
 interface Review {
   _id: string;
@@ -56,7 +57,6 @@ const Reviews: FC<ReviewProps> = ({ reviewsInitialValue }) => {
     size,
     setSize,
   } = useSWRInfinite<Review[]>(getKey, {
-    revalidateFirstPage: false,
     revalidateOnMount: true,
     fallbackData: reviewsInitialValue,
   });
@@ -141,16 +141,7 @@ const Reviews: FC<ReviewProps> = ({ reviewsInitialValue }) => {
                       </Link>
                     }
                     secondary={
-                      <>
-                        <Typography
-                          sx={{ display: "inline" }}
-                          component="span"
-                          variant="subtitle1"
-                          color="text.primary"
-                        >
-                          {`${data.text}`}
-                        </Typography>
-                      </>
+                      <SeeMoreSeeLess text={data.text} maxLength={300} />
                     }
                   />
                 </ListItem>

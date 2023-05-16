@@ -19,6 +19,7 @@
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/no-non-null-assertion": "off",
     "@typescript-eslint/no-var-requires": "off",
+    "react/no-children-prop": "off",
     "no-useless-escape": "off"
   }
 }
