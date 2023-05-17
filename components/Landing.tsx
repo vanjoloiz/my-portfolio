@@ -3,6 +3,7 @@ import Fade from "@mui/material/Fade";
 import Typed from "react-typed";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
+import { useTheme } from "@mui/material/styles";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import Image from "next/image";
@@ -11,15 +12,20 @@ import FacebookLogo from "@/assets/svg/facebook.svg";
 import GithubLogo from "@/assets/svg/github.svg";
 import Link from "@mui/material/Link";
 import Hidden from "@mui/material/Hidden";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import srcImage from "../public/dev-image.jpeg";
 
 const Landing: FC = () => {
+  const theme = useTheme();
+
+  const isMediumScreenSize = useMediaQuery(theme.breakpoints.only("xs"));
+
   return (
     <Container maxWidth="lg">
       <Box pt={25} pb={35}>
         <Grid container>
-          <Grid item md={6}>
-            <Typography variant="h1" gutterBottom>
+          <Grid item md={6} justifyContent="center">
+            <Typography variant={isMediumScreenSize ? "h2" : "h1"} gutterBottom>
               Hi, I&apos;m Salvador
             </Typography>
             <Typed

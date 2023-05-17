@@ -22,7 +22,12 @@ const Projects = () => {
     <Container maxWidth="lg">
       <Box pb={15}>
         <Hidden lgUp>
-          <Typography align="center" variant="h1" gutterBottom>
+          <Typography
+            align="center"
+            variant="h2"
+            fontWeight="bold"
+            gutterBottom
+          >
             Projects
           </Typography>
         </Hidden>

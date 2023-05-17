@@ -67,7 +67,12 @@ const Skills: FC = () => {
             </Hidden>
 
             {lgDown && (
-              <Typography variant="h1" gutterBottom align="center">
+              <Typography
+                variant="h2"
+                fontWeight="bold"
+                gutterBottom
+                align="center"
+              >
                 Skills
               </Typography>
             )}

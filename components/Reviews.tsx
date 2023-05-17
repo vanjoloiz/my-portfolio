@@ -13,6 +13,8 @@ import Link from "@mui/material/Link";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Fade from "@mui/material/Fade";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useTheme } from "@mui/material/styles";
 import useAnimate from "@/lib/useAnimate";
 import SeeMoreSeeLess from "./SeeMoreSeeLess";
 
@@ -41,6 +43,10 @@ const Reviews: FC<ReviewProps> = ({ reviewsInitialValue }) => {
   const animRef = useRef(null);
 
   const animate = useAnimate(animRef);
+
+  const theme = useTheme();
+
+  const isMediumScreenSize = useMediaQuery(theme.breakpoints.only("xs"));
 
   const getKey = (pageIndex: number, previousPageData: Review[]) => {
     if (previousPageData && !previousPageData.length) return null;
@@ -86,7 +92,12 @@ const Reviews: FC<ReviewProps> = ({ reviewsInitialValue }) => {
 
   return (
     <Container maxWidth="lg">
-      <Typography variant="h3">Reviews</Typography>
+      <Typography
+        variant={isMediumScreenSize ? "h2" : "h3"}
+        fontWeight={isMediumScreenSize ? "bold" : "normal"}
+      >
+        Reviews
+      </Typography>
       <Box pb={15} mt={1} ref={animRef}>
         <Fade in={animate} style={{ transitionDelay: "100ms" }}>
           <List

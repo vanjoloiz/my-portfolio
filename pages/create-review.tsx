@@ -12,6 +12,8 @@ import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
 import Button from "@mui/material/Button";
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useTheme } from "@mui/material/styles";
 import Snackbar from "@mui/material/Snackbar";
 import { createReviewValidationSchema } from "@utils/formValidationSchema";
 
@@ -30,6 +32,10 @@ const CreateReview = () => {
   const [isCreateReviewLoading, setIsCreateReviewLoading] = useState(false);
 
   const [isOpenSnackbar, setIsOpenSnackBar] = useState(false);
+
+  const theme = useTheme();
+
+  const isMediumScreenSize = useMediaQuery(theme.breakpoints.only("xs"));
 
   const handleOnSubmit = async (
     values: { text: string },
@@ -75,8 +81,8 @@ const CreateReview = () => {
       <Container maxWidth="md">
         <Box sx={{ display: "block", margin: "auto" }}>
           <Paper elevation={3}>
-            <Box sx={{ p: 5 }}>
-              <Typography variant="h4" mb={2}>
+            <Box sx={{ p: isMediumScreenSize ? 1.5 : 5 }}>
+              <Typography variant={isMediumScreenSize ? "h5" : "h4"} mb={2}>
                 Create review
               </Typography>
 
