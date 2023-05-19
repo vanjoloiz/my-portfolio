@@ -48,7 +48,8 @@ router.post("/", loginLimiter, async (req, res) => {
 
     return res.status(200).json(token);
   } catch (err) {
-    return console.error(err);
+    console.error(err);
+    res.status(500).send("Email sending failed.");
   }
 });
 
@@ -102,6 +103,7 @@ router.post("/signup", async (req: CustomRequest, res) => {
     return res.status(200).json(token);
   } catch (err) {
     console.error(err);
+    res.status(500).send("Email sending failed.");
   }
 });
 
