@@ -1,5 +1,5 @@
 import express from "express";
-import apicache from "apicache";
+// import apicache from "apicache";
 import { Request } from "express";
 import { authMiddleware, adminMiddleware } from "../middleware/authMiddleware";
 import Review from "../models/Review";
@@ -10,9 +10,9 @@ interface CustomRequest extends Request {
 
 const router = express.Router();
 
-const cache = apicache.middleware;
+// const cache = apicache.middleware;
 
-router.get("/", cache("5 minutes"), async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     const pageSize = 5;
     const page = Number(req.query.pageNumber) || 1;
@@ -26,7 +26,7 @@ router.get("/", cache("5 minutes"), async (req, res) => {
         "firstName lastName linkedInProfilePicUrl linkedInProfileUrl"
       );
 
-    return res.status(201).json(reviews);
+    return res.status(200).json(reviews);
   } catch (err) {
     console.error(err);
     res.status(500).send("Server error");
@@ -35,7 +35,7 @@ router.get("/", cache("5 minutes"), async (req, res) => {
 
 router.get(
   "/admin",
-  cache("5 minutes"),
+  // cache("5 minutes"),
   authMiddleware,
   adminMiddleware,
   async (req, res) => {
@@ -52,7 +52,7 @@ router.get(
           "firstName lastName linkedInProfilePicUrl linkedInProfileUrl"
         );
 
-      return res.status(201).json(reviews);
+      return res.status(200).json(reviews);
     } catch (err) {
       console.error(err);
       res.status(500).send("Server error");
@@ -69,7 +69,7 @@ router.post("/", authMiddleware, async (req: CustomRequest, res) => {
       text,
     }).save();
 
-    apicache.clear("");
+    // apicache.clear("");
 
     return res.status(201).json(review);
   } catch (err) {
@@ -92,7 +92,7 @@ router.put(
 
       await review?.save();
 
-      apicache.clear("");
+      // apicache.clear("");
 
       res.status(200).json(review);
     } catch (err) {
@@ -124,7 +124,7 @@ router.put(
       review.text = text;
       review.isApproved = false;
 
-      apicache.clear("");
+      // apicache.clear("");
 
       res.status(200).json(review);
     } catch (err) {
