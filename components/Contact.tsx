@@ -169,7 +169,7 @@ const Contact = () => {
         sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
         open={isLoading}
       >
-        <CircularProgress color="inherit" />
+        <CircularProgress color="primary" />
       </Backdrop>
     </Container>
   );
