@@ -1,4 +1,4 @@
-import { useState, forwardRef } from "react";
+import { useState, forwardRef, useRef } from "react";
 import axios from "axios";
 import { Formik, Form, Field } from "formik";
 import Grid from "@mui/material/Grid";
@@ -9,11 +9,14 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
+import Fade from "@mui/material/Fade";
+import Box from "@mui/material/Box";
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
 import Snackbar from "@mui/material/Snackbar";
 
 import { getInTouchFormValidationSchema } from "@utils/formValidationSchema";
+import useAnimate from "@/lib/useAnimate";
 
 interface FormValues {
   firstName: string;
@@ -37,6 +40,10 @@ const Contact = () => {
   const [isOpenSnackbar, setIsOpenSnackBar] = useState(false);
 
   const [isLoading, setIsLoading] = useState(false);
+
+  const animRef = useRef(null);
+
+  const animate = useAnimate(animRef);
 
   const handleSubmit = async (values: FormValues, { resetForm }: any) => {
     try {
@@ -90,78 +97,84 @@ const Contact = () => {
           validationSchema={getInTouchFormValidationSchema}
         >
           {({ handleChange, touched, errors, values }) => (
-            <Container>
-              <Form>
-                <Grid container>
-                  <Grid container item spacing={isMediumScreenSize ? 0 : 2}>
-                    <Grid item xs={12} md={6}>
+            <Box ref={animRef}>
+              <Fade in={animate} style={{ transitionDelay: "100ms" }}>
+                <Container>
+                  <Form>
+                    <Grid container>
+                      <Grid container item spacing={isMediumScreenSize ? 0 : 2}>
+                        <Grid item xs={12} md={6}>
+                          <Field
+                            component={Textfield}
+                            label="First name"
+                            fullWidth
+                            margin="dense"
+                            id="firstName"
+                            error={
+                              touched.firstName && Boolean(errors.firstName)
+                            }
+                            helperText={touched.firstName && errors.firstName}
+                            onChange={handleChange}
+                            value={values.firstName || ""}
+                          />
+                        </Grid>
+
+                        <Grid item xs={12} md={6}>
+                          <Field
+                            component={Textfield}
+                            label="Last name"
+                            fullWidth
+                            margin="dense"
+                            id="lastName"
+                            error={touched.lastName && Boolean(errors.lastName)}
+                            helperText={touched.lastName && errors.lastName}
+                            onChange={handleChange}
+                            value={values.lastName || ""}
+                          />
+                        </Grid>
+                      </Grid>
+
                       <Field
                         component={Textfield}
-                        label="First name"
                         fullWidth
+                        label="Email"
                         margin="dense"
-                        id="firstName"
-                        error={touched.firstName && Boolean(errors.firstName)}
-                        helperText={touched.firstName && errors.firstName}
+                        id="email"
+                        error={touched.email && Boolean(errors.email)}
+                        helperText={touched.email && errors.email}
                         onChange={handleChange}
-                        value={values.firstName || ""}
+                        value={values.email || ""}
+                      />
+
+                      <Field
+                        component={Textfield}
+                        fullWidth
+                        label="Message"
+                        margin="dense"
+                        multiline
+                        minRows={8}
+                        id="message"
+                        error={touched.message && Boolean(errors.message)}
+                        helperText={touched.message && errors.message}
+                        onChange={handleChange}
+                        value={values.message || ""}
                       />
                     </Grid>
 
-                    <Grid item xs={12} md={6}>
-                      <Field
-                        component={Textfield}
-                        label="Last name"
-                        fullWidth
-                        margin="dense"
-                        id="lastName"
-                        error={touched.lastName && Boolean(errors.lastName)}
-                        helperText={touched.lastName && errors.lastName}
-                        onChange={handleChange}
-                        value={values.lastName || ""}
-                      />
-                    </Grid>
-                  </Grid>
-
-                  <Field
-                    component={Textfield}
-                    fullWidth
-                    label="Email"
-                    margin="dense"
-                    id="email"
-                    error={touched.email && Boolean(errors.email)}
-                    helperText={touched.email && errors.email}
-                    onChange={handleChange}
-                    value={values.email || ""}
-                  />
-
-                  <Field
-                    component={Textfield}
-                    fullWidth
-                    label="Message"
-                    margin="dense"
-                    multiline
-                    minRows={8}
-                    id="message"
-                    error={touched.message && Boolean(errors.message)}
-                    helperText={touched.message && errors.message}
-                    onChange={handleChange}
-                    value={values.message || ""}
-                  />
-                </Grid>
-
-                <Button
-                  fullWidth
-                  disableElevation
-                  disableRipple
-                  variant="contained"
-                  sx={{ mt: "5px" }}
-                  type="submit"
-                >
-                  Send
-                </Button>
-              </Form>
-            </Container>
+                    <Button
+                      fullWidth
+                      disableElevation
+                      disableRipple
+                      variant="contained"
+                      sx={{ mt: "5px" }}
+                      type="submit"
+                    >
+                      Send
+                    </Button>
+                  </Form>
+                </Container>
+              </Fade>
+            </Box>
           )}
         </Formik>
       </>
