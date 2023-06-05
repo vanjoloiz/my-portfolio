@@ -2,6 +2,7 @@ import express from "express";
 import { Request, Response } from "express";
 import nodemailer from "nodemailer";
 import sendGridTransport from "nodemailer-sendgrid";
+import { SENDGRID_API_EMAIL, GMAIL_EMAIL } from "../utils/emailConstants";
 
 const router = express.Router();
 
@@ -16,8 +17,8 @@ router.post("/", async (req: Request, res: Response) => {
 
   try {
     await transporter.sendMail({
-      from: "vanjoloizdev@gmail.com",
-      to: "vanjoloiz01@gmail.com",
+      from: SENDGRID_API_EMAIL,
+      to: GMAIL_EMAIL,
       replyTo: email,
       subject: "Message from my website",
       text: message,
