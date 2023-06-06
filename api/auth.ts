@@ -72,6 +72,7 @@ router.post("/signup", async (req: CustomRequest, res) => {
   }
 
   if (
+    linkedInProfileUrl !== "" &&
     !linkedInProfileUrl.match(
       /^((https?:\/\/)?((www|ww)\.)?linkedin\.com\/)(([\w\d\-&#?=])+\/?){1,}$/
     )
