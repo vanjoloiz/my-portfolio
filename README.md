@@ -16,7 +16,6 @@ This is my personal portfolio website showcasing my skills and projects.
 
 - Dark mode support
 - Responsive design
-- Smooth scrolling with scroll-to-top button
 - Optimized for search engines (SEO)
 - Cross-browser compatible
 - Login/Sign up system
