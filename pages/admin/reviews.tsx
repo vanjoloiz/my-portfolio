@@ -108,7 +108,7 @@ const AdminReviews: FC<ReviewProps> = ({
   return (
     <>
       <Container maxWidth="lg">
-        <Box pb={0} mt={10}>
+        <Box pb={0} mt={10} mb={18}>
           <InfiniteScroll
             scrollThreshold={0.5}
             style={{ overflow: "hidden" }}
