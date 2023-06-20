@@ -50,6 +50,7 @@ export default function MyApp(props: MyAppProps) {
         <title>Salvador Loiz</title>
         <meta name="viewport" content="initial-scale=1, width=device-width" />
         <meta name="Salvador Loiz portfolio website" content="Salvador Loiz" />
+        <meta name="description" content="Salvador Loiz portfolio website." />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <SWRConfig value={{ fetcher }}>
