@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { GetServerSidePropsContext } from "next";
 import axios from "axios";
 import Landing from "@/components/Landing";
 import Skills from "@/components/Skills";
@@ -38,7 +39,14 @@ const Home: FC<ReviewProps> = ({ reviews: reviewsInitialValue }) => {
   );
 };
 
-export const getServerSideProps = async () => {
+export const getServerSideProps = async (
+  context: GetServerSidePropsContext
+) => {
+  context.res.setHeader(
+    "Cache-Control",
+    "public, s-maxage=10, stale-while-revalidate=59"
+  );
+
   const { data } = await axios.get<Review[]>(
     `${BASE_URL}/api/v1/review?pageNumber=1`
   );
