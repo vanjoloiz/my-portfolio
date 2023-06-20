@@ -21,6 +21,7 @@ This is my personal portfolio website showcasing my skills and projects.
 - Login/Sign up system
 - Login with Linkedin
 - Adding reviews
+- Sending email (Get in touch)
 
 ## Installation
 
