@@ -11,7 +11,7 @@ import useScrollTrigger from "@mui/material/useScrollTrigger";
 import { useThemeStore } from "../lib/useThemeStore";
 
 interface NavBarProps {
-  isLoggedIn?: boolean;
+  isLoggedIn: boolean;
   isAdmin?: boolean;
 }
 
