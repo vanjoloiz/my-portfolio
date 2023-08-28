@@ -6,6 +6,7 @@ import NavBar from "./NavBar";
 import Footer from "./Footer";
 import FloatingChat from "@/components/FloatingChat";
 import { io } from "socket.io-client";
+import { BASE_URL } from "@utils/baseUrl";
 
 interface User {
   _id: string;
@@ -19,7 +20,7 @@ interface LayoutProps {
   user?: User;
 }
 
-const socket = io("http://localhost:3000");
+const socket = io(BASE_URL);
 
 const Layout: FC<LayoutProps> = ({ children, user }) => {
   const [isAdminOnline, setIsAdminOnline] = useState(false);
