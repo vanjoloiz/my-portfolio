@@ -45,6 +45,9 @@ const Layout: FC<LayoutProps> = ({ children, user }) => {
     socket.emit("join", { userId: user?._id || "" });
   }, [user, user?._id]);
 
+  const isShowFloatingChat =
+    pathname === "/" && isAdminOnline && !user?.isAdmin;
+
   useEffect(() => {
     socket.on("connectedUsers", ({ users }) => {
       const isAdminLoggedIn = users.find(
@@ -62,7 +65,7 @@ const Layout: FC<LayoutProps> = ({ children, user }) => {
       <NavBar isLoggedIn={isLoggedIn} isAdmin={user?.isAdmin} />
       <main>{children}</main>
       <Footer />
-      {pathname === "/" && isAdminOnline && <FloatingChat />}
+      {isShowFloatingChat && <FloatingChat />}
     </>
   );
 };
