@@ -11,9 +11,13 @@ import authRouter from "./api/auth";
 import reviewRouter from "./api/review";
 import emailRouter from "./api/email";
 
+import { addUser, removeUser } from "./utils/roomActions";
+
 const app = express();
 
 const server = http.createServer(app);
+
+const io = require("socket.io")(server);
 
 const dev = process.env.NODE_ENV !== "production";
 
@@ -52,6 +56,24 @@ nextApp.prepare().then(() => {
   });
 
   app.all("*", (req, res) => handler(req, res));
+
+  io.on("connection", (socket: any) => {
+    socket.on("join", async ({ userId }: any) => {
+      const users = await addUser(userId, socket.id);
+
+      setInterval(() => {
+        socket.broadcast.emit("connectedUsers", {
+          users: users.filter(
+            (user: any) => user.userId !== userId || userId !== ""
+          ),
+        });
+      }, 10000);
+
+      socket.on("disconnect", () => {
+        removeUser(socket.id);
+      });
+    });
+  });
 
   server.listen(PORT, (err: void | boolean) => {
     if (err) throw err;

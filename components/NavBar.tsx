@@ -66,8 +66,10 @@ const NavBar: FC<NavBarProps> = ({ isLoggedIn, isAdmin }) => {
             component="span"
             onClick={() => {
               Cookie.remove("token");
-
               router.push("/login");
+              if (isAdmin) {
+                router.reload();
+              }
             }}
           >
             Logout
