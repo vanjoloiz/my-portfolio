@@ -62,10 +62,8 @@ nextApp.prepare().then(() => {
       const users = await addUser(userId, socket.id);
 
       setInterval(() => {
-        socket.broadcast.emit("connectedUsers", {
-          users: users.filter(
-            (user: any) => user.userId !== userId || userId !== ""
-          ),
+        socket.emit("connectedUsers", {
+          users: users.filter((user: any) => user.userId !== userId),
         });
       }, 10000);
 

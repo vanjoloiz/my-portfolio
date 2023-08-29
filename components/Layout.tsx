@@ -1,4 +1,5 @@
 import { FC, ReactNode, useEffect, useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 import { useRouter } from "next/router";
 import Router from "next/router";
 import NProgress from "nprogress";
@@ -42,7 +43,7 @@ const Layout: FC<LayoutProps> = ({ children, user }) => {
   });
 
   useEffect(() => {
-    socket.emit("join", { userId: user?._id || "" });
+    socket.emit("join", { userId: user?._id || uuidv4() });
   }, [user, user?._id]);
 
   const isShowFloatingChat =
@@ -53,6 +54,7 @@ const Layout: FC<LayoutProps> = ({ children, user }) => {
       const isAdminLoggedIn = users.find(
         (user: any) => user.userId === "642654cf90b5bced5ed5dc68"
       );
+
       if (isAdminLoggedIn) {
         return setIsAdminOnline(true);
       }
