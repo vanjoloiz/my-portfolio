@@ -119,7 +119,11 @@ const Reviews: FC<ReviewProps> = ({ reviewsInitialValue }) => {
                 <ListItem alignItems="flex-start">
                   <ListItemAvatar>
                     <Link
-                      href={data.profile.linkedInProfileUrl ?? undefined}
+                      href={
+                        data.profile.linkedInProfileUrl === ""
+                          ? undefined
+                          : data.profile.linkedInProfileUrl
+                      }
                       rel="noopener"
                       target="_blank"
                       sx={{
