@@ -65,13 +65,6 @@ const Reviews: FC<ReviewProps> = ({ reviewsInitialValue }) => {
   } = useSWRInfinite<Review[]>(getKey, {
     revalidateOnMount: true,
     fallbackData: reviewsInitialValue,
-    onErrorRetry: (error, _key, _config, revalidate, { retryCount }) => {
-      if (error.status === 404) return;
-
-      if (retryCount >= 10) return;
-
-      setTimeout(() => revalidate({ retryCount }), 5000);
-    },
   });
 
   const isLoadingInitialData = !reviews && !error;
@@ -148,7 +141,11 @@ const Reviews: FC<ReviewProps> = ({ reviewsInitialValue }) => {
                   <ListItemText
                     primary={
                       <Link
-                        href={data.profile.linkedInProfileUrl ?? undefined}
+                        href={
+                          data.profile.linkedInProfileUrl === ""
+                            ? undefined
+                            : data.profile.linkedInProfileUrl
+                        }
                         rel="noopener"
                         target="_blank"
                         sx={{
