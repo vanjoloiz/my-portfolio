@@ -34,7 +34,9 @@ passport.use(
 
           const linkedInEmail = profile.emails[0].value;
 
-          user = await Profile.findOne({ username: linkedInEmail });
+          user = await Profile.findOne({
+            username: `${linkedInEmail}+linkedIn`,
+          });
 
           if (user) {
             userId = user._id.toString();
@@ -47,7 +49,7 @@ passport.use(
           user = new Profile({
             firstName: profile.name.givenName,
             lastName: profile.name.familyName,
-            username: linkedInEmail,
+            username: `${linkedInEmail}+linkedIn`,
             password: generatedPassword,
             confirmPassword: generatedPassword,
             linkedInProfilePicUrl: profile.photos[0].value,
