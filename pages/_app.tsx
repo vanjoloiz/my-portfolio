@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { SWRConfig } from "swr";
 import Router from "next/router";
-import Head from "next/head";
 import { parseCookies } from "nookies";
 import axios from "axios";
 import Cookie from "js-cookie";
@@ -14,6 +13,7 @@ import createEmotionCache from "@/lib/createEmotionCache";
 import { BASE_URL } from "@utils/baseUrl";
 import Layout from "@/components/Layout";
 import { useThemeStore } from "../lib/useThemeStore";
+import HeadTags from "@/components/HeadTags";
 import "../styles/main.css";
 
 const clientSideEmotionCache = createEmotionCache();
@@ -46,13 +46,7 @@ export default function MyApp(props: MyAppProps) {
 
   return (
     <CacheProvider value={emotionCache}>
-      <Head>
-        <title>Salvador Loiz</title>
-        <meta name="viewport" content="initial-scale=1, width=device-width" />
-        <meta name="Salvador Loiz portfolio website" content="Salvador Loiz" />
-        <meta name="description" content="Salvador Loiz portfolio website." />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      <HeadTags />
       <SWRConfig value={{ fetcher }}>
         <ThemeProvider theme={muiTheme}>
           <CssBaseline />
