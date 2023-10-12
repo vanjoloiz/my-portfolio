@@ -5,7 +5,8 @@
       "@/assets/*": ["assets/*"],
       "@/components/*": ["components/*"],
       "@/lib/*": ["lib/*"],
-      "@utils/*": ["utils/*"]
+      "@utils/*": ["utils/*"],
+      "@interfaces/*": ["interfaces/*"]
     },
     "target": "es6",
     "lib": ["dom", "dom.iterable", "esnext"],

@@ -1,5 +1,7 @@
 import { useRef, FC, Fragment } from "react";
 import { useRouter } from "next/router";
+import IconButton from "@mui/material/IconButton";
+import EditIcon from "@mui/icons-material/Edit";
 import useSWRInfinite from "swr/infinite";
 import Container from "@mui/material/Container";
 import List from "@mui/material/List";
@@ -17,25 +19,15 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
 import useAnimate from "@/lib/useAnimate";
 import SeeMoreSeeLess from "./SeeMoreSeeLess";
-
-interface Review {
-  _id: string;
-  profile: {
-    _id: string;
-    firstName: string;
-    lastName: string;
-    linkedInProfileUrl: string;
-    linkedInProfilePicUrl: string;
-  };
-  text: string;
-  updatedAt: string;
-}
+import { Review } from "@interfaces/Review";
+import { User } from "@interfaces/User";
 
 interface ReviewProps {
   reviewsInitialValue: Review[][];
+  loggedInUser: User;
 }
 
-const Reviews: FC<ReviewProps> = ({ reviewsInitialValue }) => {
+const Reviews: FC<ReviewProps> = ({ reviewsInitialValue, loggedInUser }) => {
   const router = useRouter();
 
   const PAGE_SIZE = 5;
@@ -107,39 +99,13 @@ const Reviews: FC<ReviewProps> = ({ reviewsInitialValue }) => {
               paddingBottom: "25px",
             }}
           >
-            {paginateReviews?.map((data) => (
-              <Fragment key={data._id}>
-                <ListItem alignItems="flex-start">
-                  <ListItemAvatar>
-                    <Link
-                      href={
-                        data.profile.linkedInProfileUrl === ""
-                          ? undefined
-                          : data.profile.linkedInProfileUrl
-                      }
-                      rel="noopener"
-                      target="_blank"
-                      sx={{
-                        textDecoration: "none",
-                        cursor: "pointer",
-                      }}
-                    >
-                      <Avatar
-                        src={data.profile.linkedInProfilePicUrl ?? undefined}
-                      >
-                        {data.profile.linkedInProfilePicUrl ?? (
-                          <Typography>
-                            {getInitials(
-                              data.profile.firstName,
-                              data.profile.lastName
-                            )}
-                          </Typography>
-                        )}
-                      </Avatar>
-                    </Link>
-                  </ListItemAvatar>
-                  <ListItemText
-                    primary={
+            {paginateReviews?.map((data) => {
+              const isShowEditButton = data.profile._id === loggedInUser?._id;
+
+              return (
+                <Fragment key={data._id}>
+                  <ListItem alignItems="flex-start">
+                    <ListItemAvatar>
                       <Link
                         href={
                           data.profile.linkedInProfileUrl === ""
@@ -151,22 +117,67 @@ const Reviews: FC<ReviewProps> = ({ reviewsInitialValue }) => {
                         sx={{
                           textDecoration: "none",
                           cursor: "pointer",
-                          color: "inherit",
                         }}
                       >
-                        <Typography component="span" variant="subtitle2">
-                          {data.profile.firstName} {data.profile.lastName}
-                        </Typography>
+                        <Avatar
+                          src={data.profile.linkedInProfilePicUrl ?? undefined}
+                        >
+                          {data.profile.linkedInProfilePicUrl ?? (
+                            <Typography>
+                              {getInitials(
+                                data.profile.firstName,
+                                data.profile.lastName
+                              )}
+                            </Typography>
+                          )}
+                        </Avatar>
                       </Link>
-                    }
-                    secondary={
-                      <SeeMoreSeeLess text={data.text} maxLength={300} />
-                    }
-                  />
-                </ListItem>
-                <Divider variant="inset" component="li" />
-              </Fragment>
-            ))}
+                    </ListItemAvatar>
+                    <ListItemText
+                      primary={
+                        <Link
+                          href={
+                            data.profile.linkedInProfileUrl === ""
+                              ? undefined
+                              : data.profile.linkedInProfileUrl
+                          }
+                          rel="noopener"
+                          target="_blank"
+                          sx={{
+                            textDecoration: "none",
+                            cursor: "pointer",
+                            color: "inherit",
+                            display: "flex",
+                            justifyContent: "space-between",
+                            alignItems: "center",
+                          }}
+                        >
+                          <Typography component="span" variant="subtitle2">
+                            {data.profile.firstName} {data.profile.lastName}
+                          </Typography>
+                          {isShowEditButton && (
+                            <>
+                              <IconButton
+                                disableFocusRipple
+                                onClick={() =>
+                                  router.push(`/edit-review/${data._id}`)
+                                }
+                              >
+                                <EditIcon />
+                              </IconButton>
+                            </>
+                          )}
+                        </Link>
+                      }
+                      secondary={
+                        <SeeMoreSeeLess text={data.text} maxLength={300} />
+                      }
+                    />
+                  </ListItem>
+                  <Divider variant="inset" component="li" />
+                </Fragment>
+              );
+            })}
           </List>
         </Fade>
 

@@ -63,7 +63,9 @@ MyApp.getInitialProps = async ({ ctx }: AppContext) => {
   const { token } = parseCookies(ctx);
 
   const protectedRoutes =
-    ctx.pathname === "/create-review" || ctx.pathname === "/admin/reviews";
+    ctx.pathname === "/create-review" ||
+    ctx.pathname === "/admin/reviews" ||
+    ctx.pathname === "/edit-review/[id]";
 
   const adminProtectedRoutes = ctx.pathname === "/admin/reviews";
 

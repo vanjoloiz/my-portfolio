@@ -14,7 +14,6 @@ import Box from "@mui/material/Box";
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
 import Snackbar from "@mui/material/Snackbar";
-
 import { getInTouchFormValidationSchema } from "@utils/formValidationSchema";
 import useAnimate from "@/lib/useAnimate";
 

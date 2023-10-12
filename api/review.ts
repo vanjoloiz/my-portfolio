@@ -33,6 +33,16 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.get("/:id", authMiddleware, async (req, res) => {
+  try {
+    const review = await Review.findById(req.params.id);
+
+    res.status(200).json(review);
+  } catch (err) {
+    res.status(500).send("Server error");
+  }
+});
+
 router.get(
   "/admin",
   // cache("5 minutes"),
@@ -46,7 +56,7 @@ router.get(
       const reviews = await Review.find({ isApproved: false })
         .limit(pageSize)
         .skip(pageSize * (page - 1))
-        .sort("-updatedAt")
+        .sort("-createdAt")
         .populate(
           "profile",
           "firstName lastName linkedInProfilePicUrl linkedInProfileUrl"
@@ -122,9 +132,10 @@ router.put(
       }
 
       review.text = text;
-      review.isApproved = false;
 
       // apicache.clear("");
+
+      await review.save();
 
       res.status(200).json(review);
     } catch (err) {
