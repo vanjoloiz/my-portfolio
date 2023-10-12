@@ -5,6 +5,7 @@ import bcrypt from "bcrypt";
 import { authMiddleware } from "../middleware/authMiddleware";
 import Profile from "../models/Profile";
 import { loginLimiter } from "../utils/limiter";
+import { sendEmail } from "../utils/sendEmail";
 
 const router = express.Router();
 
@@ -108,6 +109,22 @@ router.post("/signup", async (req: CustomRequest, res) => {
     const token = jwt.sign(payload, process.env.JWT_SECRET!, {
       expiresIn: "7d",
     });
+
+    const options = {
+      subject: "New signup from my website",
+      html: `<p>New signup</p>
+      <p>I am ${firstName} ${lastName}</p>
+      ${
+        linkedInProfileUrl === ""
+          ? ""
+          : `
+        <a href=${linkedInProfileUrl}>${linkedInProfileUrl}</a>
+        `
+      }
+    `,
+    };
+
+    sendEmail(options);
 
     return res.status(200).json(token);
   } catch (err) {

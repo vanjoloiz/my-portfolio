@@ -7,6 +7,7 @@ This is my personal portfolio website showcasing my skills and projects.
 - React - JavaScript library for building user interfaces
 - Next.js - React framework for building server-side rendered web applications
 - Material-UI - React UI framework
+- SWR - React Hooks for Data Fetching
 - Zustand - State management library for React
 - Express - Fast, unopinionated, minimalist web framework for Node.js
 - MongoDB - A NoSQL Database
@@ -21,6 +22,7 @@ This is my personal portfolio website showcasing my skills and projects.
 - Login/Sign up system
 - Login with Linkedin
 - Adding reviews
+- Editing review
 - Sending email (Get in touch)
 
 ## Installation

@@ -6,6 +6,7 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import Profile from "../models/Profile";
 import { getCallbackUrl, Platform } from "../utils/callbackUrl";
+import { sendEmail } from "../utils/sendEmail";
 
 const router = express.Router();
 
@@ -61,6 +62,16 @@ passport.use(
           user.confirmPassword = undefined;
 
           await user.save();
+
+          const options = {
+            subject: "New signup from my website",
+            html: `<p>New signup</p>
+            <p>I am ${profile.name.givenName} ${profile.name.familyName}</p>
+            <p>With linkedIn</p>
+        `,
+          };
+
+          sendEmail(options);
 
           return done(null, profile);
         } catch (err) {
