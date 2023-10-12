@@ -5,7 +5,7 @@ import LinkedInStrategy from "passport-linkedin-oauth2";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import Profile from "../models/Profile";
-import { CALLBACK_URL } from "../utils/callbackUrl";
+import { getCallbackUrl, Platform } from "../utils/callbackUrl";
 
 const router = express.Router();
 
@@ -24,7 +24,7 @@ passport.use(
     {
       clientID: process.env.LINKEDIN_CLIENT_ID!,
       clientSecret: process.env.LINKEDIN_CLIENT_SECRET!,
-      callbackURL: CALLBACK_URL,
+      callbackURL: getCallbackUrl(Platform.LinkedIn),
       scope: ["r_emailaddress", "r_liteprofile"],
     },
     (accessToken: string, refreshToken: string, profile, done) => {
