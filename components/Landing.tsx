@@ -65,7 +65,7 @@ const Landing: FC = () => {
               </Link>
             </div>
           </Grid>
-          <Grid item md={6}>
+          <Grid item md={6} height={500}>
             <Hidden mdDown>
               <Fade in={true} style={{ transitionDelay: "100ms" }}>
                 <div>
