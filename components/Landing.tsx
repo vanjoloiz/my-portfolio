@@ -20,6 +20,8 @@ const Landing: FC = () => {
 
   const isMediumScreenSize = useMediaQuery(theme.breakpoints.only("xs"));
 
+  const isRemoveHeight = useMediaQuery(theme.breakpoints.down("md"));
+
   return (
     <Container maxWidth="lg">
       <Box pt={25} pb={35}>
@@ -65,7 +67,7 @@ const Landing: FC = () => {
               </Link>
             </div>
           </Grid>
-          <Grid item md={6} height={500}>
+          <Grid item md={6} height={!isRemoveHeight ? 500 : undefined}>
             <Hidden mdDown>
               <Fade in={true} style={{ transitionDelay: "100ms" }}>
                 <div>
