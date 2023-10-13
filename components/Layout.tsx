@@ -8,6 +8,7 @@ import Footer from "./Footer";
 import FloatingChat from "@/components/FloatingChat";
 import { io } from "socket.io-client";
 import { BASE_URL } from "@utils/baseUrl";
+import { ADMIN_ID } from "@utils/constants";
 
 interface User {
   _id: string;
@@ -25,6 +26,10 @@ const socket = io(BASE_URL);
 
 const Layout: FC<LayoutProps> = ({ children, user }) => {
   const [isAdminOnline, setIsAdminOnline] = useState(false);
+
+  const [messages, setMessages] = useState<any>([]);
+
+  const [connectedUsers, setConnectedUsers] = useState([]);
 
   const { pathname } = useRouter();
 
@@ -44,16 +49,18 @@ const Layout: FC<LayoutProps> = ({ children, user }) => {
 
   useEffect(() => {
     socket.emit("join", { userId: user?._id || uuidv4() });
-  }, [user, user?._id]);
+  }, [user]);
 
   const isShowFloatingChat =
-    pathname === "/" && isAdminOnline && !user?.isAdmin;
+    (pathname === "/" && isAdminOnline) || user?.isAdmin;
 
   useEffect(() => {
     socket.on("connectedUsers", ({ users }) => {
       const isAdminLoggedIn = users.find(
-        (user: any) => user.userId === "642654cf90b5bced5ed5dc68"
+        (user: any) => user.userId === ADMIN_ID
       );
+
+      setConnectedUsers(users);
 
       if (isAdminLoggedIn) {
         return setIsAdminOnline(true);
@@ -62,12 +69,26 @@ const Layout: FC<LayoutProps> = ({ children, user }) => {
     });
   }, []);
 
+  useEffect(() => {
+    socket.on("receivedMessageFromServer", ({ message }) => {
+      setMessages((prevMessages: any) => [...prevMessages, message]);
+    });
+  }, []);
+
   return (
     <>
       <NavBar isLoggedIn={isLoggedIn} isAdmin={user?.isAdmin} />
       <main>{children}</main>
       <Footer />
-      {isShowFloatingChat && <FloatingChat />}
+      {isShowFloatingChat && (
+        <FloatingChat
+          user={user}
+          isAdmin={user?.isAdmin}
+          isLoggedIn={isLoggedIn}
+          messages={messages}
+          setMessages={setMessages}
+        />
+      )}
     </>
   );
 };

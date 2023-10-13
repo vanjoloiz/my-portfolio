@@ -27,5 +27,7 @@ export const addUser = async (userId: string, socketId: string) => {
 };
 
 export const findConnectedUser = (userId: string) => {
-  return users.find((user: any) => user.userId === userId);
+  const result = users.find((user: any) => user.userId === userId);
+
+  return result;
 };
