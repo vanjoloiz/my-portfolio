@@ -5,4 +5,5 @@ export interface Review {
   profile: User;
   text: string;
   updatedAt: string;
+  isApproved: boolean;
 }

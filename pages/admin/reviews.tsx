@@ -21,20 +21,7 @@ import Chip from "@mui/material/Chip";
 import CheckIcon from "@mui/icons-material/Check";
 import Backdrop from "@mui/material/Backdrop";
 import { BASE_URL } from "@utils/baseUrl";
-
-interface Review {
-  _id: string;
-  profile: {
-    _id: string;
-    firstName: string;
-    lastName: string;
-    linkedInProfileUrl: string;
-    linkedInProfilePicUrl: string;
-  };
-  text: string;
-  isApproved: boolean;
-  updatedAt: string;
-}
+import { Review } from "@interfaces/Review";
 
 interface ReviewProps {
   reviews: Review[][];
@@ -133,7 +120,7 @@ const AdminReviews: FC<ReviewProps> = ({
                   <ListItem alignItems="flex-start">
                     <ListItemAvatar>
                       <Link
-                        href={data.profile.linkedInProfileUrl ?? undefined}
+                        href={data.profile.profileUrl ?? undefined}
                         rel="noopener"
                         target="_blank"
                         sx={{
@@ -141,10 +128,8 @@ const AdminReviews: FC<ReviewProps> = ({
                           cursor: "pointer",
                         }}
                       >
-                        <Avatar
-                          src={data.profile.linkedInProfilePicUrl ?? undefined}
-                        >
-                          {data.profile.linkedInProfilePicUrl ?? (
+                        <Avatar src={data.profile.profilePicUrl ?? undefined}>
+                          {data.profile.profilePicUrl ?? (
                             <Typography>
                               {getInitials(
                                 data.profile.firstName,
@@ -159,7 +144,7 @@ const AdminReviews: FC<ReviewProps> = ({
                       primary={
                         <>
                           <Link
-                            href={data.profile.linkedInProfileUrl ?? undefined}
+                            href={data.profile.profileUrl ?? undefined}
                             rel="noopener"
                             target="_blank"
                             sx={{

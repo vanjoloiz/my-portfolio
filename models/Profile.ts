@@ -6,8 +6,8 @@ interface Profile {
   username: string;
   password: string;
   confirmPassword?: string;
-  linkedInProfileUrl?: string;
-  linkedInProfilePicUrl?: string;
+  profileUrl?: string;
+  profilePicUrl?: string;
   isAdmin: boolean;
 }
 
@@ -20,7 +20,7 @@ const ProfileSchema = new mongoose.Schema<Profile>(
 
     lastName: {
       type: String,
-      required: true,
+      required: false,
     },
 
     username: {
@@ -37,11 +37,11 @@ const ProfileSchema = new mongoose.Schema<Profile>(
       type: String,
     },
 
-    linkedInProfileUrl: {
+    profileUrl: {
       type: String,
     },
 
-    linkedInProfilePicUrl: {
+    profilePicUrl: {
       type: String,
     },
 

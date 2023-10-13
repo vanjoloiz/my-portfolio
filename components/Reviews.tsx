@@ -108,9 +108,9 @@ const Reviews: FC<ReviewProps> = ({ reviewsInitialValue, loggedInUser }) => {
                     <ListItemAvatar>
                       <Link
                         href={
-                          data.profile.linkedInProfileUrl === ""
+                          data.profile.profileUrl === ""
                             ? undefined
-                            : data.profile.linkedInProfileUrl
+                            : data.profile.profileUrl
                         }
                         rel="noopener"
                         target="_blank"
@@ -119,10 +119,8 @@ const Reviews: FC<ReviewProps> = ({ reviewsInitialValue, loggedInUser }) => {
                           cursor: "pointer",
                         }}
                       >
-                        <Avatar
-                          src={data.profile.linkedInProfilePicUrl ?? undefined}
-                        >
-                          {data.profile.linkedInProfilePicUrl ?? (
+                        <Avatar src={data.profile.profilePicUrl ?? undefined}>
+                          {data.profile.profilePicUrl ?? (
                             <Typography>
                               {getInitials(
                                 data.profile.firstName,
@@ -135,26 +133,31 @@ const Reviews: FC<ReviewProps> = ({ reviewsInitialValue, loggedInUser }) => {
                     </ListItemAvatar>
                     <ListItemText
                       primary={
-                        <Link
-                          href={
-                            data.profile.linkedInProfileUrl === ""
-                              ? undefined
-                              : data.profile.linkedInProfileUrl
-                          }
-                          rel="noopener"
-                          target="_blank"
-                          sx={{
-                            textDecoration: "none",
-                            cursor: "pointer",
-                            color: "inherit",
+                        <div
+                          style={{
                             display: "flex",
                             justifyContent: "space-between",
                             alignItems: "center",
                           }}
                         >
-                          <Typography component="span" variant="subtitle2">
-                            {data.profile.firstName} {data.profile.lastName}
-                          </Typography>
+                          <Link
+                            href={
+                              data.profile.profilePicUrl === ""
+                                ? undefined
+                                : data.profile.profilePicUrl
+                            }
+                            rel="noopener"
+                            target="_blank"
+                            sx={{
+                              textDecoration: "none",
+                              cursor: "pointer",
+                              color: "inherit",
+                            }}
+                          >
+                            <Typography component="span" variant="subtitle2">
+                              {data.profile.firstName} {data.profile.lastName}
+                            </Typography>
+                          </Link>
                           {isShowEditButton && (
                             <>
                               <IconButton
@@ -167,7 +170,7 @@ const Reviews: FC<ReviewProps> = ({ reviewsInitialValue, loggedInUser }) => {
                               </IconButton>
                             </>
                           )}
-                        </Link>
+                        </div>
                       }
                       secondary={
                         <SeeMoreSeeLess text={data.text} maxLength={300} />

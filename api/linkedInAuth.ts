@@ -53,7 +53,7 @@ passport.use(
             username: `${linkedInEmail}+linkedIn`,
             password: generatedPassword,
             confirmPassword: generatedPassword,
-            linkedInProfilePicUrl: profile.photos[0].value,
+            profilePicUrl: profile.photos[0].value,
           });
 
           userId = user._id.toString();

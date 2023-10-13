@@ -21,10 +21,7 @@ router.get("/", async (req, res) => {
       .limit(pageSize)
       .skip(pageSize * (page - 1))
       .sort("-updatedAt")
-      .populate(
-        "profile",
-        "firstName lastName linkedInProfilePicUrl linkedInProfileUrl"
-      );
+      .populate("profile", "firstName lastName profileUrl profilePicUrl");
 
     return res.status(200).json(reviews);
   } catch (err) {

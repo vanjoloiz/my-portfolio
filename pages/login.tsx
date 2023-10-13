@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import Container from "@mui/material/Container";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
+import Divider from "@mui/material/Divider";
 import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
 import TextField from "@mui/material/TextField";
@@ -10,6 +11,7 @@ import Button from "@mui/material/Button";
 import Link from "@mui/material/Link";
 import Alert from "@mui/material/Alert";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import GitHubIcon from "@mui/icons-material/GitHub";
 import Cookie from "js-cookie";
 import axios from "axios";
 import InputAdornment from "@mui/material/InputAdornment";
@@ -82,6 +84,7 @@ const Login = () => {
               <Typography variant="h4" mb={2}>
                 Login
               </Typography>
+
               <Formik
                 initialValues={{ username: "", password: "" }}
                 onSubmit={handleSubmit}
@@ -150,6 +153,10 @@ const Login = () => {
                       </Button>
                     </Form>
 
+                    <Divider variant="fullWidth" sx={{ mb: 2 }}>
+                      or
+                    </Divider>
+
                     <Button
                       sx={{ mb: 2 }}
                       fullWidth
@@ -161,6 +168,19 @@ const Login = () => {
                       endIcon={<LinkedInIcon />}
                     >
                       Log in with linkedin
+                    </Button>
+
+                    <Button
+                      sx={{ mb: 2 }}
+                      fullWidth
+                      variant="contained"
+                      disableElevation
+                      disableFocusRipple
+                      disabled={isLoading}
+                      onClick={() => router.replace("/auth/github")}
+                      endIcon={<GitHubIcon />}
+                    >
+                      Log in with github
                     </Button>
                   </>
                 )}

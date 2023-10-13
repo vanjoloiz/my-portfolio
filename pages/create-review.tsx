@@ -145,7 +145,7 @@ const CreateReview = () => {
         sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
         open={isCreateReviewLoading}
       >
-        <CircularProgress color="inherit" />
+        <CircularProgress color="info" />
       </Backdrop>
     </div>
   );
