@@ -29,6 +29,7 @@ const Layout: FC<LayoutProps> = ({ children, user }) => {
 
   const [messages, setMessages] = useState<any>([]);
 
+  // eslint-disable-next-line
   const [connectedUsers, setConnectedUsers] = useState([]);
 
   const { pathname } = useRouter();

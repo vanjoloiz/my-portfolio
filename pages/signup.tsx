@@ -17,9 +17,9 @@ import { Form, Formik, Field } from "formik";
 import axios from "axios";
 import { signUpValidationSchema } from "@utils/formValidationSchema";
 import IconButton from "@mui/material/IconButton";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import LanguageIcon from "@mui/icons-material/Language";
 import InputAdornment from "@mui/material/InputAdornment";
 
 interface FormValues {
@@ -114,7 +114,7 @@ const SignUp = () => {
                   username: "",
                   password: "",
                   confirmPassword: "",
-                  linkedInProfileUrl: "",
+                  profileUrl: "",
                 }}
                 onSubmit={handleSubmit}
                 validationSchema={signUpValidationSchema}
@@ -229,24 +229,18 @@ const SignUp = () => {
 
                       <Field
                         component={TextField}
-                        label="Linkedin (optional)"
+                        label="Profile URL (optional)"
                         placeholder="Profile URL"
                         margin="dense"
-                        id="linkedInProfileUrl"
+                        id="profileUrl"
                         onChange={handleChange}
                         fullWidth
-                        error={
-                          touched.linkedInProfileUrl &&
-                          Boolean(errors.linkedInProfileUrl)
-                        }
-                        helperText={
-                          touched.linkedInProfileUrl &&
-                          errors.linkedInProfileUrl
-                        }
+                        error={touched.profileUrl && Boolean(errors.profileUrl)}
+                        helperText={touched.profileUrl && errors.profileUrl}
                         InputProps={{
                           startAdornment: (
                             <InputAdornment position="start">
-                              <LinkedInIcon />
+                              <LanguageIcon />
                             </InputAdornment>
                           ),
                         }}

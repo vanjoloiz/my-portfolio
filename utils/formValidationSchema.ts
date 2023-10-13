@@ -17,12 +17,16 @@ export const signUpValidationSchema = yup.object({
     .string()
     .required("Please confirm your password.")
     .oneOf([yup.ref("password")], "Passwords must match."),
-  linkedInProfileUrl: yup
+  profileUrl: yup
     .string()
     .matches(
-      /((https?:\/\/)?((www|\w\w)\.)?linkedin\.com\/)((([\w]{2,3})?)|([^\/]+\/(([\w|\d-&#?=])+\/?){1,}))$/,
-      "Please provide a valid linkedin profile url."
+      /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
+      "Enter correct url!"
     ),
+  // .matches(
+  //   /((https?:\/\/)?((www|\w\w)\.)?linkedin\.com\/)((([\w]{2,3})?)|([^\/]+\/(([\w|\d-&#?=])+\/?){1,}))$/,
+  //   "Please provide a valid linkedin profile url."
+  // ),
 });
 
 export const createReviewValidationSchema = yup.object({

@@ -56,7 +56,7 @@ router.get(
         .sort("-createdAt")
         .populate(
           "profile",
-          "firstName lastName linkedInProfilePicUrl linkedInProfileUrl"
+          "firstName lastName linkedInProfilePicUrl profileUrl"
         );
 
       return res.status(200).json(reviews);

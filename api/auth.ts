@@ -61,7 +61,7 @@ router.post("/signup", async (req: CustomRequest, res) => {
     username,
     password,
     confirmPassword,
-    linkedInProfileUrl,
+    profileUrl,
   } = req.body;
 
   if (password.length < 8) {
@@ -73,8 +73,8 @@ router.post("/signup", async (req: CustomRequest, res) => {
   }
 
   if (
-    linkedInProfileUrl !== "" &&
-    !linkedInProfileUrl.match(
+    profileUrl !== "" &&
+    !profileUrl.match(
       /^((https?:\/\/)?((www|ww)\.)?linkedin\.com\/)(([\w\d\-&#?=])+\/?){1,}$/
     )
   ) {
@@ -96,7 +96,7 @@ router.post("/signup", async (req: CustomRequest, res) => {
       username: username.toLowerCase(),
       password,
       confirmPassword,
-      linkedInProfileUrl,
+      profileUrl,
     });
 
     user.password = await bcrypt.hash(user.password, 10);
@@ -115,10 +115,10 @@ router.post("/signup", async (req: CustomRequest, res) => {
       html: `<p>New signup</p>
       <p>I am ${firstName} ${lastName}</p>
       ${
-        linkedInProfileUrl === ""
+        profileUrl === ""
           ? ""
           : `
-        <a href=${linkedInProfileUrl}>${linkedInProfileUrl}</a>
+        <a href=${profileUrl}>${profileUrl}</a>
         `
       }
     `,
