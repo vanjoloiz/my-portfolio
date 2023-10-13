@@ -72,10 +72,12 @@ router.post("/signup", async (req: CustomRequest, res) => {
     return res.status(401).send("Passwords must match.");
   }
 
+  // /^((https?:\/\/)?((www|ww)\.)?linkedin\.com\/)(([\w\d\-&#?=])+\/?){1,}$/
+
   if (
     profileUrl !== "" &&
     !profileUrl.match(
-      /^((https?:\/\/)?((www|ww)\.)?linkedin\.com\/)(([\w\d\-&#?=])+\/?){1,}$/
+      /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/
     )
   ) {
     return res.status(400).send("Please provide a valid linkedin profile url.");
