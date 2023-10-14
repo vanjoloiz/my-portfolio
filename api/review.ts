@@ -23,19 +23,9 @@ router.get("/", async (req, res) => {
       .sort("-updatedAt")
       .populate("profile", "firstName lastName profileUrl profilePicUrl");
 
-    return res.status(200).json(reviews);
+    res.status(200).json(reviews);
   } catch (err) {
     console.error(err);
-    res.status(500).send("Server error");
-  }
-});
-
-router.get("/:id", authMiddleware, async (req, res) => {
-  try {
-    const review = await Review.findById(req.params.id);
-
-    res.status(200).json(review);
-  } catch (err) {
     res.status(500).send("Server error");
   }
 });
@@ -45,27 +35,33 @@ router.get(
   // cache("5 minutes"),
   authMiddleware,
   adminMiddleware,
-  async (req, res) => {
+  async (req: any, res: any) => {
     try {
       const pageSize = 10;
       const page = Number(req.query.pageNumber) || 1;
-
       const reviews = await Review.find({ isApproved: false })
         .limit(pageSize)
         .skip(pageSize * (page - 1))
         .sort("-createdAt")
-        .populate(
-          "profile",
-          "firstName lastName linkedInProfilePicUrl profileUrl"
-        );
+        .populate("profile", "firstName lastName profileUrl profilePicUrl");
 
-      return res.status(200).json(reviews);
+      res.status(200).json(reviews);
     } catch (err) {
       console.error(err);
       res.status(500).send("Server error");
     }
   }
 );
+
+router.get("/:id", authMiddleware, async (req, res) => {
+  try {
+    const review = await Review.findById(req.params.id);
+    res.status(200).json(review);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Server error");
+  }
+});
 
 router.post("/", authMiddleware, async (req: CustomRequest, res) => {
   const { text } = req.body;
@@ -78,7 +74,7 @@ router.post("/", authMiddleware, async (req: CustomRequest, res) => {
 
     // apicache.clear("");
 
-    return res.status(201).json(review);
+    res.status(201).json(review);
   } catch (err) {
     console.error(err);
     res.status(500).send("Server error");
