@@ -1,4 +1,4 @@
-import { useState, forwardRef, useRef } from "react";
+import { useState, useRef } from "react";
 import axios from "axios";
 import { Formik, Form, Field } from "formik";
 import Grid from "@mui/material/Grid";
@@ -8,14 +8,13 @@ import Textfield from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
-import MuiAlert, { AlertProps } from "@mui/material/Alert";
 import Fade from "@mui/material/Fade";
 import Box from "@mui/material/Box";
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
-import Snackbar from "@mui/material/Snackbar";
 import { getInTouchFormValidationSchema } from "@utils/formValidationSchema";
 import useAnimate from "@/lib/useAnimate";
+import ToastMessage from "./ToastMessage";
 
 interface FormValues {
   firstName: string;
@@ -24,19 +23,12 @@ interface FormValues {
   message: string;
 }
 
-const Alert = forwardRef<HTMLDivElement, AlertProps>(function Alert(
-  props,
-  ref
-) {
-  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-});
-
 const Contact = () => {
   const theme = useTheme();
 
   const isMediumScreenSize = useMediaQuery(theme.breakpoints.down("md"));
 
-  const [isOpenSnackbar, setIsOpenSnackBar] = useState(false);
+  const [isOpenToastMessage, setIsOpenToastMessage] = useState(false);
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -50,7 +42,7 @@ const Contact = () => {
 
       await axios.post("/api/v1/email", values);
 
-      setIsOpenSnackBar(true);
+      setIsOpenToastMessage(true);
 
       setIsLoading(false);
 
@@ -62,25 +54,18 @@ const Contact = () => {
     setIsLoading(false);
   };
 
-  const handleSnackbarOnClose = () => {
-    setIsOpenSnackBar(false);
+  const handleToastMessageClose = () => {
+    setIsOpenToastMessage(false);
   };
 
   return (
     <Container maxWidth="sm" sx={{ paddingBottom: "200px" }}>
-      <Snackbar
-        open={isOpenSnackbar}
-        autoHideDuration={2500}
-        onClose={handleSnackbarOnClose}
-      >
-        <Alert
-          onClose={handleSnackbarOnClose}
-          severity="success"
-          sx={{ width: "100%" }}
-        >
-          Message successfully send!
-        </Alert>
-      </Snackbar>
+      <ToastMessage
+        onClose={handleToastMessageClose}
+        isOpen={isOpenToastMessage}
+        message="Message successfully send."
+      />
+
       <Typography align="center" variant="h3" pb={2}>
         Get in touch
       </Typography>

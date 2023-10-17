@@ -1,5 +1,4 @@
 import express from "express";
-// import apicache from "apicache";
 import { Request } from "express";
 import { authMiddleware, adminMiddleware } from "../middleware/authMiddleware";
 import Review from "../models/Review";
@@ -9,8 +8,6 @@ interface CustomRequest extends Request {
 }
 
 const router = express.Router();
-
-// const cache = apicache.middleware;
 
 router.get("/", async (req, res) => {
   try {
@@ -32,7 +29,6 @@ router.get("/", async (req, res) => {
 
 router.get(
   "/admin",
-  // cache("5 minutes"),
   authMiddleware,
   adminMiddleware,
   async (req: any, res: any) => {
@@ -72,8 +68,6 @@ router.post("/", authMiddleware, async (req: CustomRequest, res) => {
       text,
     }).save();
 
-    // apicache.clear("");
-
     res.status(201).json(review);
   } catch (err) {
     console.error(err);
@@ -94,8 +88,6 @@ router.put(
       review!.isApproved = true;
 
       await review?.save();
-
-      // apicache.clear("");
 
       res.status(200).json(review);
     } catch (err) {
@@ -126,11 +118,40 @@ router.put(
 
       review.text = text;
 
-      // apicache.clear("");
-
       await review.save();
 
       res.status(200).json(review);
+    } catch (err) {
+      console.error(err);
+      res.status(500).send("Server error");
+    }
+  }
+);
+
+router.delete(
+  "/delete/:reviewId",
+  authMiddleware,
+  async (req: CustomRequest, res) => {
+    const { reviewId } = req.params;
+
+    const { text } = req.body;
+
+    try {
+      const review = await Review.findById(reviewId);
+
+      if (!review) {
+        return res.status(404).json(`Review with ID:${reviewId} not found.`);
+      }
+
+      if (req.userId !== String(review.profile)) {
+        res.status(401).json("This review is not yours.");
+      }
+
+      review.text = text;
+
+      await review.deleteOne();
+
+      res.status(204).send(null);
     } catch (err) {
       console.error(err);
       res.status(500).send("Server error");

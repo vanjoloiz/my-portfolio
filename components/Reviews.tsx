@@ -1,7 +1,13 @@
-import { useRef, FC, Fragment } from "react";
+import { useRef, FC, Fragment, useState } from "react";
 import { useRouter } from "next/router";
+import Cookies from "js-cookie";
+import axios from "axios";
 import IconButton from "@mui/material/IconButton";
 import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
 import useSWRInfinite from "swr/infinite";
 import Container from "@mui/material/Container";
 import List from "@mui/material/List";
@@ -21,6 +27,9 @@ import useAnimate from "@/lib/useAnimate";
 import SeeMoreSeeLess from "./SeeMoreSeeLess";
 import { Review } from "@interfaces/Review";
 import { User } from "@interfaces/User";
+import DeleteDialog from "./DeleteDialog";
+import { BASE_URL } from "@utils/baseUrl";
+import ToastMessage from "./ToastMessage";
 
 interface ReviewProps {
   reviewsInitialValue: Review[][];
@@ -29,6 +38,8 @@ interface ReviewProps {
 
 const Reviews: FC<ReviewProps> = ({ reviewsInitialValue, loggedInUser }) => {
   const router = useRouter();
+
+  const token = Cookies.get("token");
 
   const PAGE_SIZE = 5;
 
@@ -39,6 +50,16 @@ const Reviews: FC<ReviewProps> = ({ reviewsInitialValue, loggedInUser }) => {
   const theme = useTheme();
 
   const isMediumScreenSize = useMediaQuery(theme.breakpoints.only("xs"));
+
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+
+  const open = Boolean(anchorEl);
+
+  const [isDeleteModalOpen, setIsDeleteModalDelete] = useState(false);
+
+  const [reviewIdToDelete, setReviewIdToDelete] = useState("");
+
+  const [isOpenToastMessage, setIsOpenToastMessage] = useState(false);
 
   const getKey = (pageIndex: number, previousPageData: Review[]) => {
     if (previousPageData && !previousPageData.length) return null;
@@ -54,6 +75,7 @@ const Reviews: FC<ReviewProps> = ({ reviewsInitialValue, loggedInUser }) => {
     error,
     size,
     setSize,
+    mutate,
   } = useSWRInfinite<Review[]>(getKey, {
     revalidateOnMount: true,
     fallbackData: reviewsInitialValue,
@@ -82,8 +104,50 @@ const Reviews: FC<ReviewProps> = ({ reviewsInitialValue, loggedInUser }) => {
     return `${firstInitial}${lastInitial}`;
   };
 
+  const handleMenuChange = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleDeleteModalClose = () => {
+    setIsDeleteModalDelete(false);
+  };
+
+  const handleDeleteReviewSubmit = async () => {
+    await axios.delete(`${BASE_URL}/api/v1/review/delete/${reviewIdToDelete}`, {
+      headers: {
+        Authorization: token,
+      },
+    });
+
+    setIsDeleteModalDelete(false);
+
+    setIsOpenToastMessage(true);
+
+    mutate();
+  };
+
+  const handleToastMessageClose = () => {
+    setIsOpenToastMessage(false);
+  };
+
   return (
     <Container maxWidth="lg">
+      <ToastMessage
+        onClose={handleToastMessageClose}
+        isOpen={isOpenToastMessage}
+        message="Review successfully deleted."
+      />
+
+      <DeleteDialog
+        isOpen={isDeleteModalOpen}
+        onClose={handleDeleteModalClose}
+        onOk={handleDeleteReviewSubmit}
+      />
+
       <Typography
         variant={isMediumScreenSize ? "h2" : "h3"}
         fontWeight={isMediumScreenSize ? "bold" : "normal"}
@@ -100,7 +164,7 @@ const Reviews: FC<ReviewProps> = ({ reviewsInitialValue, loggedInUser }) => {
             }}
           >
             {paginateReviews?.map((data) => {
-              const isShowEditButton = data.profile._id === loggedInUser?._id;
+              const isShowMoreButton = data.profile._id === loggedInUser?._id;
 
               return (
                 <Fragment key={data._id}>
@@ -158,16 +222,39 @@ const Reviews: FC<ReviewProps> = ({ reviewsInitialValue, loggedInUser }) => {
                               {data.profile.firstName} {data.profile.lastName}
                             </Typography>
                           </Link>
-                          {isShowEditButton && (
+                          {isShowMoreButton && (
                             <>
                               <IconButton
                                 disableFocusRipple
-                                onClick={() =>
-                                  router.push(`/edit-review/${data._id}`)
-                                }
+                                onClick={handleMenuChange}
                               >
-                                <EditIcon />
+                                <MoreVertIcon />
                               </IconButton>
+
+                              <Menu
+                                anchorEl={anchorEl}
+                                open={open}
+                                onClose={handleMenuClose}
+                              >
+                                <MenuItem
+                                  onClick={() =>
+                                    router.push(`/edit-review/${data._id}`)
+                                  }
+                                >
+                                  <EditIcon sx={{ marginRight: "10px" }} />
+                                  Edit
+                                </MenuItem>
+                                <MenuItem
+                                  onClick={() => {
+                                    setReviewIdToDelete(data._id);
+                                    handleMenuClose();
+                                    setIsDeleteModalDelete(true);
+                                  }}
+                                >
+                                  <DeleteIcon sx={{ marginRight: "10px" }} />
+                                  Delete
+                                </MenuItem>
+                              </Menu>
                             </>
                           )}
                         </div>
@@ -208,7 +295,7 @@ const Reviews: FC<ReviewProps> = ({ reviewsInitialValue, loggedInUser }) => {
                   setSize(size + 1);
                 }}
               >
-                {isLoadingMore ? "loading..." : "view more"}
+                {isLoadingMore ? "loading..." : "see more"}
               </Button>
             )}
           </Box>
