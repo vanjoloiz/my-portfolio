@@ -1,5 +1,5 @@
+import { useState } from "react";
 import useSWR from "swr";
-import { useState, forwardRef } from "react";
 import { Form, Formik, Field } from "formik";
 import axios from "axios";
 import { useRouter } from "next/router";
@@ -12,18 +12,10 @@ import Typography from "@mui/material/Typography";
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
 import Button from "@mui/material/Button";
-import MuiAlert, { AlertProps } from "@mui/material/Alert";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
-import Snackbar from "@mui/material/Snackbar";
 import { createReviewValidationSchema } from "@utils/formValidationSchema";
-
-const Alert = forwardRef<HTMLDivElement, AlertProps>(function Alert(
-  props,
-  ref
-) {
-  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-});
+import ToastMessage from "@/components/ToastMessage";
 
 const EditReview = () => {
   const router = useRouter();
@@ -40,7 +32,7 @@ const EditReview = () => {
 
   const [isCreateReviewLoading, setIsCreateReviewLoading] = useState(false);
 
-  const [isOpenSnackbar, setIsOpenSnackBar] = useState(false);
+  const [isOpenToastMessage, setIsOpenToastMessage] = useState(false);
 
   const theme = useTheme();
 
@@ -59,15 +51,15 @@ const EditReview = () => {
     });
 
     setIsCreateReviewLoading(false);
-    setIsOpenSnackBar(true);
+    setIsOpenToastMessage(true);
 
     resetForm();
 
     setIsCreateReviewLoading(false);
   };
 
-  const handleSnackbarOnClose = () => {
-    setIsOpenSnackBar(false);
+  const handleToastMessageClose = () => {
+    setIsOpenToastMessage(false);
   };
 
   const handleBackClick = () => {
@@ -76,19 +68,11 @@ const EditReview = () => {
 
   return (
     <div style={{ marginTop: "150px" }}>
-      <Snackbar
-        open={isOpenSnackbar}
-        autoHideDuration={2500}
-        onClose={handleSnackbarOnClose}
-      >
-        <Alert
-          onClose={handleSnackbarOnClose}
-          severity="success"
-          sx={{ width: "100%" }}
-        >
-          Review successfully edited!
-        </Alert>
-      </Snackbar>
+      <ToastMessage
+        onClose={handleToastMessageClose}
+        isOpen={isOpenToastMessage}
+        message="Review successfully edited!."
+      />
 
       {isLoading ? (
         <Backdrop
