@@ -43,6 +43,9 @@ LINKEDIN_CLIENT_ID={linkedinclinetid}
 LINKEDIN_CLIENT_SECRET={linkedinclientsecret}
 GITHUB_CLIENT_ID={githubclientid}
 GITHUB_CLIENT_SECRET={githubclientsecret}
+TWILIO_ACCOUNT_SID={twilioaccountsid}
+TWILIO_ACCOUNT_TOKEN={twilioaccounttoken}
+TWILIO_PHONE_NUMBER=+{twiliophonenumber}
 ADMIN_ID={adminid}
 ```
 
