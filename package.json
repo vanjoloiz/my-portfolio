@@ -42,9 +42,11 @@
     "socket.io": "^4.7.2",
     "socket.io-client": "^4.7.2",
     "swr": "^2.0.3",
+    "twilio": "^4.18.1",
     "uuid": "^9.0.0",
     "validator": "^13.9.0",
     "yup": "^1.0.2",
+    "yup-phone-lite": "^2.0.1",
     "zustand": "^4.3.7"
   },
   "devDependencies": {

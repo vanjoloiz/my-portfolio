@@ -6,6 +6,7 @@ import { authMiddleware } from "../middleware/authMiddleware";
 import Profile from "../models/Profile";
 import { loginLimiter } from "../utils/limiter";
 import { sendEmail } from "../utils/sendEmail";
+import { smsSender } from "../utils/sms";
 
 const router = express.Router();
 
@@ -62,6 +63,7 @@ router.post("/signup", async (req: CustomRequest, res) => {
     password,
     confirmPassword,
     profileUrl,
+    phoneNumber,
   } = req.body;
 
   if (password.length < 8) {
@@ -125,6 +127,8 @@ router.post("/signup", async (req: CustomRequest, res) => {
       }
     `,
     };
+
+    smsSender(phoneNumber);
 
     sendEmail(options);
 

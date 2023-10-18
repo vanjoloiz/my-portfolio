@@ -115,6 +115,7 @@ const SignUp = () => {
                   password: "",
                   confirmPassword: "",
                   profileUrl: "",
+                  phoneNumber: "",
                 }}
                 onSubmit={handleSubmit}
                 validationSchema={signUpValidationSchema}
@@ -222,6 +223,27 @@ const SignUp = () => {
                                   <Visibility />
                                 )}
                               </IconButton>
+                            </InputAdornment>
+                          ),
+                        }}
+                      />
+
+                      <Field
+                        component={TextField}
+                        label="Phone number"
+                        placeholder="Phone number"
+                        margin="dense"
+                        id="phoneNumber"
+                        onChange={handleChange}
+                        fullWidth
+                        error={
+                          touched.phoneNumber && Boolean(errors.phoneNumber)
+                        }
+                        helperText={touched.phoneNumber && errors.phoneNumber}
+                        InputProps={{
+                          startAdornment: (
+                            <InputAdornment position="start">
+                              +63
                             </InputAdornment>
                           ),
                         }}

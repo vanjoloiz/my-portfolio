@@ -1,4 +1,5 @@
 import * as yup from "yup";
+import "yup-phone-lite";
 
 export const loginValidationSchema = yup.object({
   username: yup.string().required("Please enter your username."),
@@ -27,6 +28,10 @@ export const signUpValidationSchema = yup.object({
   //   /((https?:\/\/)?((www|\w\w)\.)?linkedin\.com\/)((([\w]{2,3})?)|([^\/]+\/(([\w|\d-&#?=])+\/?){1,}))$/,
   //   "Please provide a valid linkedin profile url."
   // ),
+  phoneNumber: yup
+    .string()
+    .phone("PH", "Please provide a valid phone number.")
+    .required("Please enter your phone number."),
 });
 
 export const createReviewValidationSchema = yup.object({
