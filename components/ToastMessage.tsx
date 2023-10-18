@@ -1,6 +1,5 @@
 import { FC, forwardRef } from "react";
 import MuiAlert, { AlertProps, AlertColor } from "@mui/material/Alert";
-
 import Snackbar from "@mui/material/Snackbar";
 
 const Alert = forwardRef<HTMLDivElement, AlertProps>(function Alert(

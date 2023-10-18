@@ -1,4 +1,4 @@
-import { FC, useRef } from "react";
+import React, { FC, Fragment, useRef } from "react";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
 import Zoom from "@mui/material/Zoom";
@@ -7,32 +7,12 @@ import Hidden from "@mui/material/Hidden";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import JavascriptLogo from "@/assets/svg/javascript.svg";
-import TypeScriptLogo from "@/assets/svg/typescript.svg";
-import Html5Logo from "@/assets/svg/html5.svg";
-import Css3Logo from "@/assets/svg/css3.svg";
-import ReactLogo from "@/assets/svg/react.svg";
-import NextjsLogo from "@/assets/svg/nextjs.svg";
-import ApolloLogo from "@/assets/svg/apollo.svg";
-import ReduxLogo from "@/assets/svg/redux.svg";
-import MUILogo from "@/assets/svg/mui.svg";
-import BootstrapLogo from "@/assets/svg/bootstrap.svg";
-import AntdLogo from "@/assets/svg/antd.svg";
-import NodeJsLogo from "@/assets/svg/nodejs.svg";
-import ExpressLogo from "@/assets/svg/express.svg";
-import MongodbLogo from "@/assets/svg/mongodb.svg";
-import PostGresLogo from "@/assets/svg/postgres.svg";
-import HerokuLogo from "@/assets/svg/heroku.svg";
-import GraphQLLogo from "@/assets/svg/graphql.svg";
-import RestLogo from "@/assets/svg/rest.svg";
-import NestJSLogo from "@/assets/svg/nestjs.svg";
-import DenoLogo from "@/assets/svg/deno.svg";
-import SCSSLogo from "@/assets/svg/scss.svg";
 import Image from "next/image";
 import Tooltip from "@mui/material/Tooltip";
 import useAnimate from "@/lib/useAnimate";
 import srcImage from "../public/dev2-image.jpeg";
 import { Container } from "@mui/material";
+import { skills } from "@utils/skillsLogo";
 
 const Skills: FC = () => {
   const theme = useTheme();
@@ -96,49 +76,20 @@ const Skills: FC = () => {
                 direction="row"
                 justifyContent={justify}
               >
-                <Grid item>
-                  <Zoom
-                    in={animate}
-                    style={{ transitionDelay: `${150 * 0}ms` }}
-                  >
-                    <Tooltip title="Javascript">
-                      <JavascriptLogo />
-                    </Tooltip>
-                  </Zoom>
-                </Grid>
-
-                <Grid item>
-                  <Zoom
-                    in={animate}
-                    style={{ transitionDelay: `${150 * 1}ms` }}
-                  >
-                    <Tooltip title="Typescript">
-                      <TypeScriptLogo />
-                    </Tooltip>
-                  </Zoom>
-                </Grid>
-
-                <Grid item>
-                  <Zoom
-                    in={animate}
-                    style={{ transitionDelay: `${150 * 2}ms` }}
-                  >
-                    <Tooltip title="HTML">
-                      <Html5Logo />
-                    </Tooltip>
-                  </Zoom>
-                </Grid>
-
-                <Grid item>
-                  <Zoom
-                    in={animate}
-                    style={{ transitionDelay: `${150 * 3}ms` }}
-                  >
-                    <Tooltip title="CSS">
-                      <Css3Logo />
-                    </Tooltip>
-                  </Zoom>
-                </Grid>
+                {skills.languageKnown.map((skill) => (
+                  <Fragment key={skill.transitionDelay}>
+                    <Grid item>
+                      <Zoom
+                        in={animate}
+                        style={{
+                          transitionDelay: `${150 * skill.transitionDelay}ms`,
+                        }}
+                      >
+                        <Tooltip title={skill.title}>{skill.logo}</Tooltip>
+                      </Zoom>
+                    </Grid>
+                  </Fragment>
+                ))}
               </Grid>
             </Grid>
 
@@ -154,93 +105,20 @@ const Skills: FC = () => {
                 direction="row"
                 justifyContent={justify}
               >
-                <Grid item>
-                  <Zoom
-                    in={animate}
-                    style={{ transitionDelay: `${150 * 4}ms` }}
-                  >
-                    <Tooltip title="React">
-                      <ReactLogo />
-                    </Tooltip>
-                  </Zoom>
-                </Grid>
-
-                <Grid item>
-                  <Zoom
-                    in={animate}
-                    style={{ transitionDelay: `${150 * 5}ms` }}
-                  >
-                    <Tooltip title="Next.js">
-                      <NextjsLogo />
-                    </Tooltip>
-                  </Zoom>
-                </Grid>
-
-                <Grid item>
-                  <Zoom
-                    in={animate}
-                    style={{ transitionDelay: `${150 * 6}ms` }}
-                  >
-                    <Tooltip title="Apollo Client">
-                      <ApolloLogo />
-                    </Tooltip>
-                  </Zoom>
-                </Grid>
-
-                <Grid item>
-                  <Zoom
-                    in={animate}
-                    style={{ transitionDelay: `${150 * 7}ms` }}
-                  >
-                    <Tooltip title="Redux">
-                      <ReduxLogo />
-                    </Tooltip>
-                  </Zoom>
-                </Grid>
-
-                <Grid item>
-                  <Zoom
-                    in={animate}
-                    style={{ transitionDelay: `${150 * 8}ms` }}
-                  >
-                    <Tooltip title="Material UI">
-                      <MUILogo />
-                    </Tooltip>
-                  </Zoom>
-                </Grid>
-
-                <Grid item>
-                  <Zoom
-                    in={animate}
-                    style={{ transitionDelay: `${150 * 9}ms` }}
-                  >
-                    <Tooltip title="Bootstrap">
-                      <BootstrapLogo />
-                    </Tooltip>
-                  </Zoom>
-                </Grid>
-
-                <Grid item>
-                  <Zoom
-                    in={animate}
-                    style={{ transitionDelay: `${150 * 10}ms` }}
-                  >
-                    <Tooltip title="Ant Design">
-                      <AntdLogo />
-                    </Tooltip>
-                  </Zoom>
-                </Grid>
-
-                <Grid item>
-                  <Zoom
-                    in={animate}
-                    style={{ transitionDelay: `${150 * 11}ms` }}
-                  >
-                    <Tooltip title="SCSS">
-                      <SCSSLogo />
-                    </Tooltip>
-                  </Zoom>
-                </Grid>
+                {skills.frontEnd.map((skill) => (
+                  <Fragment key={skill.transitionDelay}>
+                    <Grid item>
+                      <Zoom
+                        in={animate}
+                        style={{
+                          transitionDelay: `${150 * skill.transitionDelay}ms`,
+                        }}
+                      >
+                        <Tooltip title={skill.title}>{skill.logo}</Tooltip>
+                      </Zoom>
+                    </Grid>
+                  </Fragment>
+                ))}
               </Grid>
             </Grid>
 
@@ -255,104 +133,20 @@ const Skills: FC = () => {
                 direction="row"
                 justifyContent={justify}
               >
-                <Grid item>
-                  <Zoom
-                    in={animate}
-                    style={{ transitionDelay: `${150 * 12}ms` }}
-                  >
-                    <Tooltip title="Node.js">
-                      <NodeJsLogo />
-                    </Tooltip>
-                  </Zoom>
-                </Grid>
-
-                <Grid item>
-                  <Tooltip title="Express.js">
-                    <Zoom
-                      in={animate}
-                      style={{ transitionDelay: `${150 * 13}ms` }}
-                    >
-                      <ExpressLogo />
-                    </Zoom>
-                  </Tooltip>
-                </Grid>
-
-                <Grid item>
-                  <Zoom
-                    in={animate}
-                    style={{ transitionDelay: `${150 * 14}ms` }}
-                  >
-                    <Tooltip title="Nest.js">
-                      <NestJSLogo />
-                    </Tooltip>
-                  </Zoom>
-                </Grid>
-
-                <Grid item>
-                  <Zoom
-                    in={animate}
-                    style={{ transitionDelay: `${150 * 15}ms` }}
-                  >
-                    <Tooltip title="Deno">
-                      <DenoLogo />
-                    </Tooltip>
-                  </Zoom>
-                </Grid>
-
-                <Grid item>
-                  <Zoom
-                    in={animate}
-                    style={{ transitionDelay: `${150 * 16}ms` }}
-                  >
-                    <Tooltip title="MongoDB">
-                      <MongodbLogo />
-                    </Tooltip>
-                  </Zoom>
-                </Grid>
-
-                <Grid item>
-                  <Zoom
-                    in={animate}
-                    style={{ transitionDelay: `${150 * 17}ms` }}
-                  >
-                    <Tooltip title="Postgres">
-                      <PostGresLogo />
-                    </Tooltip>
-                  </Zoom>
-                </Grid>
-
-                <Grid item>
-                  <Zoom
-                    in={animate}
-                    style={{ transitionDelay: `${150 * 18}ms` }}
-                  >
-                    <Tooltip title="REST API">
-                      <RestLogo />
-                    </Tooltip>
-                  </Zoom>
-                </Grid>
-
-                <Grid item>
-                  <Zoom
-                    in={animate}
-                    style={{ transitionDelay: `${150 * 19}ms` }}
-                  >
-                    <Tooltip title="GraphQL API">
-                      <GraphQLLogo />
-                    </Tooltip>
-                  </Zoom>
-                </Grid>
-
-                <Grid item>
-                  <Zoom
-                    in={animate}
-                    style={{ transitionDelay: `${150 * 20}ms` }}
-                  >
-                    <Tooltip title="Heroku">
-                      <HerokuLogo />
-                    </Tooltip>
-                  </Zoom>
-                </Grid>
+                {skills.backEnd.map((skill) => (
+                  <Fragment key={skill.transitionDelay}>
+                    <Grid item>
+                      <Zoom
+                        in={animate}
+                        style={{
+                          transitionDelay: `${150 * skill.transitionDelay}ms`,
+                        }}
+                      >
+                        <Tooltip title={skill.title}>{skill.logo}</Tooltip>
+                      </Zoom>
+                    </Grid>
+                  </Fragment>
+                ))}
               </Grid>
             </Grid>
           </Grid>
