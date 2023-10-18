@@ -1,5 +1,6 @@
 import { FC, forwardRef } from "react";
-import MuiAlert, { AlertProps } from "@mui/material/Alert";
+import MuiAlert, { AlertProps, AlertColor } from "@mui/material/Alert";
+
 import Snackbar from "@mui/material/Snackbar";
 
 const Alert = forwardRef<HTMLDivElement, AlertProps>(function Alert(
@@ -13,7 +14,7 @@ interface ToastMessageProps {
   isOpen: boolean;
   onClose: () => void;
   message: string;
-  severity?: any;
+  severity?: AlertColor;
 }
 
 const ToastMessage: FC<ToastMessageProps> = ({
