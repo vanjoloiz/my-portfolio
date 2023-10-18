@@ -7,7 +7,7 @@ const twilioClient = client(
 
 export const smsSender = (phoneNumber: string) => {
   twilioClient.messages.create({
-    body: "Thank you for registering to my website ❤️",
+    body: "Thank you for registering on my website ❤️",
     to: `+63${phoneNumber}`,
     from: process.env.TWILIO_PHONE_NUMBER,
   });
