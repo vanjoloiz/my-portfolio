@@ -51,7 +51,7 @@ const EditReview = () => {
       setToastMessage((prev) => ({
         ...prev,
         isOpen: true,
-        message: "Value not changed.",
+        message: "Value has not changed.",
         severity: "warning",
       }));
 
@@ -116,8 +116,8 @@ const EditReview = () => {
                 </Typography>
 
                 <Alert severity="warning" sx={{ mb: 2, width: "fit-content" }}>
-                  Edited review need to approved by the admin again to display
-                  again.
+                  Edited reviews need to be approved by the admin to be
+                  displayed again.
                 </Alert>
 
                 <Formik
