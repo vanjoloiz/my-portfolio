@@ -20,9 +20,8 @@ This is my personal portfolio website showcasing my skills and projects.
 - Optimized for search engines (SEO)
 - Cross-browser compatible
 - Login/Sign up system
-- Login with Linkedin
-- Adding reviews
-- Editing review
+- Login with Linkedin and Github
+- Create, edit and delete reviews
 - Sending email (Get in touch)
 
 ## Installation
@@ -40,6 +39,9 @@ SESSION_SECRET={sessionsecret}
 SENDGRID_API_KEY={sendgridapikey}
 LINKEDIN_CLIENT_ID={linkedinclinetid}
 LINKEDIN_CLIENT_SECRET={linkedinclientsecret}
+GITHUB_CLIENT_ID={githubclientid}
+GITHUB_CLIENT_SECRET={githubclientsecret}
+ADMIN_ID={adminid}
 ```
 
 ## Usage
