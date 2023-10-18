@@ -8,6 +8,7 @@ import Cookie from "js-cookie";
 import Container from "@mui/material/Container";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
+import { AlertColor } from "@mui/material/Alert";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import Backdrop from "@mui/material/Backdrop";
@@ -33,7 +34,11 @@ const EditReview = () => {
 
   const [isCreateReviewLoading, setIsCreateReviewLoading] = useState(false);
 
-  const [toastMessage, setToastMessage] = useState({
+  const [toastMessage, setToastMessage] = useState<{
+    message: string;
+    isOpen: boolean;
+    severity: AlertColor;
+  }>({
     message: "",
     isOpen: false,
     severity: "success",
