@@ -13,7 +13,7 @@ interface ToastMessageProps {
   isOpen: boolean;
   onClose: () => void;
   message: string;
-  severity: any;
+  severity?: any;
 }
 
 const ToastMessage: FC<ToastMessageProps> = ({
