@@ -2,6 +2,7 @@ import { useState } from "react";
 import useSWR from "swr";
 import { Form, Formik, Field } from "formik";
 import axios from "axios";
+import Alert from "@mui/material/Alert";
 import { useRouter } from "next/router";
 import Cookie from "js-cookie";
 import Container from "@mui/material/Container";
@@ -32,7 +33,11 @@ const EditReview = () => {
 
   const [isCreateReviewLoading, setIsCreateReviewLoading] = useState(false);
 
-  const [isOpenToastMessage, setIsOpenToastMessage] = useState(false);
+  const [toastMessage, setToastMessage] = useState({
+    message: "",
+    isOpen: false,
+    severity: "success",
+  });
 
   const theme = useTheme();
 
@@ -42,6 +47,17 @@ const EditReview = () => {
     values: { text: string },
     { resetForm }: any
   ) => {
+    if (values.text === review.text) {
+      setToastMessage((prev) => ({
+        ...prev,
+        isOpen: true,
+        message: "Value not changed.",
+        severity: "warning",
+      }));
+
+      return;
+    }
+
     setIsCreateReviewLoading(true);
 
     mutate({ ...review, text: values.text }, false);
@@ -51,7 +67,12 @@ const EditReview = () => {
     });
 
     setIsCreateReviewLoading(false);
-    setIsOpenToastMessage(true);
+    setToastMessage((prev) => ({
+      ...prev,
+      isOpen: true,
+      message: "Review successfully edited.",
+      severity: "success",
+    }));
 
     resetForm();
 
@@ -59,7 +80,10 @@ const EditReview = () => {
   };
 
   const handleToastMessageClose = () => {
-    setIsOpenToastMessage(false);
+    setToastMessage((prev) => ({
+      ...prev,
+      isOpen: false,
+    }));
   };
 
   const handleBackClick = () => {
@@ -70,8 +94,9 @@ const EditReview = () => {
     <div style={{ marginTop: "150px" }}>
       <ToastMessage
         onClose={handleToastMessageClose}
-        isOpen={isOpenToastMessage}
-        message="Review successfully edited!."
+        isOpen={toastMessage.isOpen}
+        message={toastMessage.message}
+        severity={toastMessage.severity}
       />
 
       {isLoading ? (
@@ -89,6 +114,11 @@ const EditReview = () => {
                 <Typography variant={isMediumScreenSize ? "h5" : "h4"} mb={2}>
                   Edit review
                 </Typography>
+
+                <Alert severity="warning" sx={{ mb: 2, width: "fit-content" }}>
+                  Edited review need to approved by the admin again to display
+                  again.
+                </Alert>
 
                 <Formik
                   enableReinitialize

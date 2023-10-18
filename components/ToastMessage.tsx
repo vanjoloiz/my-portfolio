@@ -13,12 +13,18 @@ interface ToastMessageProps {
   isOpen: boolean;
   onClose: () => void;
   message: string;
+  severity: any;
 }
 
-const ToastMessage: FC<ToastMessageProps> = ({ isOpen, onClose, message }) => {
+const ToastMessage: FC<ToastMessageProps> = ({
+  isOpen,
+  onClose,
+  message,
+  severity = "success",
+}) => {
   return (
     <Snackbar open={isOpen} autoHideDuration={2500} onClose={onClose}>
-      <Alert onClose={onClose} severity="success" sx={{ width: "100%" }}>
+      <Alert onClose={onClose} severity={severity} sx={{ width: "100%" }}>
         {message}
       </Alert>
     </Snackbar>

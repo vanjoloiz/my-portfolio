@@ -117,6 +117,7 @@ router.put(
       }
 
       review.text = text;
+      review.isApproved = false;
 
       await review.save();
 
