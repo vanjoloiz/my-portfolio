@@ -4,7 +4,7 @@ import Head from "next/head";
 const HeadTags = () => {
   return (
     <Head>
-      <title>Salvador Loiz - Portfolio</title>
+      <title>Salvador Loiz</title>
       <meta name="viewport" content="initial-scale=1, width=device-width" />
       <meta
         name="description"
@@ -14,7 +14,7 @@ const HeadTags = () => {
         name="keywords"
         content="Salvador Loiz, portfolio, skills, projects"
       />
-      <meta property="og:title" content="Salvador Loiz - Portfolio" />
+      <meta property="og:title" content="Salvador Loiz" />
       <meta
         property="og:description"
         content="Portfolio website of Salvador Loiz showcasing skills and projects."
