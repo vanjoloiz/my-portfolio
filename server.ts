@@ -4,6 +4,7 @@ import next from "next";
 import dotenv from "dotenv";
 import passport from "passport";
 import session from "express-session";
+import { Socket } from "socket.io-client";
 
 import connectDb from "./config/db";
 import linkedInAuth from "./api/linkedInAuth";
@@ -54,7 +55,7 @@ nextApp.prepare().then(() => {
   app.use("/api/v1/email", emailRouter);
   app.use("/api/v1/message", messageRouter);
 
-  io.on("connection", (socket: any) => {
+  io.on("connection", (socket: Socket) => {
     socket.on("join", async ({ userId }: any) => {
       const users = await addUser(userId, socket.id);
 

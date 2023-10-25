@@ -4,11 +4,15 @@ import Head from "next/head";
 const HeadTags = () => {
   return (
     <Head>
-      <title>Salvador Loiz</title>
+      <title>Salvador Loiz - Portfolio</title>
       <meta name="viewport" content="initial-scale=1, width=device-width" />
       <meta
         name="description"
         content="Portfolio website of Salvador Loiz showcasing skills and projects."
+      />
+      <meta
+        name="keywords"
+        content="Salvador Loiz, portfolio, skills, projects"
       />
       <meta property="og:title" content="Salvador Loiz - Portfolio" />
       <meta
@@ -16,6 +20,10 @@ const HeadTags = () => {
         content="Portfolio website of Salvador Loiz showcasing skills and projects."
       />
       <meta property="og:type" content="website" />
+      <meta property="og:image" content="/your-image-url.jpg" />
+      <meta name="author" content="Salvador Loiz" />
+      <meta name="robots" content="index, follow" />
+      <link rel="canonical" href="https://salvadorloizjr.onrender.com/" />
       <link rel="icon" href="/favicon.ico" />
     </Head>
   );
