@@ -6,6 +6,8 @@ interface Profile {
   username: string;
   password: string;
   confirmPassword?: string;
+  email: string;
+  phoneNumber?: string;
   profileUrl?: string;
   profilePicUrl?: string;
   isAdmin: boolean;
@@ -34,6 +36,15 @@ const ProfileSchema = new mongoose.Schema<Profile>(
     },
 
     confirmPassword: {
+      type: String,
+    },
+
+    email: {
+      required: true,
+      type: String,
+    },
+
+    phoneNumber: {
       type: String,
     },
 

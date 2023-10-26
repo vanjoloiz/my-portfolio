@@ -5,6 +5,7 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import GitHubStrategy from "passport-github2";
 import Profile from "../models/Profile";
+import { sendWelcomeEmail } from "../utils/sendEmail";
 import { getCallbackUrl, Platform } from "../utils/callbackUrl";
 
 const router = express.Router();
@@ -46,6 +47,7 @@ passport.use(
           username: `${githubEmail}+github`,
           password: generatedPassword,
           confirmPassword: generatedPassword,
+          email: githubEmail,
           profilePicUrl: profile.photos[0].value,
           profileUrl: profile.profileUrl,
         });
@@ -56,6 +58,8 @@ passport.use(
         user.confirmPassword = undefined;
 
         await user.save();
+
+        sendWelcomeEmail(profile.displayName, githubEmail);
       } catch (err) {
         console.error(err);
       }

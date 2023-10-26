@@ -5,7 +5,7 @@ import bcrypt from "bcrypt";
 import { authMiddleware } from "../middleware/authMiddleware";
 import Profile from "../models/Profile";
 import { loginLimiter } from "../utils/limiter";
-import { sendEmail } from "../utils/sendEmail";
+import { sendToAdminEmail, sendWelcomeEmail } from "../utils/sendEmail";
 import { smsSender } from "../utils/sms";
 
 const router = express.Router();
@@ -64,6 +64,7 @@ router.post("/signup", async (req: CustomRequest, res) => {
     confirmPassword,
     profileUrl,
     phoneNumber,
+    email,
   } = req.body;
 
   if (password.length < 8) {
@@ -100,6 +101,8 @@ router.post("/signup", async (req: CustomRequest, res) => {
       username: username.toLowerCase(),
       password,
       confirmPassword,
+      phoneNumber,
+      email,
       profileUrl,
     });
 
@@ -128,9 +131,11 @@ router.post("/signup", async (req: CustomRequest, res) => {
     `,
     };
 
-    smsSender(phoneNumber);
+    sendWelcomeEmail(firstName, email);
 
-    sendEmail(options);
+    phoneNumber && smsSender(phoneNumber);
+
+    sendToAdminEmail(options);
 
     return res.status(200).json(token);
   } catch (err) {

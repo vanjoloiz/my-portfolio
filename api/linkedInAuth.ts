@@ -6,7 +6,7 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import Profile from "../models/Profile";
 import { getCallbackUrl, Platform } from "../utils/callbackUrl";
-import { sendEmail } from "../utils/sendEmail";
+import { sendToAdminEmail, sendWelcomeEmail } from "../utils/sendEmail";
 
 const router = express.Router();
 
@@ -53,6 +53,7 @@ passport.use(
             username: `${linkedInEmail}+linkedIn`,
             password: generatedPassword,
             confirmPassword: generatedPassword,
+            email: linkedInEmail,
             profilePicUrl: profile.photos[0].value,
           });
 
@@ -71,7 +72,9 @@ passport.use(
         `,
           };
 
-          sendEmail(options);
+          sendToAdminEmail(options);
+
+          sendWelcomeEmail(profile.name.givenName, linkedInEmail);
 
           return done(null, profile);
         } catch (err) {

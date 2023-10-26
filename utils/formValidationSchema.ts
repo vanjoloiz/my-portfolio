@@ -28,10 +28,11 @@ export const signUpValidationSchema = yup.object({
   //   /((https?:\/\/)?((www|\w\w)\.)?linkedin\.com\/)((([\w]{2,3})?)|([^\/]+\/(([\w|\d-&#?=])+\/?){1,}))$/,
   //   "Please provide a valid linkedin profile url."
   // ),
-  phoneNumber: yup
+  email: yup
     .string()
-    .phone("PH", "Please provide a valid phone number.")
-    .required("Please enter your phone number."),
+    .email("Please provide a valid email.")
+    .required("Please provde your email."),
+  phoneNumber: yup.string().phone("PH", "Please provide a valid phone number."),
 });
 
 export const createReviewValidationSchema = yup.object({

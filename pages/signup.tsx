@@ -17,6 +17,7 @@ import { Form, Formik, Field } from "formik";
 import axios from "axios";
 import { signUpValidationSchema } from "@utils/formValidationSchema";
 import IconButton from "@mui/material/IconButton";
+import EmailIcon from "@mui/icons-material/Email";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import LanguageIcon from "@mui/icons-material/Language";
@@ -115,6 +116,7 @@ const SignUp = () => {
                   password: "",
                   confirmPassword: "",
                   profileUrl: "",
+                  email: "",
                   phoneNumber: "",
                 }}
                 onSubmit={handleSubmit}
@@ -230,7 +232,26 @@ const SignUp = () => {
 
                       <Field
                         component={TextField}
-                        label="Phone number"
+                        placeholder="Email"
+                        label="Email"
+                        margin="dense"
+                        id="email"
+                        onChange={handleChange}
+                        fullWidth
+                        error={touched.email && Boolean(errors.email)}
+                        helperText={touched.email && errors.email}
+                        InputProps={{
+                          startAdornment: (
+                            <InputAdornment position="start">
+                              <EmailIcon />
+                            </InputAdornment>
+                          ),
+                        }}
+                      />
+
+                      <Field
+                        component={TextField}
+                        label="Phone number (optional)"
                         placeholder="Phone number"
                         margin="dense"
                         id="phoneNumber"
