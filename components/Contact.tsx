@@ -40,7 +40,7 @@ const Contact = () => {
     try {
       setIsLoading(true);
 
-      await axios.post("/api/v1/email", values);
+      await axios.post("/api/v1/getInTouch", values);
 
       setIsOpenToastMessage(true);
 

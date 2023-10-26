@@ -11,7 +11,7 @@ import linkedInAuth from "./api/linkedInAuth";
 import githubAuth from "./api/githubAuth";
 import authRouter from "./api/auth";
 import reviewRouter from "./api/review";
-import emailRouter from "./api/email";
+import getInTouchRouter from "./api/getInTouch";
 import messageRouter from "./api/message";
 import { addUser, removeUser, findConnectedUser } from "./utils/roomActions";
 
@@ -52,7 +52,7 @@ nextApp.prepare().then(() => {
   app.use("/", githubAuth);
   app.use("/api/v1/auth", authRouter);
   app.use("/api/v1/review", reviewRouter);
-  app.use("/api/v1/email", emailRouter);
+  app.use("/api/v1/getInTouch", getInTouchRouter);
   app.use("/api/v1/message", messageRouter);
 
   io.on("connection", (socket: Socket) => {
