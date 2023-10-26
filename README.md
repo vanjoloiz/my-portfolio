@@ -23,6 +23,7 @@ This is my personal portfolio website showcasing my skills and projects.
 - Login/Sign up system
 - Login with Linkedin and Github
 - Create, edit and delete reviews
+- Admin authorization for approving a review to display on the website
 - Sending email (Get in touch)
 - SMS
 
