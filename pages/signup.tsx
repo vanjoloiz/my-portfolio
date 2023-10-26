@@ -233,7 +233,6 @@ const SignUp = () => {
                       <Field
                         component={TextField}
                         placeholder="Email"
-                        label="Email"
                         margin="dense"
                         id="email"
                         onChange={handleChange}
