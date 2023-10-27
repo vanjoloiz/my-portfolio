@@ -4,7 +4,7 @@ import next from "next";
 import dotenv from "dotenv";
 import passport from "passport";
 import session from "express-session";
-import { Socket } from "socket.io-client";
+import { Socket } from "socket.io";
 
 import connectDb from "./config/db";
 import linkedInAuth from "./api/linkedInAuth";
