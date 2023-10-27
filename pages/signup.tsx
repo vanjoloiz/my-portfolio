@@ -272,7 +272,7 @@ const SignUp = () => {
                       <Field
                         component={TextField}
                         label="Profile URL (optional)"
-                        placeholder="Profile URL"
+                        placeholder="Preferably LinkedIn"
                         margin="dense"
                         id="profileUrl"
                         onChange={handleChange}
