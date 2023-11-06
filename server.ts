@@ -2,7 +2,6 @@ import express from "express";
 import http from "http";
 import next from "next";
 import dotenv from "dotenv";
-import passport from "passport";
 import session from "express-session";
 import { Socket } from "socket.io";
 
@@ -44,9 +43,6 @@ nextApp.prepare().then(() => {
       secret: process.env.SESSION_SECRET!,
     })
   );
-
-  app.use(passport.initialize());
-  app.use(passport.session());
 
   app.use("/", linkedInAuth);
   app.use("/", githubAuth);

@@ -10,14 +10,6 @@ import { sendToAdminEmail, sendWelcomeEmail } from "../utils/sendEmail";
 
 const router = express.Router();
 
-passport.serializeUser((user, done) => {
-  done(null, user);
-});
-
-passport.deserializeUser((user: any, done) => {
-  done(null, user);
-});
-
 let userId: string;
 
 passport.use(
