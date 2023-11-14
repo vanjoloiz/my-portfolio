@@ -12,7 +12,7 @@ This is my personal portfolio website showcasing my skills and projects.
 - Express - Fast, unopinionated, minimalist web framework for Node.js
 - MongoDB - A NoSQL Database
 - Sendgrid - Email Delivery platform
-- Twilio - Communication APIs for sending and receiving text message and phone calls
+- ~~Twilio - Communication APIs for sending and receiving text message and phone calls~~
 
 ## Features
 
@@ -25,7 +25,7 @@ This is my personal portfolio website showcasing my skills and projects.
 - Create, edit and delete reviews
 - Admin authorization for approving a review to display on the website
 - Sending email (Get in touch, Welcome email upon registering)
-- SMS
+- ~~SMS~~
 
 ## Installation
 
