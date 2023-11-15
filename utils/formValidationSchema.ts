@@ -9,7 +9,11 @@ export const loginValidationSchema = yup.object({
 export const signUpValidationSchema = yup.object({
   firstName: yup.string().required("Please enter your first name."),
   lastName: yup.string().required("Please enter your last name."),
-  username: yup.string().required("Please enter your username."),
+  username: yup
+    .string()
+    .required("Please enter your username.")
+    .min(5, "Username must be at least 5 characters."),
+
   password: yup
     .string()
     .required("Please enter your password.")

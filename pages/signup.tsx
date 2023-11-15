@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
+import axios from "axios";
 import Cookie from "js-cookie";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
@@ -9,12 +10,12 @@ import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import CloseIcon from "@mui/icons-material/Close";
+import CheckIcon from "@mui/icons-material/Check";
 import Link from "@mui/material/Link";
-import Alert from "@mui/material/Alert";
 import CircularProgress from "@mui/material/CircularProgress";
 import Grid from "@mui/material/Grid";
 import { Form, Formik, Field } from "formik";
-import axios from "axios";
 import { signUpValidationSchema } from "@utils/formValidationSchema";
 import IconButton from "@mui/material/IconButton";
 import EmailIcon from "@mui/icons-material/Email";
@@ -22,6 +23,7 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import LanguageIcon from "@mui/icons-material/Language";
 import InputAdornment from "@mui/material/InputAdornment";
+import { BASE_URL } from "@utils/baseUrl";
 
 interface FormValues {
   firstName: string;
@@ -31,6 +33,8 @@ interface FormValues {
   confirmPassword: string;
 }
 
+let cancel: any;
+
 const SignUp = () => {
   const router = useRouter();
 
@@ -38,13 +42,17 @@ const SignUp = () => {
 
   const isSmall = useMediaQuery(theme.breakpoints.down("md"));
 
-  const [error, setError] = useState({ isShow: false, message: "" });
-
   const [isLoading, setIsLoading] = useState(false);
 
   const [isShowPassword, setIsShowPassword] = useState({
     password: false,
     confirmPassword: false,
+  });
+
+  const [username, setUsername] = useState({
+    isError: false,
+    isLoading: false,
+    errorMessage: "",
   });
 
   const isRedirectToQuery = router.query.redirect !== undefined;
@@ -54,6 +62,52 @@ const SignUp = () => {
   const loginAnchorRedirect = isRedirectToQuery
     ? `/login?redirect=${String(router.query.redirect)}`
     : "/login";
+
+  const handleIsUsernameTakenChange = async (username: string) => {
+    try {
+      if (username !== "") {
+        if (cancel) {
+          cancel();
+        }
+
+        const { CancelToken } = axios;
+
+        setUsername((prev) => ({
+          ...prev,
+          isLoading: true,
+          isError: false,
+        }));
+
+        await axios.get(`${BASE_URL}/api/v1/auth/authusername/${username}`, {
+          cancelToken: new CancelToken((canceler) => {
+            cancel = canceler;
+          }),
+        });
+
+        setUsername((prev) => ({
+          ...prev,
+          isError: false,
+          errorMessage: "",
+          isLoading: false,
+        }));
+      } else {
+        setUsername((prev) => ({
+          ...prev,
+          isError: false,
+          errorMessage: "",
+        }));
+      }
+    } catch (err: any) {
+      if (err.code !== "ERR_CANCELED") {
+        setUsername((prev) => ({
+          ...prev,
+          isError: true,
+          errorMessage: err.response?.data,
+          isLoading: false,
+        }));
+      }
+    }
+  };
 
   const handleShowPasswordClick = () => {
     setIsShowPassword({
@@ -75,8 +129,6 @@ const SignUp = () => {
 
       const { data } = await axios.post("/api/v1/auth/signup ", values);
 
-      setError({ isShow: false, message: "" });
-
       Cookie.set("token", data, { expires: 7 });
 
       router.push(redirect);
@@ -84,12 +136,41 @@ const SignUp = () => {
         setIsLoading(false);
       });
     } catch (err: any) {
-      setError({
-        isShow: true,
-        message: err.response.data,
-      });
-
       setIsLoading(false);
+    }
+  };
+
+  const getUsernameInputAdornment = (
+    usernameError: boolean,
+    usernameValue: string
+  ) => {
+    if (username.isLoading) {
+      return (
+        <InputAdornment position="end">
+          <CircularProgress size={17} />
+        </InputAdornment>
+      );
+    }
+
+    if (username.isError && !username.isLoading) {
+      return (
+        <InputAdornment position="end">
+          <CloseIcon sx={{ fill: "red" }} />{" "}
+        </InputAdornment>
+      );
+    }
+
+    if (
+      !username.isError &&
+      !username.isLoading &&
+      usernameError &&
+      usernameValue !== ""
+    ) {
+      return (
+        <InputAdornment position="end">
+          <CheckIcon sx={{ fill: "green" }} />
+        </InputAdornment>
+      );
     }
   };
 
@@ -99,11 +180,6 @@ const SignUp = () => {
         <Box sx={{ display: "block", margin: "auto" }}>
           <Paper elevation={3}>
             <Box p={6}>
-              {error.isShow && (
-                <Alert severity="error" sx={{ mb: 2 }}>
-                  {error.message}
-                </Alert>
-              )}
               <Typography variant="h4" mb={2}>
                 Sign up
               </Typography>
@@ -122,7 +198,7 @@ const SignUp = () => {
                 onSubmit={handleSubmit}
                 validationSchema={signUpValidationSchema}
               >
-                {({ touched, errors, handleChange }) => (
+                {({ touched, errors, handleChange, values }) => (
                   <Form>
                     <Grid container>
                       <Grid container item spacing={isSmall ? 0 : 2}>
@@ -162,9 +238,24 @@ const SignUp = () => {
                         margin="dense"
                         id="username"
                         fullWidth
-                        onChange={handleChange}
-                        error={touched.username && Boolean(errors.username)}
-                        helperText={touched.username && errors.username}
+                        onChange={(event: any) => {
+                          handleChange(event);
+                          handleIsUsernameTakenChange(event.target.value);
+                        }}
+                        error={
+                          (touched.username && Boolean(errors.username)) ||
+                          (username.isError && !username.isLoading)
+                        }
+                        helperText={
+                          (touched.username && errors.username) ||
+                          username.errorMessage
+                        }
+                        InputProps={{
+                          endAdornment: getUsernameInputAdornment(
+                            Boolean(!errors.username),
+                            values.username
+                          ),
+                        }}
                       />
 
                       <Field
