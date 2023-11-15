@@ -33,13 +33,13 @@ const Landing: FC = () => {
             <Typed
               style={{ fontSize: "32px" }}
               strings={[
-                "Full stack Developer. 🌐",
-                "React Developer. ⚛️",
-                "Node js Developer. 💻",
-                "Passionate about coding.",
+                "Full stack Developer 🌐",
+                "React Developer ⚛️",
+                "Node.js Developer ⬢",
+                "Passionate about coding 💻",
               ]}
-              typeSpeed={40}
-              backSpeed={50}
+              typeSpeed={10}
+              backSpeed={20}
               loop
             />
             <div style={{ marginTop: "30px", display: "flex", gap: "10px" }}>
