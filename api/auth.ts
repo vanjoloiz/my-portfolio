@@ -68,11 +68,15 @@ router.post("/signup", async (req: CustomRequest, res) => {
   } = req.body;
 
   if (password.length < 8) {
-    return res.status(401).send("Password must be at least 8 characters.");
+    return res.status(400).send("Password must be at least 8 characters.");
   }
 
   if (password !== confirmPassword) {
-    return res.status(401).send("Passwords must match.");
+    return res.status(400).send("Passwords must match.");
+  }
+
+  if (username.length < 5) {
+    return res.status(400).send("Username must be at least 5 characters..");
   }
 
   // /^((https?:\/\/)?((www|ww)\.)?linkedin\.com\/)(([\w\d\-&#?=])+\/?){1,}$/
@@ -141,6 +145,22 @@ router.post("/signup", async (req: CustomRequest, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).send("Email sending failed.");
+  }
+});
+
+router.get("/authusername/:username", async (req, res) => {
+  const { username } = req.params;
+
+  try {
+    const user = await Profile.findOne({
+      username: username.toLocaleLowerCase(),
+    });
+
+    if (user) return res.status(401).send("Username already taken.");
+
+    res.status(200).send("Available.");
+  } catch (err) {
+    res.status(500).send("Server error.");
   }
 });
 
