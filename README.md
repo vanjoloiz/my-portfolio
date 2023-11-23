@@ -38,7 +38,6 @@ This is my personal portfolio website showcasing my skills and projects.
 DB_PASSWORD={dbpassword}
 MONGO_URI={mongouri}
 JWT_SECRET={jwtsecret}
-SESSION_SECRET={sessionsecret}
 SENDGRID_API_KEY={sendgridapikey}
 LINKEDIN_CLIENT_ID={linkedinclinetid}
 LINKEDIN_CLIENT_SECRET={linkedinclientsecret}

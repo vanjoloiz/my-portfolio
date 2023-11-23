@@ -2,7 +2,6 @@ import express from "express";
 import http from "http";
 import next from "next";
 import dotenv from "dotenv";
-import session from "express-session";
 import { Socket } from "socket.io";
 
 import connectDb from "./config/db";
@@ -35,14 +34,6 @@ connectDb();
 nextApp.prepare().then(() => {
   app.use(express.urlencoded({ extended: false }));
   app.use(express.json());
-
-  app.use(
-    session({
-      resave: false,
-      saveUninitialized: true,
-      secret: process.env.SESSION_SECRET!,
-    })
-  );
 
   app.use("/", linkedInAuth);
   app.use("/", githubAuth);
