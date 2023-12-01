@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Form, Formik, Field } from "formik";
 import axios from "axios";
+import Alert from "@mui/material/Alert";
 import { useRouter } from "next/router";
 import Cookie from "js-cookie";
 import Container from "@mui/material/Container";
@@ -69,6 +70,11 @@ const CreateReview = () => {
               <Typography variant={isMediumScreenSize ? "h5" : "h4"} mb={2}>
                 Create review
               </Typography>
+
+              <Alert severity="warning" sx={{ mb: 2, width: "fit-content" }}>
+                Admin needs to approve your review before it to display on the
+                website.
+              </Alert>
 
               <Formik
                 initialValues={{
