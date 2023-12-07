@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
+import Link from "next/link";
 import Container from "@mui/material/Container";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
@@ -8,7 +9,6 @@ import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import Link from "@mui/material/Link";
 import Alert from "@mui/material/Alert";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import GitHubIcon from "@mui/icons-material/GitHub";
@@ -185,7 +185,11 @@ const Login = () => {
                   </>
                 )}
               </Formik>
-              <Link href={signUpAnchorRedirect} color="inherit">
+              <Link
+                href={signUpAnchorRedirect}
+                legacyBehavior={false}
+                style={{ color: "black" }}
+              >
                 Don&apos; t have an account? Sign Up
               </Link>
             </Box>

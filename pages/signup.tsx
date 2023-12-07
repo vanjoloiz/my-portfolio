@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
+import Link from "next/link";
 import axios from "axios";
 import Cookie from "js-cookie";
 import Container from "@mui/material/Container";
@@ -12,7 +13,6 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import CloseIcon from "@mui/icons-material/Close";
 import CheckIcon from "@mui/icons-material/Check";
-import Link from "@mui/material/Link";
 import CircularProgress from "@mui/material/CircularProgress";
 import Grid from "@mui/material/Grid";
 import { Form, Formik, Field } from "formik";
@@ -400,7 +400,11 @@ const SignUp = () => {
                   </Form>
                 )}
               </Formik>
-              <Link href={loginAnchorRedirect} color="inherit">
+              <Link
+                href={loginAnchorRedirect}
+                legacyBehavior={false}
+                style={{ color: "black" }}
+              >
                 Already have an account? Sign in
               </Link>
             </Box>
