@@ -1,5 +1,6 @@
 import { useState, useRef } from "react";
 import axios from "axios";
+import ReCAPTCHA from "react-google-recaptcha";
 import { Formik, Form, Field } from "formik";
 import Grid from "@mui/material/Grid";
 import useMediaQuery from "@mui/material/useMediaQuery";
@@ -12,6 +13,8 @@ import Fade from "@mui/material/Fade";
 import Box from "@mui/material/Box";
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
+import Dialog from "@mui/material/Dialog";
+import DialogContent from "@mui/material/DialogContent";
 import { getInTouchFormValidationSchema } from "@utils/formValidationSchema";
 import useAnimate from "@/lib/useAnimate";
 import ToastMessage from "./ToastMessage";
@@ -23,6 +26,13 @@ interface FormValues {
   message: string;
 }
 
+const formInitialValues = {
+  firstName: "",
+  lastName: "",
+  email: "",
+  message: "",
+};
+
 const Contact = () => {
   const theme = useTheme();
 
@@ -30,28 +40,48 @@ const Contact = () => {
 
   const [isOpenToastMessage, setIsOpenToastMessage] = useState(false);
 
+  const [reCaptchaToken, setReCaptchaToken] = useState("");
+
+  const [isReCaptchaModalOpen, setIsReCaptchaModalOpen] = useState(false);
+
+  const [formValue, setFormValue] = useState(formInitialValues);
+
   const [isLoading, setIsLoading] = useState(false);
 
   const animRef = useRef(null);
 
+  const formikRef = useRef<any>();
+
   const animate = useAnimate(animRef);
 
-  const handleSubmit = async (values: FormValues, { resetForm }: any) => {
+  const handleSubmitFromReCaptcha = async (value: string | null) => {
+    setReCaptchaToken(value!);
+    setIsReCaptchaModalOpen(false);
+
     try {
       setIsLoading(true);
 
-      await axios.post("/api/v1/getInTouch", values);
+      await axios.post("/api/v1/getInTouch", formValue);
 
       setIsOpenToastMessage(true);
 
       setIsLoading(false);
-
-      resetForm();
     } catch (err) {
       console.error(err);
     }
 
+    //@ts-ignore
+    formikRef?.current.resetForm();
+
     setIsLoading(false);
+  };
+
+  const handleSubmit = async (values: FormValues) => {
+    setIsReCaptchaModalOpen(true);
+
+    if (reCaptchaToken === "") setIsReCaptchaModalOpen(true);
+
+    setFormValue(values);
   };
 
   const handleToastMessageClose = () => {
@@ -71,14 +101,10 @@ const Contact = () => {
       </Typography>
       <>
         <Formik
-          initialValues={{
-            firstName: "",
-            lastName: "",
-            email: "",
-            message: "",
-          }}
+          initialValues={formInitialValues}
           onSubmit={handleSubmit}
           validationSchema={getInTouchFormValidationSchema}
+          innerRef={formikRef}
         >
           {({ handleChange, touched, errors, values }) => (
             <Box ref={animRef}>
@@ -168,6 +194,18 @@ const Contact = () => {
       >
         <CircularProgress color="primary" />
       </Backdrop>
+      <Dialog
+        open={isReCaptchaModalOpen}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogContent>
+          <ReCAPTCHA
+            sitekey={process.env.NEXT_PUBLIC_GOOGLE_RECAPTCHA!}
+            onChange={handleSubmitFromReCaptcha}
+          />
+        </DialogContent>
+      </Dialog>
     </Container>
   );
 };
