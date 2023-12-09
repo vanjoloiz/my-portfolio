@@ -206,9 +206,9 @@ const Reviews: FC<ReviewProps> = ({ reviewsInitialValue, loggedInUser }) => {
                         >
                           <Link
                             href={
-                              data.profile.profilePicUrl === ""
+                              data.profile.profileUrl === ""
                                 ? undefined
-                                : data.profile.profilePicUrl
+                                : data.profile.profileUrl
                             }
                             rel="noopener"
                             target="_blank"
