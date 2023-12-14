@@ -1,12 +1,18 @@
 import express from "express";
+import * as crypto from "crypto";
 import { Request } from "express";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import { authMiddleware } from "../middleware/authMiddleware";
 import Profile from "../models/Profile";
 import { loginLimiter } from "../utils/limiter";
-import { sendToAdminEmail, sendWelcomeEmail } from "../utils/sendEmail";
+import {
+  sendToAdminEmail,
+  sendWelcomeEmail,
+  sendForgotPasswordEmail,
+} from "../utils/sendEmail";
 import { smsSender } from "../utils/sms";
+import { BASE_URL } from "../utils/baseUrl";
 
 const router = express.Router();
 
@@ -161,6 +167,80 @@ router.get("/authusername/:username", async (req, res) => {
     res.status(200).send("Available.");
   } catch (err) {
     res.status(500).send("Server error.");
+  }
+});
+
+router.post("/forgot-password", async (req, res) => {
+  const { username } = req.body;
+
+  const user = await Profile.findOne({ username });
+  try {
+    if (user) {
+      const token = crypto.randomBytes(32).toString("hex");
+
+      user.resetPasswordToken = token;
+      user.resetPasswordTokenTimeStamp = Date.now() + 3600000;
+
+      await user.save();
+
+      const passwordResetLink = `${BASE_URL}/forgot-password/${token}`;
+
+      await sendForgotPasswordEmail(
+        token,
+        user.username,
+        user.email,
+        passwordResetLink
+      );
+    } else {
+      return res.status(404).json({
+        message: "Username not found.",
+      });
+    }
+
+    res.status(200).json({
+      message: "Forgot password email sent.",
+      userEmail: user?.email,
+    });
+  } catch (err) {
+    res.status(500).send("Server error.");
+  }
+});
+
+router.post("/forgot-password/:token", async (req, res) => {
+  const { password, confirmPassword } = req.body;
+
+  try {
+    const user = await Profile.findOne({
+      resetPasswordToken: req.params.token,
+    });
+
+    const date = new Date();
+    date.setHours(date.getHours() + 2);
+
+    if (user) {
+      if (user.resetPasswordTokenTimeStamp! < Date.now()) {
+        return res.status(401).send("Token is not valid.");
+      }
+
+      const isPasswordSame = await bcrypt.compare(password, user.password);
+
+      if (isPasswordSame)
+        return res.status(401).send("Please don't use your old password.");
+
+      user.password = await bcrypt.hash(password, 10);
+      user.resetPasswordToken = undefined;
+      user.resetPasswordTokenTimeStamp = undefined;
+
+      await user.save();
+      res.status(200).send("Password successfully change.");
+    } else {
+      res.status(401).send("Token is not valid.");
+    }
+  } catch (err) {
+    res.status(500).send("Server error.");
+  }
+  if (password !== confirmPassword) {
+    return res.status(400).send("Passwords must match.");
   }
 });
 

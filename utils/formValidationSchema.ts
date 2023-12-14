@@ -52,3 +52,18 @@ export const getInTouchFormValidationSchema = yup.object({
     .email("Please provide a valid email."),
   message: yup.string().required("Please enter your message."),
 });
+
+export const resetPasswordValidationSchema = yup.object({
+  username: yup.string().required("Please enter your username."),
+});
+
+export const createNewPasswordValidationSchema = yup.object({
+  password: yup
+    .string()
+    .required("Please enter your password.")
+    .min(8, "Password must be at least 8 characters."),
+  confirmPassword: yup
+    .string()
+    .required("Please confirm your password.")
+    .oneOf([yup.ref("password")], "Passwords must match."),
+});

@@ -11,6 +11,8 @@ interface Profile {
   profileUrl?: string;
   profilePicUrl?: string;
   isAdmin: boolean;
+  resetPasswordToken?: string;
+  resetPasswordTokenTimeStamp?: number;
 }
 
 const ProfileSchema = new mongoose.Schema<Profile>(
@@ -61,6 +63,14 @@ const ProfileSchema = new mongoose.Schema<Profile>(
     isAdmin: {
       type: Boolean,
       default: false,
+    },
+
+    resetPasswordToken: {
+      type: String,
+    },
+
+    resetPasswordTokenTimeStamp: {
+      type: Number,
     },
   },
   { timestamps: true }

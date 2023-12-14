@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
+import Grid from "@mui/material/Grid";
 import Link from "next/link";
 import Container from "@mui/material/Container";
 import Paper from "@mui/material/Paper";
@@ -185,13 +186,26 @@ const Login = () => {
                   </>
                 )}
               </Formik>
-              <Link
-                href={signUpAnchorRedirect}
-                legacyBehavior={false}
-                style={{ color: "black" }}
-              >
-                Don&apos; t have an account? Sign Up
-              </Link>
+              <Grid container spacing={10}>
+                <Grid item>
+                  <Link
+                    href={signUpAnchorRedirect}
+                    legacyBehavior={false}
+                    style={{ color: "black" }}
+                  >
+                    Don&apos; t have an account? Sign Up
+                  </Link>
+                </Grid>
+                <Grid item>
+                  <Link
+                    href="/forgot-password"
+                    legacyBehavior={false}
+                    style={{ color: "black" }}
+                  >
+                    Forgot Password?
+                  </Link>
+                </Grid>
+              </Grid>
             </Box>
           </Paper>
         </Box>

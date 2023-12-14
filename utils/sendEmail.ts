@@ -49,3 +49,32 @@ export const sendWelcomeEmail = async (firstName: string, email: string) => {
     console.error(err);
   }
 };
+
+export const sendForgotPasswordEmail = async (
+  token: string,
+  username: string,
+  email: string,
+  passwordResetLink: string
+) => {
+  const html = pug.renderFile(
+    `${__dirname}/templates/forgotPasswordEmail.pug`,
+    {
+      token,
+      username,
+      email,
+      passwordResetLink,
+    }
+  );
+
+  try {
+    await transporter.sendMail({
+      from: SENDGRID_API_EMAIL,
+      to: email,
+      replyTo: process.env.GMAIL_EMAIL,
+      subject: "Password Reset Instructions",
+      html: juice(html),
+    });
+  } catch (err) {
+    console.error(err);
+  }
+};

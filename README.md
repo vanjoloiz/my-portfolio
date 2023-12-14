@@ -22,6 +22,7 @@ This is my personal portfolio website showcasing my skills and projects.
 - Cross-browser compatible
 - Login/Sign up system
 - Login with Linkedin and Github
+- Forgot password via email
 - Create, edit and delete reviews
 - Admin authorization for approving a review to display on the website
 - Sending email (Get in touch, Welcome email upon registering)

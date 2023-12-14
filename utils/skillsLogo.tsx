@@ -82,7 +82,7 @@ export const skills = {
     {
       logo: <SCSSLogo />,
       transitionDelay: 12,
-      title: "CSS",
+      title: "SCSS",
     },
   ],
 
