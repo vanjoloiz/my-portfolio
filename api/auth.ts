@@ -214,9 +214,6 @@ router.post("/forgot-password/:token", async (req, res) => {
       resetPasswordToken: req.params.token,
     });
 
-    const date = new Date();
-    date.setHours(date.getHours() + 2);
-
     if (user) {
       if (user.resetPasswordTokenTimeStamp! < Date.now()) {
         return res.status(401).send("Token is not valid.");
