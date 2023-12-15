@@ -193,7 +193,7 @@ const ForgotPassword = () => {
                             size={17}
                           />
                         )}
-                        Send instruction
+                        Send instructions
                       </Button>
                     </Form>
                   </>
