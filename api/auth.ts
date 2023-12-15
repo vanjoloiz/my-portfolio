@@ -216,7 +216,7 @@ router.post("/forgot-password/:token", async (req, res) => {
 
     if (user) {
       if (user.resetPasswordTokenTimeStamp! < Date.now()) {
-        return res.status(401).send("Token is not valid.");
+        return res.status(401).send("Token is expired, please request again.");
       }
 
       const isPasswordSame = await bcrypt.compare(password, user.password);

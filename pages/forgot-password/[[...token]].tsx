@@ -37,6 +37,7 @@ const ForgotPassword = () => {
   const [isError, setIsError] = useState({
     usernameNotFound: false,
     invalidToken: false,
+    isExpired: false,
     samePassword: false,
   });
 
@@ -93,6 +94,16 @@ const ForgotPassword = () => {
         }));
       }
 
+      if (err.response.data === "Token is expired, please request again.") {
+        return setIsError((prev) => ({
+          ...prev,
+          usernameNotFound: false,
+          invalidToken: false,
+          isExpired: true,
+          samePassword: false,
+        }));
+      }
+
       setIsError((prev) => ({
         ...prev,
         usernameNotFound: false,
@@ -137,6 +148,12 @@ const ForgotPassword = () => {
             {isError.samePassword && (
               <Alert severity="error" sx={{ mb: 2 }}>
                 Please don&apos;t use your old password.
+              </Alert>
+            )}
+
+            {isError.isExpired && (
+              <Alert severity="error" sx={{ mb: 2 }}>
+                Token is expired, please request again.
               </Alert>
             )}
 
