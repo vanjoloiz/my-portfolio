@@ -108,13 +108,11 @@ router.put(
     try {
       const review = await Review.findById(reviewId);
 
-      if (!review) {
+      if (!review)
         return res.status(404).json(`Review with ID:${reviewId} not found.`);
-      }
 
-      if (req.userId !== String(review.profile)) {
+      if (req.userId !== String(review.profile))
         res.status(401).json("This review is not yours.");
-      }
 
       review.text = text;
       review.isApproved = false;
@@ -140,13 +138,11 @@ router.delete(
     try {
       const review = await Review.findById(reviewId);
 
-      if (!review) {
+      if (!review)
         return res.status(404).json(`Review with ID:${reviewId} not found.`);
-      }
 
-      if (req.userId !== String(review.profile)) {
+      if (req.userId !== String(review.profile))
         res.status(401).json("This review is not yours.");
-      }
 
       review.text = text;
 

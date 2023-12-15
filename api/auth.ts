@@ -73,17 +73,14 @@ router.post("/signup", async (req: CustomRequest, res) => {
     email,
   } = req.body;
 
-  if (password.length < 8) {
+  if (password.length < 8)
     return res.status(400).send("Password must be at least 8 characters.");
-  }
 
-  if (password !== confirmPassword) {
+  if (password !== confirmPassword)
     return res.status(400).send("Passwords must match.");
-  }
 
-  if (username.length < 5) {
+  if (username.length < 5)
     return res.status(400).send("Username must be at least 5 characters..");
-  }
 
   // /^((https?:\/\/)?((www|ww)\.)?linkedin\.com\/)(([\w\d\-&#?=])+\/?){1,}$/
 
@@ -101,9 +98,7 @@ router.post("/signup", async (req: CustomRequest, res) => {
 
     user = await Profile.findOne({ username: username.toLowerCase() });
 
-    if (user) {
-      return res.status(409).send("This username already registered.");
-    }
+    if (user) return res.status(409).send("This username already registered.");
 
     user = new Profile({
       firstName,
@@ -215,9 +210,8 @@ router.post("/forgot-password/:token", async (req, res) => {
     });
 
     if (user) {
-      if (user.resetPasswordTokenTimeStamp! < Date.now()) {
+      if (user.resetPasswordTokenTimeStamp! < Date.now())
         return res.status(401).send("Token is expired, please request again.");
-      }
 
       const isPasswordSame = await bcrypt.compare(password, user.password);
 
