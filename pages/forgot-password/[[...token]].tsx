@@ -24,6 +24,14 @@ const isEmpty = (obj: any) => {
   return Object.keys(obj).length === 0;
 };
 
+const showErrorAlert = (message: string) => {
+  return (
+    <Alert severity="error" sx={{ mb: 2 }}>
+      {message}
+    </Alert>
+  );
+};
+
 const ForgotPassword = () => {
   const router = useRouter();
 
@@ -133,29 +141,12 @@ const ForgotPassword = () => {
       <Container maxWidth="sm">
         <Paper elevation={3}>
           <Box p={5}>
-            {isError.usernameNotFound && (
-              <Alert severity="error" sx={{ mb: 2 }}>
-                User not registered.
-              </Alert>
-            )}
-
-            {isError.invalidToken && (
-              <Alert severity="error" sx={{ mb: 2 }}>
-                Something went wrong.
-              </Alert>
-            )}
-
-            {isError.samePassword && (
-              <Alert severity="error" sx={{ mb: 2 }}>
-                Please don&apos;t use your old password.
-              </Alert>
-            )}
-
-            {isError.isExpired && (
-              <Alert severity="error" sx={{ mb: 2 }}>
-                Token is expired, please request again.
-              </Alert>
-            )}
+            {isError.usernameNotFound && showErrorAlert("User not registered.")}
+            {isError.invalidToken && showErrorAlert("Something went wrong.")}
+            {isError.samePassword &&
+              showErrorAlert("Please don't use your old password.")}
+            {isError.isExpired &&
+              showErrorAlert(" Token is expired, please request again.")}
 
             <Typography variant="h4" mb={2} align="center">
               {isNoParams ? "Reset your password" : "Create new password"}
