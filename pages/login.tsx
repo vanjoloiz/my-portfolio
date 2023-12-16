@@ -186,8 +186,8 @@ const Login = () => {
                   </>
                 )}
               </Formik>
-              <Grid container spacing={10}>
-                <Grid item>
+              <Grid container spacing={3}>
+                <Grid item sm={12} md={8}>
                   <Link
                     href={signUpAnchorRedirect}
                     legacyBehavior={false}
@@ -196,7 +196,7 @@ const Login = () => {
                     Don&apos; t have an account? Sign Up
                   </Link>
                 </Grid>
-                <Grid item>
+                <Grid item sm={12} md={4}>
                   <Link
                     href="/forgot-password"
                     legacyBehavior={false}
