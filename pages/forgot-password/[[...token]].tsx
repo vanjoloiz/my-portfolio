@@ -154,7 +154,7 @@ const ForgotPassword = () => {
 
             <Typography variant="subtitle1" mb={2} align="center">
               {isNoParams
-                ? "    Enter your username so we can send you a message on how to reset your password."
+                ? "Enter your username so we can send you a message on how to reset your password."
                 : "Your new password must be different from previous used password."}
             </Typography>
 
