@@ -204,6 +204,10 @@ router.post("/forgot-password", async (req, res) => {
 router.post("/forgot-password/:token", async (req, res) => {
   const { password, confirmPassword } = req.body;
 
+  if (password !== confirmPassword) {
+    return res.status(400).send("Passwords must match.");
+  }
+
   try {
     const user = await Profile.findOne({
       resetPasswordToken: req.params.token,
@@ -229,9 +233,6 @@ router.post("/forgot-password/:token", async (req, res) => {
     }
   } catch (err) {
     res.status(500).send("Server error.");
-  }
-  if (password !== confirmPassword) {
-    return res.status(400).send("Passwords must match.");
   }
 });
 
