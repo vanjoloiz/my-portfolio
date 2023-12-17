@@ -323,6 +323,7 @@ const SignUp = () => {
 
                       <Field
                         component={TextField}
+                        label="Email"
                         placeholder="Email"
                         margin="dense"
                         id="email"
