@@ -47,6 +47,7 @@ const ForgotPassword = () => {
     invalidToken: false,
     isExpired: false,
     samePassword: false,
+    noEmail: false,
   });
 
   const [isLoading, setIsLoading] = useState(false);
@@ -66,11 +67,24 @@ const ForgotPassword = () => {
       router.events.on("routeChangeComplete", () => {
         setIsLoading(false);
       });
-    } catch (err) {
+    } catch (err: any) {
+      if (err.response.data === "Server error.") {
+        setIsError((prev) => ({
+          ...prev,
+          usernameNotFound: false,
+          invalidToken: false,
+          isExpired: false,
+          samePassword: false,
+          noEmail: true,
+        }));
+        return setIsLoading(false);
+      }
+
       setIsError((prev) => ({
         ...prev,
         usernameNotFound: true,
         invalidToken: false,
+        noEmail: false,
       }));
       setIsLoading(false);
     }
@@ -147,6 +161,9 @@ const ForgotPassword = () => {
               showErrorAlert("Please don't use your old password.")}
             {isError.isExpired &&
               showErrorAlert(" Token is expired, please request again.")}
+
+            {isError.noEmail &&
+              showErrorAlert("Your registered account has no email.")}
 
             <Typography variant="h4" mb={2} align="center">
               {isNoParams ? "Reset your password" : "Create new password"}
