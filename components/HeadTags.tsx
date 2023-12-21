@@ -20,7 +20,10 @@ const HeadTags = () => {
         content="Portfolio website of Salvador Loiz showcasing skills and projects."
       />
       <meta property="og:type" content="website" />
-      <meta property="og:image" content="/your-image-url.jpg" />
+      <meta
+        property="og:image"
+        content="https://avatars.githubusercontent.com/u/55220938?v=4"
+      />
       <meta name="author" content="Salvador Loiz" />
       <meta name="robots" content="index, follow" />
       <link rel="canonical" href="https://salvadorloizjr.onrender.com/" />
