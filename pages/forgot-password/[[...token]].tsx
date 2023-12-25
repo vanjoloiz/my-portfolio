@@ -160,7 +160,7 @@ const ForgotPassword = () => {
             {isError.samePassword &&
               showErrorAlert("Please don't use your old password.")}
             {isError.isExpired &&
-              showErrorAlert(" Token is expired, please request again.")}
+              showErrorAlert("Link expired, please request again.")}
 
             {isError.noEmail &&
               showErrorAlert("Your registered account has no email.")}
