@@ -225,7 +225,9 @@ const Reviews: FC<ReviewProps> = ({ reviewsInitialValue, loggedInUser }) => {
                           {isShowMoreButton && (
                             <>
                               <IconButton
+                                sx={{ pt: 0 }}
                                 disableFocusRipple
+                                disableRipple
                                 onClick={handleMenuChange}
                               >
                                 <MoreVertIcon />
