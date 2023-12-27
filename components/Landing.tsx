@@ -1,6 +1,6 @@
 import { FC } from "react";
 import Fade from "@mui/material/Fade";
-import Typed from "react-typed";
+import { TypeAnimation } from "react-type-animation";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { useTheme } from "@mui/material/styles";
@@ -30,17 +30,22 @@ const Landing: FC = () => {
             <Typography variant={isMediumScreenSize ? "h2" : "h1"} gutterBottom>
               Hi, I&apos;m Salvador
             </Typography>
-            <Typed
-              style={{ fontSize: "32px" }}
-              strings={[
+            <TypeAnimation
+              sequence={[
                 "Full stack Developer 🌐",
+                1000,
                 "React Developer ⚛️",
+                1000,
                 "Node.js Developer ⬢",
+                1000,
                 "Passionate about coding 💻",
+                1000,
               ]}
-              typeSpeed={10}
-              backSpeed={20}
-              loop
+              wrapper="span"
+              speed={75}
+              deletionSpeed={65}
+              style={{ fontSize: "32px" }}
+              repeat={Infinity}
             />
             <div style={{ marginTop: "30px", display: "flex", gap: "10px" }}>
               <Link
