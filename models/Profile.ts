@@ -32,6 +32,7 @@ const ProfileSchema = new mongoose.Schema<Profile>(
       required: true,
       lowercase: true,
       unique: true,
+      trim: true,
     },
 
     password: {

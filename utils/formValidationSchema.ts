@@ -11,7 +11,9 @@ export const signUpValidationSchema = yup.object({
   lastName: yup.string().required("Please enter your last name."),
   username: yup
     .string()
+    .trim()
     .required("Please enter your username.")
+    .matches(/^\S+$/, "Username cannot contain whitespace.")
     .min(5, "Username must be at least 5 characters."),
 
   password: yup

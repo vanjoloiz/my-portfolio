@@ -65,7 +65,7 @@ const SignUp = () => {
 
   const handleIsUsernameTakenChange = async (username: string) => {
     try {
-      if (username !== "") {
+      if (username.trim() !== "") {
         if (cancel) {
           cancel();
         }
