@@ -2,7 +2,7 @@ import createCache from "@emotion/cache";
 
 const isBrowser = typeof document !== "undefined";
 
-export const createEmotionCache = () => {
+const createEmotionCache = () => {
   let insertionPoint;
 
   if (isBrowser) {
@@ -14,3 +14,5 @@ export const createEmotionCache = () => {
 
   return createCache({ key: "mui-style", insertionPoint });
 };
+
+export default createEmotionCache;
