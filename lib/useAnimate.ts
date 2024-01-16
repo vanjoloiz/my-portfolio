@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect, RefObject } from "react";
 
-export default function useAnimate(ref: RefObject<HTMLElement>) {
+const useAnimate = (ref: RefObject<HTMLElement>) => {
   const [animate, setAnimate] = useState(false);
   const observerRef = useRef<any>(null);
 
@@ -16,4 +16,5 @@ export default function useAnimate(ref: RefObject<HTMLElement>) {
   }, [ref]);
 
   return animate;
-}
+};
+export default useAnimate;
