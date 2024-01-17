@@ -1,4 +1,5 @@
 import { FC } from "react";
+import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import Box from "@mui/material/Box";
@@ -18,7 +19,9 @@ const Footer: FC = () => {
           target="_blank"
           rel="noopener"
         >
-          <GitHubIcon sx={{ cursor: "pointer" }} />
+          <Tooltip title="Gimme some star!" arrow>
+            <GitHubIcon sx={{ cursor: "pointer" }} />
+          </Tooltip>
         </Link>
       </Box>
     </footer>
