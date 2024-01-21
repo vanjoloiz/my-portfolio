@@ -14,7 +14,7 @@ import reviewRouter from "./api/review";
 import getInTouchRouter from "./api/getInTouch";
 import messageRouter from "./api/message";
 import { addUser, removeUser, findConnectedUser } from "./utils/roomActions";
-import { BASE_URL } from "./utils/baseUrl";
+// import { BASE_URL } from "./utils/baseUrl";
 
 const app = express();
 
@@ -40,7 +40,7 @@ nextApp.prepare().then(() => {
 
   app.use(
     cors({
-      origin: BASE_URL,
+      origin: "https://salvadorloiz.onrender.com",
       optionsSuccessStatus: 200,
     })
   );
