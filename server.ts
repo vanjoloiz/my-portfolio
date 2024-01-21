@@ -2,7 +2,6 @@ import express from "express";
 import http from "http";
 import next from "next";
 import dotenv from "dotenv";
-import cors from "cors";
 import compression from "compression";
 import { Socket } from "socket.io";
 
@@ -14,7 +13,6 @@ import reviewRouter from "./api/review";
 import getInTouchRouter from "./api/getInTouch";
 import messageRouter from "./api/message";
 import { addUser, removeUser, findConnectedUser } from "./utils/roomActions";
-// import { BASE_URL } from "./utils/baseUrl";
 
 const app = express();
 
@@ -37,13 +35,6 @@ connectDb();
 nextApp.prepare().then(() => {
   app.use(express.urlencoded({ extended: false }));
   app.use(express.json());
-
-  app.use(
-    cors({
-      origin: "https://salvadorloiz.onrender.com",
-      optionsSuccessStatus: 200,
-    })
-  );
 
   app.use(compression());
 
