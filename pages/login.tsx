@@ -54,7 +54,7 @@ const Login = () => {
 
       setError({ isShow: false, message: "" });
 
-      Cookie.set("token", data, { expires: 7 });
+      Cookie.set("token", data, { expires: 7, secure: true });
 
       router.push(redirect);
       router.events.on("routeChangeComplete", () => {

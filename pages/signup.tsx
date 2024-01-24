@@ -129,7 +129,7 @@ const SignUp = () => {
 
       const { data } = await axios.post("/api/v1/auth/signup ", values);
 
-      Cookie.set("token", data, { expires: 7 });
+      Cookie.set("token", data, { expires: 7, secure: true });
 
       router.push(redirect);
       router.events.on("routeChangeComplete", () => {
