@@ -1,5 +1,6 @@
 import express from "express";
 import http from "http";
+import cors from "cors";
 import next from "next";
 import dotenv from "dotenv";
 import compression from "compression";
@@ -18,7 +19,12 @@ const app = express();
 
 const server = http.createServer(app);
 
-const io = require("socket.io")(server);
+const io = require("socket.io")(server, {
+  cors: {
+    origin: "https://salvadorloizjr.com",
+    methods: ["GET", "POST"],
+  },
+});
 
 const dev = process.env.NODE_ENV !== "production";
 
@@ -33,6 +39,19 @@ const PORT = process.env.PORT || 3000;
 connectDb();
 
 nextApp.prepare().then(() => {
+  const whitelist = ["https://salvadorloizjr.com"];
+  const corsOptionsDelegate = (req: any, callback: any) => {
+    let corsOptions;
+    if (whitelist.indexOf(req.header("Origin")) !== -1) {
+      corsOptions = { origin: true };
+    } else {
+      corsOptions = { origin: false };
+    }
+    callback(null, corsOptions);
+  };
+
+  app.use(cors(corsOptionsDelegate));
+
   app.use(express.urlencoded({ extended: false }));
   app.use(express.json());
 
