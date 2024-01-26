@@ -26,7 +26,7 @@ const HeadTags = () => {
       />
       <meta name="author" content="Salvador Loiz" />
       <meta name="robots" content="index, follow" />
-      <link rel="canonical" href="https://salvadorloizjr.onrender.com/" />
+      <link rel="canonical" href="https://salvadorloizjr.com/" />
       <link rel="icon" href="/favicon.ico" />
     </Head>
   );

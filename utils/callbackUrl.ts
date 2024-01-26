@@ -5,6 +5,6 @@ export enum Platform {
 
 export const getCallbackUrl = (platform: Platform) => {
   return process.env.NODE_ENV === "production"
-    ? `https://salvadorloizjr.onrender.com/auth/${platform}/callback`
+    ? `https://salvadorloizjr.com/auth/${platform}/callback`
     : `http://localhost:3000/auth/${platform}/callback`;
 };
