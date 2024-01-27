@@ -21,7 +21,10 @@ const server = http.createServer(app);
 
 const io = require("socket.io")(server, {
   cors: {
-    origin: "https://salvadorloizjr.com",
+    origin: [
+      "https://salvadorloizjr.com",
+      "https://salvadorloizjr.onrender.com",
+    ],
     methods: ["GET", "POST"],
   },
 });
@@ -39,7 +42,10 @@ const PORT = process.env.PORT || 3000;
 connectDb();
 
 nextApp.prepare().then(() => {
-  const whitelist = ["https://salvadorloizjr.com"];
+  const whitelist = [
+    "https://salvadorloizjr.com",
+    "https://salvadorloizjr.onrender.com",
+  ];
   const corsOptionsDelegate = (req: any, callback: any) => {
     let corsOptions;
     if (whitelist.indexOf(req.header("Origin")) !== -1) {
