@@ -70,14 +70,14 @@ MyApp.getInitialProps = async ({ ctx }: AppContext) => {
 
   let user;
 
-  if (ctx.pathname === "/") {
+  if (ctx.pathname === "/" || !ctx.pathname.includes("/v2")) {
     if (ctx?.req) {
       ctx.res?.writeHead(302, {
         Location: "/v2",
       });
       ctx.res?.end();
     } else {
-      Router.push("/");
+      Router.push("/v2");
     }
   }
 
