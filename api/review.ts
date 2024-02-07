@@ -11,7 +11,7 @@ const router = express.Router();
 
 router.get("/", async (req, res) => {
   try {
-    const pageSize = 5;
+    const pageSize = 6;
     const page = Number(req.query.pageNumber) || 1;
 
     const reviews = await Review.find({ isApproved: true })
@@ -60,12 +60,14 @@ router.get("/:id", authMiddleware, async (req, res) => {
 });
 
 router.post("/", authMiddleware, async (req: CustomRequest, res) => {
-  const { text } = req.body;
+  const { text, title, rating } = req.body;
 
   try {
     const review = await new Review({
       profile: req.userId,
       text,
+      title,
+      rating,
     }).save();
 
     res.status(201).json(review);

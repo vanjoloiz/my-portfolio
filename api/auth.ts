@@ -178,7 +178,7 @@ router.post("/forgot-password", async (req, res) => {
 
       await user.save();
 
-      const passwordResetLink = `${BASE_URL}/forgot-password/${token}`;
+      const passwordResetLink = `${BASE_URL}/v2/forgot-password/${token}`;
 
       await sendForgotPasswordEmail(
         token,

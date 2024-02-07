@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { SWRConfig } from "swr";
 import Router from "next/router";
 import { parseCookies } from "nookies";
@@ -10,7 +11,8 @@ import { CacheProvider, EmotionCache } from "@emotion/react";
 import { createTheme } from "@mui/material/styles";
 import createEmotionCache from "@/lib/createEmotionCache";
 import { BASE_URL } from "@utils/baseUrl";
-import Layout from "@/components/v2/Layout";
+import Layout from "@/components/Layout";
+import { useThemeStore } from "../lib/useThemeStore";
 import HeadTags from "@/components/HeadTags";
 import "../styles/main.css";
 
@@ -28,17 +30,17 @@ interface MyAppProps extends AppProps {
 export default function MyApp(props: MyAppProps) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
 
+  const isDarkMode = useThemeStore((state: any) => state.isDarkMode);
+
+  const [mode, setMode] = useState<"light" | "dark">("light");
+
+  useEffect(() => {
+    setMode(isDarkMode ? "dark" : "light");
+  }, [isDarkMode]);
+
   const muiTheme = createTheme({
     palette: {
-      primary: {
-        main: "#FFFFFF",
-      },
-      mode: "dark",
-    },
-    typography: {
-      button: {
-        textTransform: "none",
-      },
+      mode,
     },
   });
 
@@ -61,53 +63,41 @@ MyApp.getInitialProps = async ({ ctx }: AppContext) => {
   const { token } = parseCookies(ctx);
 
   const protectedRoutes =
-    ctx.pathname === "/v2/create-review" ||
-    ctx.pathname === "/v2/admin/reviews" ||
-    ctx.pathname === "/v2//edit-review/[id]" ||
-    ctx.pathname === "/v2/welcome";
+    ctx.pathname === "/create-review" ||
+    ctx.pathname === "/admin/reviews" ||
+    ctx.pathname === "/edit-review/[id]";
 
-  const adminProtectedRoutes = ctx.pathname === "/v2/admin/reviews";
+  const adminProtectedRoutes = ctx.pathname === "/admin/reviews";
 
   let user;
-
-  if (ctx.pathname === "/") {
-    if (ctx?.req) {
-      ctx.res?.writeHead(302, {
-        Location: "/v2",
-      });
-      ctx.res?.end();
-    } else {
-      Router.push("/");
-    }
-  }
 
   if (!token) {
     if (protectedRoutes) {
       if (ctx?.req) {
-        if (ctx.pathname === "/v2/create-review") {
+        if (ctx.pathname === "/create-review") {
           ctx.res?.writeHead(302, {
-            Location: "/v2/login?redirect=create-review",
+            Location: "/login?redirect=create-review",
           });
           ctx.res?.end();
         } else {
-          ctx.res?.writeHead(302, { Location: "/v2/login" });
+          ctx.res?.writeHead(302, { Location: "/login" });
           ctx.res?.end();
         }
       } else {
         if (ctx.pathname === "/create-review") {
-          Router.push("/v2/login?redirect=create-review");
+          Router.push("/login?redirect=create-review");
         } else {
-          Router.push("/v2/login");
+          Router.push("/login");
         }
       }
     }
   } else {
-    if (ctx.pathname === "/v2/login" || ctx.pathname === "/v2/sign-up") {
-      if (ctx?.req) {
-        ctx.res?.writeHead(302, { location: "/v2" });
+    if (!protectedRoutes && ctx.pathname !== "/") {
+      if (ctx.req) {
+        ctx.res?.writeHead(302, { location: "/" });
         ctx.res?.end();
       } else {
-        Router.push("/v2");
+        Router.push("/");
       }
     }
 
@@ -120,10 +110,10 @@ MyApp.getInitialProps = async ({ ctx }: AppContext) => {
     if (adminProtectedRoutes) {
       if (!data.isAdmin) {
         if (ctx?.req) {
-          ctx.res?.writeHead(302, { Location: "/v2" });
+          ctx.res?.writeHead(302, { Location: "/" });
           ctx.res?.end();
         } else {
-          Router.push("/v2");
+          Router.push("/");
         }
       }
     }

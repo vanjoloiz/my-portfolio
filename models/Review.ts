@@ -2,8 +2,10 @@ import mongoose, { Schema, Types } from "mongoose";
 
 interface Review {
   profile: Types.ObjectId;
+  title: string;
   text: string;
   isApproved?: boolean;
+  rating: number;
 }
 
 const ReviewSchema = new mongoose.Schema<Review>(
@@ -13,8 +15,19 @@ const ReviewSchema = new mongoose.Schema<Review>(
       ref: "Profile",
     },
 
+    title: {
+      type: String,
+      required: true,
+      max: 15,
+    },
+
     text: {
       type: String,
+      required: true,
+    },
+
+    rating: {
+      type: Number,
       required: true,
     },
 

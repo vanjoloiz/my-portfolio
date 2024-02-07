@@ -7,6 +7,8 @@ interface Profile {
   password: string;
   confirmPassword?: string;
   email: string;
+  company: string;
+  jobTitle: string;
   phoneNumber?: string;
   profileUrl?: string;
   profilePicUrl?: string;
@@ -46,6 +48,14 @@ const ProfileSchema = new mongoose.Schema<Profile>(
 
     email: {
       required: true,
+      type: String,
+    },
+
+    company: {
+      type: String,
+    },
+
+    jobTitle: {
       type: String,
     },
 
