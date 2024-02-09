@@ -37,7 +37,7 @@ const NavBar: FC<NavBarProps> = ({ user }) => {
               variant="h6"
               component="div"
               sx={{ flexGrow: 1 }}
-              onClick={() => router.push("/", undefined, { shallow: true })}
+              onClick={() => router.push("/v2", undefined, { shallow: true })}
             >
               <span style={{ cursor: "pointer" }}>Salvador Loiz</span>
             </Typography>
