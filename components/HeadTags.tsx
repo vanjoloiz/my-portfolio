@@ -8,7 +8,7 @@ const HeadTags = () => {
       <meta name="viewport" content="initial-scale=1, width=device-width" />
       <meta
         name="description"
-        content="Portfolio website of Salvador Loiz showcasing skills and projects."
+        content="Welcome to SEE, the portfolio website of Salvador Loiz. Here, Salvador showcases his diverse skills and a collection of impressive projects. Explore the fusion of creativity and expertise in design and development as you browse through Salvador's work. Welcome to the world of Salvador Loiz's skills and projects!"
       />
       <meta
         name="keywords"
@@ -17,7 +17,7 @@ const HeadTags = () => {
       <meta property="og:title" content="Salvador Loiz" />
       <meta
         property="og:description"
-        content="Portfolio website of Salvador Loiz showcasing skills and projects."
+        content="Welcome to SEE, the portfolio website of Salvador Loiz. Here, Salvador showcases his diverse skills and a collection of impressive projects. Explore the fusion of creativity and expertise in design and development as you browse through Salvador's work. Welcome to the world of Salvador Loiz's skills and projects!"
       />
       <meta property="og:type" content="website" />
       <meta
