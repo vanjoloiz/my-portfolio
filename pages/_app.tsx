@@ -11,7 +11,7 @@ import { createTheme } from "@mui/material/styles";
 import createEmotionCache from "@/lib/createEmotionCache";
 import { BASE_URL } from "@utils/baseUrl";
 import Layout from "@/components/v2/Layout";
-import HeadTags from "@/components/HeadTags";
+import HeadTags from "@/components/v2/HeadTags";
 import "../styles/main.css";
 
 const clientSideEmotionCache = createEmotionCache();

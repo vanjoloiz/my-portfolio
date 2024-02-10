@@ -8,7 +8,7 @@ import Brightness4Icon from "@mui/icons-material/Brightness4";
 import IconButton from "@mui/material/IconButton";
 import BrightnessHighIcon from "@mui/icons-material/BrightnessHigh";
 import useScrollTrigger from "@mui/material/useScrollTrigger";
-import { useThemeStore } from "../lib/useThemeStore";
+import { useThemeStore } from "../../lib/useThemeStore";
 
 interface NavBarProps {
   isLoggedIn: boolean;

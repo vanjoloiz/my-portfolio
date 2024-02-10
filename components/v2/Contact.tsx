@@ -13,7 +13,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import { getInTouchFormValidationSchema } from "@utils/formValidationSchema";
-import ToastMessage from "../../components/ToastMessage";
+import ToastMessage from "./ToastMessage";
 import MetaTags from "./MetaTags";
 
 interface FormValues {

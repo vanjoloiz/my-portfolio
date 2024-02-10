@@ -1,11 +1,11 @@
 import { FC } from "react";
 import axios from "axios";
-import Landing from "@/components/Landing";
-import Skills from "@/components/Skills";
-import Projects from "@/components/Projects";
-import Reviews from "@/components/Reviews";
+import Landing from "@/components/v1/Landing";
+import Skills from "@/components/v1/Skills";
+import Projects from "@/components/v1/Projects";
+import Reviews from "@/components/v1/Reviews";
 import Container from "@mui/material/Container";
-import Contact from "@/components/Contact";
+import Contact from "@/components/v1/Contact";
 import { Review } from "@interfaces/Review";
 import { User } from "@interfaces/User";
 

@@ -11,9 +11,9 @@ import { CacheProvider, EmotionCache } from "@emotion/react";
 import { createTheme } from "@mui/material/styles";
 import createEmotionCache from "@/lib/createEmotionCache";
 import { BASE_URL } from "@utils/baseUrl";
-import Layout from "@/components/Layout";
+import Layout from "@/components/v1/Layout";
 import { useThemeStore } from "../lib/useThemeStore";
-import HeadTags from "@/components/HeadTags";
+import HeadTags from "@/components/v1/HeadTags";
 import "../styles/main.css";
 
 const clientSideEmotionCache = createEmotionCache();

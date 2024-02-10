@@ -5,7 +5,7 @@ import Router from "next/router";
 import NProgress from "nprogress";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
-import FloatingChat from "@/components/FloatingChat";
+import FloatingChat from "@/components/v1/FloatingChat";
 import { io } from "socket.io-client";
 import { BASE_URL } from "@utils/baseUrl";
 import { ADMIN_ID } from "@utils/constants";

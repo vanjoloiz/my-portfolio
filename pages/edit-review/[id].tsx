@@ -17,7 +17,7 @@ import Button from "@mui/material/Button";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
 import { createReviewValidationSchema } from "@utils/formValidationSchema";
-import ToastMessage from "@/components/ToastMessage";
+import ToastMessage from "@/components/v1/ToastMessage";
 
 const EditReview = () => {
   const router = useRouter();
