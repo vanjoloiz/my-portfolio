@@ -13,7 +13,7 @@ import GithubLogo from "@/assets/svg/github.svg";
 import Link from "@mui/material/Link";
 import Hidden from "@mui/material/Hidden";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import srcImage from "../public/dev-image.jpeg";
+import srcImage from "../../public/dev-image.jpeg";
 
 const Landing: FC = () => {
   const theme = useTheme();

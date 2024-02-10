@@ -12,7 +12,7 @@ import Image from "next/image";
 import Hidden from "@mui/material/Hidden";
 import Fade from "@mui/material/Fade";
 import useAnimate from "@/lib/useAnimate";
-import srcImage from "../public/dev3-image.jpeg";
+import srcImage from "../../public/dev3-image.jpeg";
 
 const Projects = () => {
   const animRef = React.useRef(null);

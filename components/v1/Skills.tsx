@@ -10,7 +10,8 @@ import Typography from "@mui/material/Typography";
 import Image from "next/image";
 import Tooltip from "@mui/material/Tooltip";
 import useAnimate from "@/lib/useAnimate";
-import srcImage from "../public/dev2-image.jpeg";
+// import srcImage from "../public/dev2-image.jpeg";
+import srcImage from "../../public/dev2-image.jpeg";
 import { Container } from "@mui/material";
 import { skills } from "@utils/skillsLogo";
 
