@@ -6,7 +6,7 @@ import createEmotionCache from "@/lib/createEmotionCache";
 export default class MyDocument extends Document {
   render() {
     return (
-      <Html lang="en" style={{ overflowX: "hidden" }}>
+      <Html lang="en">
         <Head>
           {/* PWA primary color */}
           <link

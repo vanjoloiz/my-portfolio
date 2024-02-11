@@ -33,13 +33,13 @@ const NavBar: FC<NavBarProps> = ({ user }) => {
           }}
         >
           <Toolbar>
-            <Typography
-              variant="h6"
-              component="div"
-              sx={{ flexGrow: 1 }}
-              onClick={() => router.push("/v2", undefined, { shallow: true })}
-            >
-              <span style={{ cursor: "pointer" }}>Salvador Loiz</span>
+            <Typography variant="h6" sx={{ flexGrow: 1 }}>
+              <span
+                onClick={() => router.push("/v2", undefined, { shallow: true })}
+                style={{ cursor: "pointer" }}
+              >
+                Salvador Loiz
+              </span>
             </Typography>
 
             <Box sx={{ display: { lg: "none" } }}>
