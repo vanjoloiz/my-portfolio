@@ -132,7 +132,7 @@ const NavDrawer = ({ user, isOpen, onClose }: any) => {
 
   return (
     <Drawer anchor="left" open={isOpen} onClose={onClose}>
-      <List
+      <Box
         sx={{
           width: "8rem",
           minWidth: "250px",
@@ -144,54 +144,66 @@ const NavDrawer = ({ user, isOpen, onClose }: any) => {
           px: 7,
         }}
       >
-        {items.map((item) => (
-          <ListItem disablePadding key={item.label} onClick={onClose}>
-            <ListItemButton
-              onClick={item.onClick && item.onClick}
-              disableRipple
-              disableGutters
-              sx={{
-                width: "10vw",
-                "&:hover": {
-                  bgcolor: "transparent",
-                },
-              }}
-            >
-              <ListItemText
-                primary={
-                  <Link href={item.pathName}>
-                    <Typography
-                      component="a"
-                      fontSize="18px"
-                      sx={{
-                        color:
-                          router.pathname === `${item.pathName}`
-                            ? "#FFFFFF"
-                            : "#BBBBBB",
-                        "&:hover": {
-                          letterSpacing: "3px",
-                          transition: ".3s ease-in-out",
-                        },
-                      }}
-                    >
-                      <Box
+        <List>
+          <Typography variant="h4" fontWeight="bold" mb={2} letterSpacing={7}>
+            Vanjo
+          </Typography>
+          {items.map((item) => (
+            <ListItem disablePadding key={item.label} onClick={onClose}>
+              <ListItemButton
+                onClick={item.onClick && item.onClick}
+                disableRipple
+                disableGutters
+                sx={{
+                  width: "8vh",
+                  "&:hover": {
+                    bgcolor: "transparent",
+                  },
+                }}
+              >
+                <ListItemText
+                  primary={
+                    <Link href={item.pathName}>
+                      <Typography
+                        component="a"
+                        fontSize="18px"
                         sx={{
-                          display: "flex",
-                          justifyContent: "flex-start",
-                          gap: "20px",
+                          color:
+                            router.pathname === `${item.pathName}`
+                              ? "#FFFFFF"
+                              : "#BBBBBB",
+                          "&:hover": {
+                            letterSpacing: "2px",
+                            transition: ".3s ease-in-out",
+                          },
                         }}
                       >
-                        {item.icon}
-                        {item.label}
-                      </Box>
-                    </Typography>
-                  </Link>
-                }
-              />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
+                        <Box
+                          sx={{
+                            display: "flex",
+                            justifyContent: "flex-start",
+                            gap: "20px",
+                          }}
+                        >
+                          {item.icon}
+                          {item.label}
+                        </Box>
+                      </Typography>
+                    </Link>
+                  }
+                />
+              </ListItemButton>
+            </ListItem>
+          ))}
+        </List>
+        <Typography variant="subtitle2" mt={5}>
+          © 2024 Salvador Loiz
+        </Typography>
+
+        <Typography variant="subtitle1" fontSize="12px">
+          Built using Next.js
+        </Typography>
+      </Box>
     </Drawer>
   );
 };
