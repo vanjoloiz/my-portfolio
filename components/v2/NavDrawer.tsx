@@ -197,7 +197,7 @@ const NavDrawer = ({ user, isOpen, onClose }: any) => {
           ))}
         </List>
         <Typography variant="subtitle2" mt={5}>
-          © 2024 Salvador Loiz
+          © {new Date().getFullYear()} Salvador Loiz
         </Typography>
 
         <Typography variant="subtitle1" fontSize="12px">
