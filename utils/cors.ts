@@ -1,6 +1,6 @@
 import { BASE_URL } from "./baseUrl";
 
-const whitelist = [BASE_URL, `https://salvadorloizjr.onrender.com`];
+const whitelist = [BASE_URL, "https://salvadorloizjr.onrender.com"];
 
 export const corsOptionsDelegate = (req: any, callback: any) => {
   let corsOptions;
