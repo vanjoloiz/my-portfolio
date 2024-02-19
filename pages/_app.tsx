@@ -77,7 +77,7 @@ MyApp.getInitialProps = async ({ ctx }: AppContext) => {
       });
       ctx.res?.end();
     } else {
-      Router.push("/v2");
+      Router.push("/v2", undefined, { shallow: true });
     }
   }
 
