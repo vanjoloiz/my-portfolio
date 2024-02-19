@@ -29,7 +29,7 @@ const NavBar: FC<NavBarProps> = ({ user }) => {
 
   const [viewingUserCount, setViewingUserCount] = useState(1);
 
-  const [isLoading, setIsLoading] = useState(false);
+  // const [isLoading, setIsLoading] = useState(false);
 
   const [isOpenNavDrawer, setIsOpenNavDrawer] = useState(false);
 
@@ -39,15 +39,15 @@ const NavBar: FC<NavBarProps> = ({ user }) => {
     }
 
     socket.emit("join", Cookie.get("userId"));
-  }, []);
+  });
 
   useEffect(() => {
     const fetchInitialCount = async () => {
-      setIsLoading(true);
+      // setIsLoading(true);
 
       const { data } = await axios.get("/api/v1/count");
       setViewingUserCount(data.length);
-      setIsLoading(false);
+      // setIsLoading(false);
     };
 
     fetchInitialCount();
@@ -96,24 +96,22 @@ const NavBar: FC<NavBarProps> = ({ user }) => {
               </IconButton>
             </Box>
 
-            {!isLoading && (
-              <Typography
-                component="span"
-                fontWeight="bold"
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  fontSize: "12px",
-                }}
-              >
-                <AccessTimeIcon sx={{ fontSize: "12px", mr: 0.5 }} />
-                {viewingUserCount}
-                <span style={{ marginLeft: "2px" }}>
-                  {viewingUserCount > 1 ? "Viewers" : "Viewer"}
-                </span>
-              </Typography>
-            )}
+            <Typography
+              component="span"
+              fontWeight="bold"
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                fontSize: "12px",
+              }}
+            >
+              <AccessTimeIcon sx={{ fontSize: "12px", mr: 0.5 }} />
+              {viewingUserCount}
+              <span style={{ marginLeft: "2px" }}>
+                {viewingUserCount > 1 ? "Viewers" : "Viewer"}
+              </span>
+            </Typography>
           </Toolbar>
         </AppBar>
       </HideOnScroll>
