@@ -47,16 +47,16 @@ nextApp.prepare().then(async () => {
 
   io.on("connection", (socket: Socket) => {
     socket.on("join", async (userId) => {
-      const users = await addUser(userId, socket.id);
-
       await axios.post(`${BASE_URL}/api/v1/count/${userId}`);
+
+      const users = await addUser(userId, socket.id);
 
       io.emit("updateViewsCount", users.length);
 
       socket.on("disconnect", async () => {
-        await removeUser(socket.id);
-
         await axios.delete(`${BASE_URL}/api/v1/count/${userId}`);
+
+        await removeUser(socket.id);
 
         io.emit("updateViewsCount", users.length);
       });
