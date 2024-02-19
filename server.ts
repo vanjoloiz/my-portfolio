@@ -13,21 +13,17 @@ import authRouter from "./api/auth";
 import reviewRouter from "./api/review";
 import getInTouchRouter from "./api/getInTouch";
 import messageRouter from "./api/message";
-import { addUser, removeUser, findConnectedUser } from "./utils/roomActions";
+import countRouter from "./api/count";
+import { corsOptionsDelegate, socketIOCors } from "./utils/cors";
+import { addUser, removeUser } from "./utils/roomActions";
+import axios from "axios";
+import { BASE_URL } from "./utils/baseUrl";
 
 const app = express();
 
 const server = http.createServer(app);
 
-const io = require("socket.io")(server, {
-  cors: {
-    origin: [
-      "https://salvadorloizjr.com",
-      "https://salvadorloizjr.onrender.com",
-    ],
-    methods: ["GET", "POST"],
-  },
-});
+const io = require("socket.io")(server, socketIOCors);
 
 const dev = process.env.NODE_ENV !== "production";
 
@@ -41,21 +37,7 @@ const PORT = process.env.PORT || 3000;
 
 connectDb();
 
-nextApp.prepare().then(() => {
-  const whitelist = [
-    "https://salvadorloizjr.com",
-    "https://salvadorloizjr.onrender.com",
-  ];
-  const corsOptionsDelegate = (req: any, callback: any) => {
-    let corsOptions;
-    if (whitelist.indexOf(req.header("Origin")) !== -1) {
-      corsOptions = { origin: true };
-    } else {
-      corsOptions = { origin: false };
-    }
-    callback(null, corsOptions);
-  };
-
+nextApp.prepare().then(async () => {
   app.use(cors(corsOptionsDelegate));
 
   app.use(express.urlencoded({ extended: false }));
@@ -63,36 +45,31 @@ nextApp.prepare().then(() => {
 
   app.use(compression());
 
+  io.on("connection", (socket: Socket) => {
+    socket.on("join", async (userId) => {
+      const users = await addUser(userId, socket.id);
+
+      await axios.post(`${BASE_URL}/api/v1/count/${userId}`);
+
+      io.emit("updateViewsCount", users.length);
+
+      socket.on("disconnect", async () => {
+        await axios.delete(`${BASE_URL}/api/v1/count/${userId}`);
+
+        removeUser(socket.id);
+
+        io.emit("updateViewsCount", users.length);
+      });
+    });
+  });
+
   app.use("/", linkedInAuth);
   app.use("/", githubAuth);
   app.use("/api/v1/auth", authRouter);
   app.use("/api/v1/review", reviewRouter);
   app.use("/api/v1/getInTouch", getInTouchRouter);
   app.use("/api/v1/message", messageRouter);
-
-  io.on("connection", (socket: Socket) => {
-    socket.on("join", async ({ userId }: any) => {
-      const users = await addUser(userId, socket.id);
-
-      setInterval(() => {
-        socket.emit("connectedUsers", {
-          users: users.filter((user: any) => user.userId !== userId),
-        });
-      }, 10000);
-
-      socket.on("disconnect", () => {
-        removeUser(socket.id);
-      });
-    });
-
-    socket.on("sendMessageToServer", ({ message }: any) => {
-      const receiverSocket = findConnectedUser(message.userIdToSend);
-
-      io.to(receiverSocket.socketId).emit("receivedMessageFromServer", {
-        message,
-      });
-    });
-  });
+  app.use("/api/v1/count", countRouter);
 
   app.get("/health", (req, res) => {
     res.status(200).send("Ok");

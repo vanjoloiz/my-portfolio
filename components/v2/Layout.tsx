@@ -1,4 +1,4 @@
-import { FC, ReactNode, useState } from "react";
+import { FC, ReactNode } from "react";
 import Router from "next/router";
 import NProgress from "nprogress";
 import NavBar from "./NavBar";
@@ -18,9 +18,6 @@ interface LayoutProps {
 }
 
 const Layout: FC<LayoutProps> = ({ children, user }) => {
-  // eslint-disable-next-line
-  const [connectedUsers, setConnectedUsers] = useState([]);
-
   const isLoggedIn = user !== undefined;
 
   Router.events.on("routeChangeStart", () => {
