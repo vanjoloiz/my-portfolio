@@ -33,10 +33,10 @@ const NavBar: FC<NavBarProps> = ({ user }) => {
 
   const [isOpenNavDrawer, setIsOpenNavDrawer] = useState(false);
 
-  useEffect(() => {
-    const userId =
-      Cookie.get("userId") === undefined ? uuidv4() : Cookie.get("userId");
+  const userId =
+    Cookie.get("userId") === undefined ? uuidv4() : Cookie.get("userId");
 
+  useEffect(() => {
     socket.emit("join", userId);
   }, []);
 
