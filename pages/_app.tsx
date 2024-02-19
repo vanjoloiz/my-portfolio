@@ -94,10 +94,11 @@ MyApp.getInitialProps = async ({ ctx }: AppContext) => {
           ctx.res?.end();
         }
       } else {
-        if (ctx.pathname === "/create-review") {
+        if (ctx.pathname === "/v2/create-review") {
           Router.push("/v2/login?redirect=create-review");
         } else {
-          Router.push("/v2/login");
+          ctx.res?.writeHead(302, { Location: "/v2/login" });
+          ctx.res?.end();
         }
       }
     }
