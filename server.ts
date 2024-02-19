@@ -54,9 +54,9 @@ nextApp.prepare().then(async () => {
       io.emit("updateViewsCount", users.length);
 
       socket.on("disconnect", async () => {
-        await axios.delete(`${BASE_URL}/api/v1/count/${userId}`);
+        await removeUser(socket.id);
 
-        removeUser(socket.id);
+        await axios.delete(`${BASE_URL}/api/v1/count/${userId}`);
 
         io.emit("updateViewsCount", users.length);
       });
