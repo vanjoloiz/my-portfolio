@@ -15,7 +15,7 @@ import getInTouchRouter from "./api/getInTouch";
 import messageRouter from "./api/message";
 import countRouter from "./api/count";
 import { corsOptionsDelegate, socketIOCors } from "./utils/cors";
-import { addUser, removeUser } from "./utils/roomActions";
+// import { addUser, removeUser } from "./utils/roomActions";
 import axios from "axios";
 import { BASE_URL } from "./utils/baseUrl";
 
@@ -47,18 +47,20 @@ nextApp.prepare().then(async () => {
 
   io.on("connection", (socket: Socket) => {
     socket.on("join", async (userId) => {
-      await axios.post(`${BASE_URL}/api/v1/count/${userId}`);
+      const { data } = await axios.post(`${BASE_URL}/api/v1/count/${userId}`);
 
-      const users = await addUser(userId, socket.id);
+      // const users = await addUser(userId, socket.id);
 
-      io.emit("updateViewsCount", users.length);
+      io.emit("updateViewsCount", data);
 
       socket.on("disconnect", async () => {
-        await axios.delete(`${BASE_URL}/api/v1/count/${userId}`);
+        const { data } = await axios.delete(
+          `${BASE_URL}/api/v1/count/${userId}`
+        );
 
-        await removeUser(socket.id);
+        // await removeUser(socket.id);
 
-        io.emit("updateViewsCount", users.length);
+        io.emit("updateViewsCount", data);
       });
     });
   });

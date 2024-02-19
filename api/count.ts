@@ -11,9 +11,11 @@ router.get("/", async (req, res) => {
 
 router.post("/:userId", async (req, res) => {
   try {
-    const count = await new Count({
+    await new Count({
       userId: req.params.userId,
     }).save();
+
+    const count = await Count.countDocuments();
 
     res.status(200).json(count);
   } catch (err: any) {
@@ -24,7 +26,9 @@ router.post("/:userId", async (req, res) => {
 });
 
 router.delete("/:userId", async (req, res) => {
-  const count = await Count.findOneAndDelete({ userId: req.params.userId });
+  await Count.findOneAndDelete({ userId: req.params.userId });
+
+  const count = await Count.countDocuments();
 
   res.status(200).json(count);
 });
