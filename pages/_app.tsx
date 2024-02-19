@@ -77,10 +77,7 @@ MyApp.getInitialProps = async ({ ctx }: AppContext) => {
       });
       ctx.res?.end();
     } else {
-      ctx.res?.writeHead(302, {
-        Location: "/v2",
-      });
-      ctx.res?.end();
+      Router.push("/v2");
     }
   }
 
@@ -103,8 +100,7 @@ MyApp.getInitialProps = async ({ ctx }: AppContext) => {
           });
           ctx.res?.end();
         } else {
-          ctx.res?.writeHead(302, { Location: "/v2/login" });
-          ctx.res?.end();
+          Router.push("/v2/login");
         }
       }
     }

@@ -38,9 +38,7 @@ const NavBar: FC<NavBarProps> = ({ user }) => {
       Cookie.set("userId", uuidv4());
     }
 
-    const userId = Cookie.get("userId");
-
-    socket.emit("join", userId);
+    socket.emit("join", Cookie.get("userId"));
   }, []);
 
   useEffect(() => {
