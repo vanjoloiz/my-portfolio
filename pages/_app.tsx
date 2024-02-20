@@ -70,6 +70,17 @@ MyApp.getInitialProps = async ({ ctx }: AppContext) => {
 
   let user;
 
+  if (!ctx.pathname.includes("/v2")) {
+    if (ctx?.req) {
+      ctx.res?.writeHead(302, {
+        Location: `${BASE_URL}/v2`,
+      });
+      ctx.res?.end();
+    } else {
+      Router.push(`${BASE_URL}/v2`);
+    }
+  }
+
   if (!token) {
     if (protectedRoutes) {
       if (ctx?.req) {
