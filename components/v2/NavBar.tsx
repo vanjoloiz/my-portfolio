@@ -29,8 +29,6 @@ const NavBar: FC<NavBarProps> = ({ user }) => {
 
   const [viewingUserCount, setViewingUserCount] = useState(1);
 
-  // const [isLoading, setIsLoading] = useState(false);
-
   const [isOpenNavDrawer, setIsOpenNavDrawer] = useState(false);
 
   useEffect(() => {
@@ -43,11 +41,8 @@ const NavBar: FC<NavBarProps> = ({ user }) => {
 
   useEffect(() => {
     const fetchInitialCount = async () => {
-      // setIsLoading(true);
-
       const { data } = await axios.get("/api/v1/count");
       setViewingUserCount(data.length);
-      // setIsLoading(false);
     };
 
     fetchInitialCount();
