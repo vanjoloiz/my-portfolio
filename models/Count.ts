@@ -6,6 +6,11 @@ const CountSchema = new mongoose.Schema({
     unique: true,
     required: true,
   },
+
+  ipAddress: {
+    type: String,
+    required: true,
+  },
 });
 
 const CountModel = mongoose.model("Count", CountSchema);

@@ -37,7 +37,7 @@ const NavBar: FC<NavBarProps> = ({ user }) => {
     }
 
     socket.emit("join", Cookie.get("userId"));
-  });
+  }, []);
 
   useEffect(() => {
     const fetchInitialCount = async () => {

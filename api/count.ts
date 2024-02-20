@@ -9,10 +9,11 @@ router.get("/", async (req, res) => {
   res.status(200).json(count);
 });
 
-router.post("/:userId", async (req, res) => {
+router.post("/:userId/:ipAddress", async (req, res) => {
   try {
     await new Count({
       userId: req.params.userId,
+      ipAddress: req.params.ipAddress,
     }).save();
 
     const count = await Count.countDocuments();

@@ -1,10 +1,14 @@
 import express from "express";
+import axios from "axios";
 import http from "http";
 import cors from "cors";
 import next from "next";
 import dotenv from "dotenv";
 import compression from "compression";
 import { Socket } from "socket.io";
+
+// @ts-ignore
+import ipInfo from "ipinfo";
 
 import connectDb from "./config/db";
 import linkedInAuth from "./api/linkedInAuth";
@@ -15,7 +19,6 @@ import getInTouchRouter from "./api/getInTouch";
 import messageRouter from "./api/message";
 import countRouter from "./api/count";
 import { corsOptionsDelegate, socketIOCors } from "./utils/cors";
-import axios from "axios";
 import { BASE_URL } from "./utils/baseUrl";
 
 const app = express();
@@ -46,7 +49,11 @@ nextApp.prepare().then(async () => {
 
   io.on("connection", (socket: Socket) => {
     socket.on("join", async (userId) => {
-      const { data } = await axios.post(`${BASE_URL}/api/v1/count/${userId}`);
+      const info = await ipInfo();
+
+      const { data } = await axios.post(
+        `${BASE_URL}/api/v1/count/${userId}/${info.ip}`
+      );
 
       io.emit("updateViewsCount", data);
 
