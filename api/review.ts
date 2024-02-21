@@ -49,9 +49,19 @@ router.get(
   }
 );
 
-router.get("/:id", authMiddleware, async (req, res) => {
+router.get("/id/:id", authMiddleware, async (req, res) => {
   try {
     const review = await Review.findById(req.params.id);
+    res.status(200).json(review);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Server error");
+  }
+});
+
+router.get("/userId/:userId", authMiddleware, async (req, res) => {
+  try {
+    const review = await Review.find({ profile: req.params.userId });
     res.status(200).json(review);
   } catch (err) {
     console.error(err);

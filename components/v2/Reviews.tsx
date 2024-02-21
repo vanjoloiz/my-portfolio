@@ -1,6 +1,7 @@
 import { useState } from "react";
 import useSWRInfinite from "swr/infinite";
 import Card from "@mui/material/Card";
+import Slide from "@mui/material/Slide";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
@@ -20,6 +21,15 @@ const getKey = (pageIndex: number, previousPageData: any) => {
 
 const Reviews = ({ reviews }: any) => {
   const [isOpenModal, setIsOpenModal] = useState(false);
+  const [reviewModalData, setReviewModalData] = useState({
+    title: "",
+    text: "",
+    date: "",
+    authorFirstName: "",
+    authorLastName: "",
+  });
+
+  const [isShowReadMoreButton, setIsShowReadMoreButton] = useState(-1);
 
   const { data, size, setSize, isLoading } = useSWRInfinite(getKey, {
     revalidateFirstPage: false,
@@ -35,7 +45,25 @@ const Reviews = ({ reviews }: any) => {
 
   const isReachEnd = data![data!.length - 1]?.length < 6;
 
-  const handleReviewMoreClick = () => setIsOpenModal(!isOpenModal);
+  const handleReviewMoreClick = (review: any) => {
+    setIsOpenModal(!isOpenModal);
+
+    setReviewModalData((prev) => ({
+      ...prev,
+      title: review.title,
+      text: review.text,
+      createdAt: review.createdAt,
+      authorFirstName: review.profile.firstName,
+      authorLastName: review.profile.lastName || "",
+    }));
+  };
+
+  const handleModalOnClose = () => setIsOpenModal(false);
+
+  const handleCardOnMouseOver = (index: number) =>
+    setIsShowReadMoreButton(index);
+
+  const handleCardOnMouseLeave = () => setIsShowReadMoreButton(-1);
 
   return (
     <>
@@ -44,9 +72,16 @@ const Reviews = ({ reviews }: any) => {
         Reviews
       </Typography>
       <Grid container spacing={2}>
-        {paginateReviews.map((review: any) => (
+        {paginateReviews.map((review: any, index: number) => (
           <Grid item xs={12} md={6} lg={4} key={review._id}>
-            <Card>
+            <Card
+              sx={{
+                cursor: "pointer",
+              }}
+              onClick={() => handleReviewMoreClick(review)}
+              onMouseEnter={() => handleCardOnMouseOver(index)}
+              onMouseLeave={handleCardOnMouseLeave}
+            >
               <CardContent
                 sx={{
                   maxHeight: 100,
@@ -75,24 +110,26 @@ const Reviews = ({ reviews }: any) => {
                   &quot;{review.text}&quot;
                 </Typography>
               </CardContent>
-              <CardActions sx={{ pt: 2 }}>
-                <Button
-                  onClick={handleReviewMoreClick}
-                  sx={{
-                    "&:hover": {
-                      bgcolor: "transparent",
-                      letterSpacing: "2px",
-                      transition: ".3s ease-in-out",
-                    },
-                  }}
-                  disableRipple
-                  disableElevation
-                  disableFocusRipple
-                  size="small"
-                >
-                  Read More
-                </Button>
-              </CardActions>
+
+              <Slide direction="right" in={isShowReadMoreButton === index}>
+                <CardActions>
+                  <Button
+                    sx={{
+                      pb: 1,
+                      "&:hover": {
+                        bgcolor: "transparent",
+                        zIndex: 0,
+                      },
+                    }}
+                    disableRipple
+                    disableElevation
+                    disableFocusRipple
+                    size="small"
+                  >
+                    Read More
+                  </Button>
+                </CardActions>
+              </Slide>
             </Card>
           </Grid>
         ))}
@@ -114,7 +151,11 @@ const Reviews = ({ reviews }: any) => {
         </Box>
       )}
 
-      <ReviewModal isOpen={isOpenModal} onClose={handleReviewMoreClick} />
+      <ReviewModal
+        review={reviewModalData}
+        isOpen={isOpenModal}
+        onClose={handleModalOnClose}
+      />
     </>
   );
 };

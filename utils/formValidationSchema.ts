@@ -1,5 +1,6 @@
 import * as yup from "yup";
 import "yup-phone-lite";
+import { REVIEW_TEXT_MAXIMUM_LENGTH } from "./constants";
 
 export const loginValidationSchema = yup.object({
   username: yup.string().required("Please enter your username."),
@@ -42,7 +43,12 @@ export const signUpValidationSchema = yup.object({
 });
 
 export const createReviewValidationSchema = yup.object({
-  text: yup.string().required("Please enter your review."),
+  title: yup.string().required("Please enter your review title."),
+  text: yup
+    .string()
+    .required("Please enter your review.")
+    .min(150, "Please make your review have 150 characters.")
+    .max(REVIEW_TEXT_MAXIMUM_LENGTH, "Character limit reached."),
 });
 
 export const getInTouchFormValidationSchema = yup.object({
