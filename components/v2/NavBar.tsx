@@ -22,7 +22,11 @@ interface NavBarProps {
   user: any;
 }
 
-const socket = io(BASE_URL);
+const socket = io(BASE_URL, {
+  reconnection: true,
+  reconnectionAttempts: 3,
+  reconnectionDelay: 1000,
+});
 
 const NavBar: FC<NavBarProps> = ({ user }) => {
   const router = useRouter();
@@ -31,12 +35,16 @@ const NavBar: FC<NavBarProps> = ({ user }) => {
 
   const [isOpenNavDrawer, setIsOpenNavDrawer] = useState(false);
 
-  useEffect(() => {
+  const emitSocketConnection = () => {
     if (Cookie.get("userId") === undefined) {
       Cookie.set("userId", uuidv4());
     }
 
-    socket.emit("join", Cookie.get("userId"));
+    return socket.emit("join", Cookie.get("userId"));
+  };
+
+  useEffect(() => {
+    emitSocketConnection();
   }, []);
 
   useEffect(() => {
@@ -51,6 +59,12 @@ const NavBar: FC<NavBarProps> = ({ user }) => {
   useEffect(() => {
     socket.on("updateViewsCount", (count) => {
       setViewingUserCount(count);
+    });
+  }, []);
+
+  useEffect(() => {
+    socket.io.on("reconnect", () => {
+      emitSocketConnection();
     });
   }, []);
 
