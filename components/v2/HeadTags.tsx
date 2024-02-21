@@ -19,6 +19,7 @@ const HeadTags = () => {
         property="og:description"
         content="Welcome to SEE, the portfolio website of Salvador Loiz. Here, Salvador showcases his diverse skills and a collection of impressive projects. Explore the fusion of creativity and expertise in design and development as you browse through Salvador's work. Welcome to the world of Salvador Loiz's skills and projects!"
       />
+      <meta property="og:site_name" content="Salvador Loiz" />
       <meta property="og:type" content="website" />
       <meta
         property="og:image"
