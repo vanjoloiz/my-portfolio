@@ -105,22 +105,24 @@ const NavBar: FC<NavBarProps> = ({ user }) => {
               </IconButton>
             </Box>
 
-            <Typography
-              component="span"
-              fontWeight="bold"
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                fontSize: "12px",
-              }}
-            >
-              <AccessTimeIcon sx={{ fontSize: "12px", mr: 0.5 }} />
-              {viewingUserCount}
-              <span style={{ marginLeft: "2px" }}>
-                {viewingUserCount > 1 ? "Viewers" : "Viewer"}
-              </span>
-            </Typography>
+            {viewingUserCount !== 0 && (
+              <Typography
+                component="span"
+                fontWeight="bold"
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  fontSize: "12px",
+                }}
+              >
+                <AccessTimeIcon sx={{ fontSize: "12px", mr: 0.5 }} />
+                {viewingUserCount}
+                <span style={{ marginLeft: "2px" }}>
+                  {viewingUserCount > 1 ? "Viewers" : "Viewer"}
+                </span>
+              </Typography>
+            )}
           </Toolbar>
         </AppBar>
       </HideOnScroll>
