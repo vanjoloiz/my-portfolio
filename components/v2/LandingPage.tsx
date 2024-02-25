@@ -31,7 +31,7 @@ const LandingPage = ({ reviews, user }: any) => {
         textAlign: { xs: "center", lg: "unset" },
       }}
     >
-      <Slide direction="left" in={true} timeout={725}>
+      <Slide direction="left" in={true} timeout={725} unmountOnExit>
         <Container maxWidth="md">
           {router.pathname === "/v2" && <Info />}
           {router.pathname === "/v2/contact" && <Contact />}
