@@ -83,7 +83,7 @@ const NavBar: FC<NavBarProps> = ({ user }) => {
           position="sticky"
           sx={{
             boxShadow: "none",
-            backgroundColor: "secondary.main",
+            // backgroundColor: "secondary.main",
           }}
         >
           <Toolbar>
