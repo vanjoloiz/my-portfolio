@@ -1,4 +1,5 @@
 import { FC, useEffect, useState } from "react";
+import dynamic from "next/dynamic";
 import axios from "axios";
 import Cookie from "js-cookie";
 import { v4 as uuidv4 } from "uuid";
@@ -11,7 +12,12 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { Box } from "@mui/material";
 import NavDrawer from "./NavDrawer";
 import HideOnScroll from "@utils/HideOnScroll";
+import Fade from "@mui/material/Fade";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
+
+const Odometer = dynamic(import("react-odometerjs"), {
+  ssr: false,
+});
 
 import { io } from "socket.io-client";
 import { BASE_URL } from "@utils/baseUrl";
@@ -40,7 +46,7 @@ const NavBar: FC<NavBarProps> = ({ user }) => {
       Cookie.set("userId", uuidv4());
     }
 
-    return socket.emit("join", Cookie.get("userId"));
+    socket.emit("join", Cookie.get("userId"));
   };
 
   useEffect(() => {
@@ -77,11 +83,14 @@ const NavBar: FC<NavBarProps> = ({ user }) => {
           position="sticky"
           sx={{
             boxShadow: "none",
-            bgcolor: "##262626",
+            backgroundColor: "secondary.main",
           }}
         >
           <Toolbar>
-            <Typography variant="h6" sx={{ flexGrow: 1 }}>
+            <Typography
+              variant="h6"
+              sx={{ flexGrow: 1, color: "primary.main" }}
+            >
               <span
                 onClick={() => router.push("/v2", undefined, { shallow: true })}
                 style={{ cursor: "pointer" }}
@@ -106,22 +115,25 @@ const NavBar: FC<NavBarProps> = ({ user }) => {
             </Box>
 
             {viewingUserCount !== 0 && (
-              <Typography
-                component="span"
-                fontWeight="bold"
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  fontSize: "12px",
-                }}
-              >
-                <AccessTimeIcon sx={{ fontSize: "12px", mr: 0.5 }} />
-                {viewingUserCount}
-                <span style={{ marginLeft: "2px" }}>
-                  {viewingUserCount > 1 ? "Viewers" : "Viewer"}
-                </span>
-              </Typography>
+              <Fade in={true} timeout={725}>
+                <Typography
+                  component="span"
+                  fontWeight="bold"
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    fontSize: "12px",
+                    color: "primary.main",
+                  }}
+                >
+                  <AccessTimeIcon sx={{ fontSize: "12px", mr: 0.5 }} />
+                  <Odometer value={viewingUserCount} />
+                  <span style={{ marginLeft: "2px" }}>
+                    {viewingUserCount > 1 ? "Viewers" : "Viewer"}
+                  </span>
+                </Typography>
+              </Fade>
             )}
           </Toolbar>
         </AppBar>
