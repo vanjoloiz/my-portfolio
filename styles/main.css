@@ -1,5 +1,9 @@
+body::-webkit-scrollbar {
+  display: none;
+}
+
 body {
-  overflow: hidden;
+  -ms-overflow-style: none;
 }
 
 #nprogress {
