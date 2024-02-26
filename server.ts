@@ -55,14 +55,14 @@ nextApp.prepare().then(async () => {
         `${BASE_URL}/api/v1/count/${userId}/${info.ip}`
       );
 
-      io.emit("updateViewsCount", data);
+      io.emit("updateViewsCount", data.length);
 
       socket.on("disconnect", async () => {
         const { data } = await axios.delete(
           `${BASE_URL}/api/v1/count/${userId}`
         );
 
-        io.emit("updateViewsCount", data);
+        io.emit("updateViewsCount", data.length);
       });
     });
   });

@@ -3,7 +3,6 @@ import mongoose from "mongoose";
 const CountSchema = new mongoose.Schema({
   userId: {
     type: String,
-    unique: true,
     required: true,
   },
 

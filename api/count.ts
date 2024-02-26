@@ -4,7 +4,7 @@ import Count from "../models/Count";
 const router = express.Router();
 
 router.get("/", async (req, res) => {
-  const count = await Count.find();
+  const count = await Count.find().distinct("userId");
 
   res.status(200).json(count);
 });
@@ -16,7 +16,7 @@ router.post("/:userId/:ipAddress", async (req, res) => {
       ipAddress: req.params.ipAddress,
     }).save();
 
-    const count = await Count.countDocuments();
+    const count = await Count.find().distinct("userId");
 
     res.status(200).json(count);
   } catch (err: any) {
@@ -29,7 +29,7 @@ router.post("/:userId/:ipAddress", async (req, res) => {
 router.delete("/:userId", async (req, res) => {
   await Count.findOneAndDelete({ userId: req.params.userId });
 
-  const count = await Count.countDocuments();
+  const count = await Count.find().distinct("userId");
 
   res.status(200).json(count);
 });
