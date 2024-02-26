@@ -37,7 +37,7 @@ const socket = io(BASE_URL, {
 const NavBar: FC<NavBarProps> = ({ user }) => {
   const router = useRouter();
 
-  const [viewingUserCount, setViewingUserCount] = useState(1);
+  const [viewingUserCount, setViewingUserCount] = useState(0);
 
   const [isOpenNavDrawer, setIsOpenNavDrawer] = useState(false);
 
