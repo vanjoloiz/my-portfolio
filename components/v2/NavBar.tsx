@@ -14,6 +14,9 @@ import NavDrawer from "./NavDrawer";
 import HideOnScroll from "@utils/HideOnScroll";
 import Fade from "@mui/material/Fade";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
+import LightModeIcon from "@mui/icons-material/LightMode";
+import { useThemeStore } from "../../lib/useThemeStore";
 
 const Odometer = dynamic(import("react-odometerjs"), {
   ssr: false,
@@ -40,6 +43,16 @@ const NavBar: FC<NavBarProps> = ({ user }) => {
   const [viewingUserCount, setViewingUserCount] = useState(0);
 
   const [isOpenNavDrawer, setIsOpenNavDrawer] = useState(false);
+
+  const { toggleTheme }: any = useThemeStore();
+
+  const isDarkMode = useThemeStore((state: any) => state.isDarkMode);
+
+  const [mode, setMode] = useState<"light" | "dark">("light");
+
+  useEffect(() => {
+    setMode(isDarkMode ? "dark" : "light");
+  }, [isDarkMode]);
 
   const emitSocketConnection = () => {
     if (Cookie.get("userId") === undefined) {
@@ -83,7 +96,7 @@ const NavBar: FC<NavBarProps> = ({ user }) => {
           position="sticky"
           sx={{
             boxShadow: "none",
-            // backgroundColor: "secondary.main",
+            backgroundColor: "secondary.main",
           }}
         >
           <Toolbar>
@@ -100,6 +113,14 @@ const NavBar: FC<NavBarProps> = ({ user }) => {
             </Typography>
 
             <Box sx={{ display: { lg: "none" } }}>
+              <IconButton
+                onClick={toggleTheme}
+                disableFocusRipple
+                disableTouchRipple
+              >
+                {mode === "light" ? <DarkModeIcon /> : <LightModeIcon />}
+              </IconButton>
+
               <IconButton
                 onClick={handleMenuIconClick}
                 disableFocusRipple

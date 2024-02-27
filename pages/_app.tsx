@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { SWRConfig } from "swr";
 import Router from "next/router";
 import { parseCookies } from "nookies";
@@ -12,6 +13,8 @@ import createEmotionCache from "@/lib/createEmotionCache";
 import { BASE_URL } from "@utils/baseUrl";
 import Layout from "@/components/v2/Layout";
 import HeadTags from "@/components/v2/HeadTags";
+import { getDesignTokens } from "../styles/designToken";
+import { useThemeStore } from "../lib/useThemeStore";
 import "../styles/main.css";
 
 const clientSideEmotionCache = createEmotionCache();
@@ -28,25 +31,22 @@ interface MyAppProps extends AppProps {
 export default function MyApp(props: MyAppProps) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
 
-  const muiTheme = createTheme({
-    palette: {
-      primary: {
-        main: "#FFFFFF",
-      },
-      mode: "dark",
-    },
-    typography: {
-      button: {
-        textTransform: "none",
-      },
-    },
-  });
+  const isDarkMode = useThemeStore((state: any) => state.isDarkMode);
+
+  const [mode, setMode] = useState<"light" | "dark">("dark");
+
+  useEffect(() => {
+    setMode(isDarkMode ? "dark" : "light");
+  }, [isDarkMode]);
+
+  // @ts-ignore
+  const colorTheme = createTheme(getDesignTokens(mode));
 
   return (
     <CacheProvider value={emotionCache}>
       <HeadTags />
       <SWRConfig value={{ fetcher }}>
-        <ThemeProvider theme={muiTheme}>
+        <ThemeProvider theme={colorTheme}>
           <CssBaseline />
           <Layout {...pageProps}>
             <Component {...pageProps} />

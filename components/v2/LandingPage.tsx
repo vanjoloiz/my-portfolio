@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import { useRouter } from "next/router";
 import { Container, Box } from "@mui/material";
 import Slide from "@mui/material/Slide";
@@ -19,19 +20,29 @@ import News from "./News";
 const LandingPage = ({ reviews, user }: any) => {
   const router = useRouter();
 
+  const containerRef = useRef(null);
+
   return (
     <Box
+      ref={containerRef}
       sx={{
         minHeight: "calc(100vh - 30px)",
         display: "flex",
         justifyContent: "center",
         flexDirection: "column",
         pb: 7,
-
+        overflow: "hidden",
         textAlign: { xs: "center", lg: "unset" },
       }}
     >
-      <Slide direction="left" in={true} timeout={725} unmountOnExit>
+      <Slide
+        direction="right"
+        in={true}
+        timeout={725}
+        unmountOnExit
+        mountOnEnter
+        container={containerRef.current}
+      >
         <Container maxWidth="md">
           {router.pathname === "/v2" && <Info />}
           {router.pathname === "/v2/contact" && <Contact />}

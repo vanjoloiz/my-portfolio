@@ -170,8 +170,8 @@ const SideNav = ({ user }: any) => {
                       sx={{
                         color:
                           router.pathname === `${item.pathName}`
-                            ? "#FFFFFF"
-                            : "#BBBBBB",
+                            ? "link.active"
+                            : "link.default",
                         "&:hover": {
                           letterSpacing: "3px",
                           transition: ".3s ease-in-out",

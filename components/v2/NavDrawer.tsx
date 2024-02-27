@@ -170,8 +170,8 @@ const NavDrawer = ({ user, isOpen, onClose }: any) => {
                         sx={{
                           color:
                             router.pathname === `${item.pathName}`
-                              ? "#FFFFFF"
-                              : "#BBBBBB",
+                              ? "link.active"
+                              : "link.default",
                           "&:hover": {
                             letterSpacing: "2px",
                             transition: ".3s ease-in-out",

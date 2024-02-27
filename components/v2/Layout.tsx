@@ -4,6 +4,7 @@ import NProgress from "nprogress";
 import NavBar from "./NavBar";
 import SideNav from "./SideNav";
 import { Grid } from "@mui/material";
+import ColorThemeButton from "./ColorThemeButton";
 
 interface User {
   _id: string;
@@ -40,17 +41,28 @@ const Layout: FC<LayoutProps> = ({ children, user }) => {
           <Grid
             item
             md={12}
-            lg={4}
+            lg={3}
             sx={{
-              bgcolor: "#000000",
+              bgcolor: "background.secondary",
               display: { xs: "none", lg: "block" },
             }}
           >
             <SideNav user={user} />
           </Grid>
 
-          <Grid item xs={12} lg={8}>
+          <Grid item xs={12} lg={8.6} sx={{ bgcolor: "background.main" }}>
             {children}
+          </Grid>
+
+          <Grid
+            item
+            lg={0.4}
+            sx={{
+              bgcolor: "background.main",
+              display: { md: "none", lg: "block" },
+            }}
+          >
+            <ColorThemeButton />
           </Grid>
         </Grid>
       </main>

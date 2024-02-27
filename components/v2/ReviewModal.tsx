@@ -9,12 +9,7 @@ const ReviewModal = ({ review, isOpen, onClose }: any) => {
     <Dialog open={isOpen} onClose={onClose} maxWidth="md">
       <Box sx={{ p: 5 }}>
         <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-          <Typography
-            variant="subtitle1"
-            sx={{ color: "#BBBBBB" }}
-            marginBottom={3}
-            fontStyle="italic"
-          >
+          <Typography variant="subtitle1" marginBottom={3} fontStyle="italic">
             By {review.authorFirstName} {review.authorLastName} |{" "}
             {review.createdAt && format(review.createdAt, "d MMMM yyyy")}
           </Typography>
@@ -27,7 +22,7 @@ const ReviewModal = ({ review, isOpen, onClose }: any) => {
 
         <Typography
           variant="subtitle1"
-          sx={{ color: "#BBBBBB", whiteSpace: "pre-wrap" }}
+          sx={{ whiteSpace: "pre-wrap" }}
           marginBottom={3}
         >
           {review.text}

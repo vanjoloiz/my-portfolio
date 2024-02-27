@@ -90,19 +90,19 @@ const Reviews = ({ reviews }: any) => {
                 }}
               >
                 <Typography
-                  sx={{ fontSize: 22, fontWeight: "bold", color: "#E9E9E9" }}
-                  color="text.secondary"
+                  sx={{ fontSize: 22, fontWeight: "bold" }}
+                  color="text.main"
                   gutterBottom
                 >
                   {review.profile.firstName} {review.profile.lastName}
                 </Typography>
                 <Typography
+                  color="text.secondary"
                   sx={{
                     display: "-webkit-box",
                     overflow: "hidden",
                     WebkitLineClamp: 12,
                     WebkitBoxOrient: "vertical",
-                    color: "#BBBBBB",
                     fontStyle: "italic",
                   }}
                   variant="body2"
