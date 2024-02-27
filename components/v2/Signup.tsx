@@ -394,9 +394,11 @@ const SignUp = () => {
           <Link
             href={loginAnchorRedirect}
             legacyBehavior={false}
-            style={{ color: "#FFFFFF" }}
+            style={{ textDecoration: "none" }}
           >
-            Already have an account? Sign in
+            <Typography sx={{ color: "primary.main" }}>
+              Already have an account? Sign in
+            </Typography>
           </Link>
         </Box>
       </Container>

@@ -193,18 +193,22 @@ const Login = () => {
                   <Link
                     href={signUpAnchorRedirect}
                     legacyBehavior={false}
-                    style={{ color: "#FFFFFF" }}
+                    style={{ textDecoration: "none" }}
                   >
-                    Don&apos; t have an account? Sign Up
+                    <Typography sx={{ color: "primary.main" }}>
+                      Don&apos; t have an account? Sign Up
+                    </Typography>
                   </Link>
                 </Grid>
                 <Grid item xs={12} sm={12} md={12}>
                   <Link
                     href="/v2/forgot-password"
                     legacyBehavior={false}
-                    style={{ color: "#FFFFFF" }}
+                    style={{ textDecoration: "none" }}
                   >
-                    Forgot Password?
+                    <Typography sx={{ color: "primary.main" }}>
+                      Forgot Password?
+                    </Typography>
                   </Link>
                 </Grid>
               </Grid>
