@@ -17,7 +17,7 @@ export const useThemeStore = create<ThemeStore | any>(
     }),
     {
       name: "theme",
-      storage: createJSONStorage(() => sessionStorage),
+      storage: createJSONStorage(() => localStorage),
     }
   )
 );
