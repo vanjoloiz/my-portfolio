@@ -68,7 +68,7 @@ const Reviews = ({ reviews }: any) => {
   return (
     <>
       <MetaTags title="Reviews" />
-      <Typography align="left" variant="h4" my={4.5} fontWeight="bold">
+      <Typography align="left" variant="h4" mt={5} mb={3} fontWeight="bold">
         Reviews
       </Typography>
       <Grid container spacing={2}>
@@ -135,7 +135,7 @@ const Reviews = ({ reviews }: any) => {
         ))}
       </Grid>
       {!isReachEnd && (
-        <Box sx={{ display: "flex", justifyContent: "center", pt: 1.5 }}>
+        <Box sx={{ display: "flex", justifyContent: "center", pt: 2 }}>
           <Button
             disableElevation
             disableFocusRipple

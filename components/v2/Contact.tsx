@@ -90,7 +90,7 @@ const Contact = () => {
         message="Message successfully send."
       />
 
-      <Typography align="left" variant="h4" mb={5} fontWeight="bold">
+      <Typography align="left" variant="h4" mb={2} fontWeight="bold">
         Get in touch
       </Typography>
       <>
