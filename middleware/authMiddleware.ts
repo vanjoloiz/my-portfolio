@@ -19,11 +19,14 @@ export const authMiddleware = async (
   let token;
 
   try {
-    if (!req.headers.authorization) {
+    if (
+      !req.headers.authorization ||
+      !req.headers.authorization.startsWith("Bearer")
+    ) {
       return res.status(401).send("Unauthorized");
     }
 
-    token = req.headers.authorization;
+    token = req.headers.authorization.split(" ")[1];
 
     const { userId }: any = jwt.verify(token, process.env.JWT_SECRET!);
 

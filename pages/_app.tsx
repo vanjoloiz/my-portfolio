@@ -21,7 +21,7 @@ const clientSideEmotionCache = createEmotionCache();
 
 const fetcher = (url: string) =>
   axios
-    .get(url, { headers: { Authorization: Cookie.get("token") } })
+    .get(url, { headers: { Authorization: `Bearer ${Cookie.get("token")}` } })
     .then((res) => res.data);
 
 interface MyAppProps extends AppProps {
