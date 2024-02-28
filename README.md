@@ -9,7 +9,8 @@ This is my personal portfolio website showcasing my skills and projects.
 - Material-UI - React UI framework
 - SWR - React Hooks for Data Fetching
 - Zustand - State management library for React
-- Express - Fast, unopinionated, minimalist web framework for Node.js
+- Express - Fast, unopinionated, minimalist web framework for Node.
+- Socket.io - Bidirectional and low-latency communication for every platform
 - MongoDB - A NoSQL Database
 - Sendgrid - Email Delivery platform
 - ~~Twilio - Communication APIs for sending and receiving text message and phone calls~~
@@ -26,6 +27,7 @@ This is my personal portfolio website showcasing my skills and projects.
 - Create, edit and delete reviews
 - Admin authorization for approving a review to display on the website
 - Sending email (Get in touch, Welcome email upon registering)
+- Real-time count of currently viewing users
 - ~~SMS~~
 
 ## Installation
