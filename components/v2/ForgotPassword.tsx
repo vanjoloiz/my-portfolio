@@ -17,7 +17,7 @@ import {
   resetPasswordValidationSchema,
 } from "@utils/formValidationSchema";
 import { BASE_URL } from "@utils/baseUrl";
-import MetaTags from "./MetaTags";
+import HeadTags from "./HeadTags";
 
 const isEmpty = (obj: any) => {
   return Object.keys(obj).length === 0;
@@ -155,7 +155,7 @@ const ForgotPassword = () => {
 
   return (
     <>
-      <MetaTags title="Forgot Password" />
+      <HeadTags title="Forgot Password" />
       <Container maxWidth="md">
         {isError.usernameNotFound && showErrorAlert("User not registered.")}
         {isError.invalidToken && showErrorAlert("Something went wrong.")}

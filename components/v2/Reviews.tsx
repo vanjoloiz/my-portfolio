@@ -10,7 +10,7 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
 import ReviewLoading from "./ReviewLoading";
-import MetaTags from "./MetaTags";
+import HeadTags from "./HeadTags";
 import ReviewModal from "./ReviewModal";
 
 const getKey = (pageIndex: number, previousPageData: any) => {
@@ -67,7 +67,7 @@ const Reviews = ({ reviews }: any) => {
 
   return (
     <>
-      <MetaTags title="Reviews" />
+      <HeadTags title="Reviews" />
       <Typography align="left" variant="h4" mt={5} mb={3} fontWeight="bold">
         Reviews
       </Typography>

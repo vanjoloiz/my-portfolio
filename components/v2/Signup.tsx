@@ -23,7 +23,7 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import LanguageIcon from "@mui/icons-material/Language";
 import InputAdornment from "@mui/material/InputAdornment";
 import { BASE_URL } from "@utils/baseUrl";
-import MetaTags from "./MetaTags";
+import HeadTags from "./HeadTags";
 
 interface FormValues {
   firstName: string;
@@ -176,7 +176,7 @@ const SignUp = () => {
 
   return (
     <>
-      <MetaTags title="Sign Up" />
+      <HeadTags title="Sign Up" />
       <Container maxWidth="md">
         <Box sx={{ display: "block", margin: "auto" }}>
           <Typography align="left" variant="h4" my={2} fontWeight="bold">

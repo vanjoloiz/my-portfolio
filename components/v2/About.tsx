@@ -1,10 +1,10 @@
 import Typography from "@mui/material/Typography";
-import MetaTags from "./MetaTags";
+import HeadTags from "./HeadTags";
 
 const About = () => {
   return (
     <>
-      <MetaTags title="About" />
+      <HeadTags title="About" />
       <Typography
         align="center"
         sx={{

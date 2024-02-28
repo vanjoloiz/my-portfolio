@@ -20,7 +20,7 @@ import { loginValidationSchema } from "@utils/formValidationSchema";
 import IconButton from "@mui/material/IconButton";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import MetaTags from "./MetaTags";
+import HeadTags from "./HeadTags";
 
 interface FormValues {
   username: string;
@@ -74,7 +74,7 @@ const Login = () => {
 
   return (
     <>
-      <MetaTags title="Login" />
+      <HeadTags title="Login" />
       <Container maxWidth="md">
         <Typography align="left" variant="h4" mb={2} fontWeight="bold">
           Login

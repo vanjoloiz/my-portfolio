@@ -12,10 +12,10 @@ import { createTheme } from "@mui/material/styles";
 import createEmotionCache from "@/lib/createEmotionCache";
 import { BASE_URL } from "@utils/baseUrl";
 import Layout from "@/components/v2/Layout";
-import HeadTags from "@/components/v2/HeadTags";
 import { getDesignTokens } from "../styles/designToken";
 import { useThemeStore } from "../lib/useThemeStore";
 import "../styles/main.css";
+import HeadTags from "@/components/v2/HeadTags";
 
 const clientSideEmotionCache = createEmotionCache();
 
@@ -44,7 +44,7 @@ export default function MyApp(props: MyAppProps) {
 
   return (
     <CacheProvider value={emotionCache}>
-      <HeadTags />
+      <HeadTags title="Salvador Loiz" />
       <SWRConfig value={{ fetcher }}>
         <ThemeProvider theme={colorTheme}>
           <CssBaseline />

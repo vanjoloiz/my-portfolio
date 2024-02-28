@@ -6,7 +6,7 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Alert from "@mui/material/Alert";
 import CircularProgress from "@mui/material/CircularProgress";
-import MetaTags from "./MetaTags";
+import HeadTags from "./HeadTags";
 import { createReviewValidationSchema } from "@utils/formValidationSchema";
 import { REVIEW_TEXT_MAXIMUM_LENGTH } from "@utils/constants";
 import { BASE_URL } from "@utils/baseUrl";
@@ -49,7 +49,7 @@ const CreateReview = () => {
 
   return (
     <>
-      <MetaTags title="Create Review" />
+      <HeadTags title="Create Review" />
       <ToastMessage
         onClose={handleToastMessageClose}
         isOpen={isOpenToastMessage}

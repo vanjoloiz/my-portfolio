@@ -1,18 +1,20 @@
-import React from "react";
 import Head from "next/head";
 
-const HeadTags = () => {
+const HeadTags = ({ title }: { title: string }) => {
+  const siteName = title === "Salvador Loiz" ? "" : "Salvador Loiz |";
+  const titleContent = `${siteName} ${title}`;
+
   return (
     <Head>
-      <title>Salvador Loiz</title>
+      <title>{titleContent}</title>
       <meta name="viewport" content="initial-scale=1, width=device-width" />
       <meta
         name="description"
-        content="Welcome to SEE, the portfolio website of Salvador Loiz. Here, Salvador showcases his diverse skills and a collection of impressive projects. Explore the fusion of creativity and expertise in design and development as you browse through Salvador's work. Welcome to the world of Salvador Loiz's skills and projects!"
+        content="Welcome to see, the portfolio website of Salvador Loiz. Here, Salvador showcases his diverse skills and a collection of impressive projects. Explore the fusion of creativity and expertise in design and development as you browse through Salvador's work. Welcome to the world of Salvador Loiz's skills and projects!"
       />
       <meta
         name="keywords"
-        content="Salvador Loiz, portfolio, skills, projects"
+        content="Salvador Loiz, Vanjo Loiz, portfolio, skills, projects"
       />
       <meta property="og:title" content="Salvador Loiz" />
       <meta

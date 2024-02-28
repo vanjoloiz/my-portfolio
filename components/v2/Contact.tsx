@@ -14,7 +14,7 @@ import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import { getInTouchFormValidationSchema } from "@utils/formValidationSchema";
 import ToastMessage from "./ToastMessage";
-import MetaTags from "./MetaTags";
+import HeadTags from "./HeadTags";
 
 interface FormValues {
   firstName: string;
@@ -83,7 +83,7 @@ const Contact = () => {
 
   return (
     <>
-      <MetaTags title="Contact" />
+      <HeadTags title="Contact" />
       <ToastMessage
         onClose={handleToastMessageClose}
         isOpen={isOpenToastMessage}
