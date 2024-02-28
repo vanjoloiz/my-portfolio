@@ -116,7 +116,7 @@ MyApp.getInitialProps = async ({ ctx }: AppContext) => {
 
     const { data } = await axios.get(`${BASE_URL}/api/v1/auth`, {
       headers: {
-        Authorization: token,
+        Authorization: `Bearer ${token}`,
       },
     });
 
