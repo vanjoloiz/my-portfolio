@@ -59,7 +59,7 @@ const Layout: FC<LayoutProps> = ({ children, user }) => {
             lg={0.4}
             sx={{
               bgcolor: "background.main",
-              display: { md: "none", lg: "block" },
+              display: { xs: "none", lg: "block" },
             }}
           >
             <ColorThemeButton />
