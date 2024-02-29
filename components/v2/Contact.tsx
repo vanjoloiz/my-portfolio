@@ -167,7 +167,7 @@ const Contact = () => {
                 disableFocusRipple
                 disableTouchRipple
                 variant="contained"
-                sx={{ mt: "35px" }}
+                sx={{ mt: "20px" }}
                 type="submit"
               >
                 Send Message
