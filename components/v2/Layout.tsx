@@ -3,7 +3,7 @@ import Router from "next/router";
 import NProgress from "nprogress";
 import NavBar from "./NavBar";
 import SideNav from "./SideNav";
-import { Grid } from "@mui/material";
+import Grid from "@mui/material/Grid";
 import ColorThemeButton from "./ColorThemeButton";
 
 interface User {

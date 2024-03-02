@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { useRouter } from "next/router";
-import { Container, Box } from "@mui/material";
+import Container from "@mui/material/Container";
+import Box from "@mui/material/Box";
 import Slide from "@mui/material/Slide";
 
 import Welcome from "./Welcome";
