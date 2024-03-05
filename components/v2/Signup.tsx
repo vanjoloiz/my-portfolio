@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
+import { PatternFormat } from "react-number-format";
 import Link from "next/link";
 import axios from "axios";
 import Cookie from "js-cookie";
@@ -228,7 +229,6 @@ const SignUp = () => {
                       />
                     </Grid>
                   </Grid>
-
                   <Field
                     component={TextField}
                     label="Username"
@@ -254,7 +254,6 @@ const SignUp = () => {
                       ),
                     }}
                   />
-
                   <Field
                     component={TextField}
                     label="Password"
@@ -282,7 +281,6 @@ const SignUp = () => {
                       ),
                     }}
                   />
-
                   <Field
                     component={TextField}
                     label="Confirm password"
@@ -314,7 +312,6 @@ const SignUp = () => {
                       ),
                     }}
                   />
-
                   <Field
                     component={TextField}
                     label="Email"
@@ -334,13 +331,14 @@ const SignUp = () => {
                     }}
                   />
 
-                  <Field
-                    component={TextField}
+                  <PatternFormat
+                    format="### ### ####"
+                    customInput={TextField}
+                    onChange={handleChange}
                     label="Phone number (optional)"
                     placeholder="Phone number"
                     margin="dense"
                     id="phoneNumber"
-                    onChange={handleChange}
                     fullWidth
                     error={touched.phoneNumber && Boolean(errors.phoneNumber)}
                     helperText={touched.phoneNumber && errors.phoneNumber}
@@ -369,7 +367,6 @@ const SignUp = () => {
                       ),
                     }}
                   />
-
                   <Button
                     sx={{ mt: 2, mb: 2 }}
                     fullWidth
