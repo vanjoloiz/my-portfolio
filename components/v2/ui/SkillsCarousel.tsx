@@ -25,6 +25,7 @@ import SCSSLogo from "@/assets/svg/scss.svg";
 import SocketIOLogo from "@/assets/svg/socket-io-svgrepo-com.svg";
 import FastifyLogo from "@/assets/svg/fastify-icon-svgrepo-com.svg";
 import DockerLogo from "@/assets/svg/docker-svgrepo-com.svg";
+import TailwindCss from "@/assets/svg/tailwind-svgrepo-com.svg";
 import { useThemeStore } from "../../../lib/useThemeStore";
 
 const options = {
@@ -106,6 +107,10 @@ const SkillsCarousel = () => {
 
             <div className="embla__slide">
               <ReduxLogo />
+            </div>
+
+            <div className="embla__slide">
+              <TailwindCss />
             </div>
 
             <div className="embla__slide">
