@@ -37,7 +37,7 @@ const educationSteps = [
   },
   {
     label: "Borol 1st Elementary School",
-    date: "Jan 2004 - Mar 2010",
+    date: "Jan 2006 - Mar 2010",
   },
 ];
 
