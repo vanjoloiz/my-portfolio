@@ -17,7 +17,7 @@ body {
   z-index: 1031;
   top: 0;
   left: 0;
-  background-color: #ffffff;
+  background-color: #868686;
 
   width: 100%;
   height: 2px;
@@ -150,4 +150,41 @@ body {
 .odometer.odometer-auto-theme .odometer-value,
 .odometer.odometer-theme-default .odometer-value {
   text-align: center;
+}
+
+.embla {
+  margin: auto;
+  --slide-height: 19rem;
+  --slide-spacing: 9rem;
+  --slide-size: 5%;
+}
+.embla__viewport {
+  overflow: hidden;
+}
+.embla__container {
+  backface-visibility: hidden;
+  display: flex;
+  touch-action: pan-y;
+  margin-left: calc(var(--slide-spacing) * -1);
+}
+.embla__slide {
+  flex: 0 0 var(--slide-size);
+  min-width: 0;
+  padding-left: var(--slide-spacing);
+}
+.embla__slide__number {
+  box-shadow: inset 0 0 0 0.2rem var(--detail-medium-contrast);
+  border-radius: 1.8rem;
+  font-size: 4rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--slide-height);
+}
+
+@media only screen and (max-width: 844px) {
+  .embla {
+    --slide-spacing: 7rem;
+  }
 }

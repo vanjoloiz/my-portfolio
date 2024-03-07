@@ -28,6 +28,7 @@ export const getDesignTokens = (mode: PaletteMode) => ({
           },
           text: {
             primary: BLACK,
+            secondary: MIDNIGHT_BLACK,
           },
           link: {
             default: GRAY,
@@ -48,6 +49,7 @@ export const getDesignTokens = (mode: PaletteMode) => ({
           },
           text: {
             primary: ANTIQUE_WHITE,
+            secondary: "#BBBBBB",
           },
           link: {
             default: GRAY_ALTERNATIVE,

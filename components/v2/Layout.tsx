@@ -1,10 +1,12 @@
 import { FC, ReactNode } from "react";
+import { useRouter } from "next/router";
 import Router from "next/router";
 import NProgress from "nprogress";
 import NavBar from "./NavBar";
 import SideNav from "./SideNav";
 import Grid from "@mui/material/Grid";
 import ColorThemeButton from "./ColorThemeButton";
+import AboutSecondSection from "./ui/AboutSecondSection";
 
 interface User {
   _id: string;
@@ -20,6 +22,8 @@ interface LayoutProps {
 
 const Layout: FC<LayoutProps> = ({ children, user }) => {
   const isLoggedIn = user !== undefined;
+
+  const router = useRouter();
 
   Router.events.on("routeChangeStart", () => {
     NProgress.start();
@@ -52,6 +56,7 @@ const Layout: FC<LayoutProps> = ({ children, user }) => {
 
           <Grid item xs={12} lg={8.6} sx={{ bgcolor: "background.main" }}>
             {children}
+            {router.pathname === "/v2/about" && <AboutSecondSection />}
           </Grid>
 
           <Grid
