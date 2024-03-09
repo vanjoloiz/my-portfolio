@@ -62,114 +62,113 @@ const SkillsCarousel = () => {
         mb: 1.5,
       }}
     >
-      <div className="embla">
-        <div className="embla__viewport" ref={emblaRef1}>
-          <div className="embla__container">
-            <div className="embla__slide">
+      <div className="skills-carousel">
+        <div className="skills-carousel-viewport" ref={emblaRef1}>
+          <div
+            className="skills-carousel-container"
+            style={{ marginBottom: "60px" }}
+          >
+            <div className="skills-carousel-slide">
               <JavascriptLogo />
             </div>
 
-            <div className="embla__slide">
+            <div className="skills-carousel-slide">
               <TypeScriptLogo />
             </div>
 
-            <div className="embla__slide">
+            <div className="skills-carousel-slide">
               <Html5Logo />
             </div>
 
-            <div className="embla__slide">
+            <div className="skills-carousel-slide">
               <Css3Logo />
             </div>
 
-            <div className="embla__slide">
+            <div className="skills-carousel-slide">
               <ReactLogo />
             </div>
 
-            <div className="embla__slide">
+            <div className="skills-carousel-slide">
               <NextjsLogo style={{ fill: isDarkMode ? "white" : "black" }} />
             </div>
 
-            <div className="embla__slide">
+            <div className="skills-carousel-slide">
               <MUILogo />
             </div>
 
-            <div className="embla__slide">
+            <div className="skills-carousel-slide">
               <AntdLogo />
             </div>
 
-            <div className="embla__slide">
+            <div className="skills-carousel-slide">
               <BootstrapLogo />
             </div>
 
-            <div className="embla__slide">
+            <div className="skills-carousel-slide">
               <ApolloLogo />
             </div>
 
-            <div className="embla__slide">
+            <div className="skills-carousel-slide">
               <ReduxLogo />
             </div>
 
-            <div className="embla__slide">
+            <div className="skills-carousel-slide">
               <TailwindCss />
             </div>
 
-            <div className="embla__slide">
+            <div className="skills-carousel-slide">
               <SCSSLogo />
             </div>
           </div>
         </div>
 
-        <br />
-        <br />
-        <br />
-
-        <div className="embla__viewport" ref={emblaRef2}>
-          <div className="embla__container">
-            <div className="embla__slide">
+        <div className="skills-carousel-viewport" ref={emblaRef2}>
+          <div className="skills-carousel-container">
+            <div className="skills-carousel-slide">
               <NodeJsLogo />
             </div>
 
-            <div className="embla__slide">
+            <div className="skills-carousel-slide">
               <ExpressLogo style={{ fill: isDarkMode ? "white" : "black" }} />
             </div>
 
-            <div className="embla__slide">
+            <div className="skills-carousel-slide">
               <FastifyLogo style={{ fill: isDarkMode ? "white" : "black" }} />
             </div>
 
-            <div className="embla__slide">
+            <div className="skills-carousel-slide">
               <NestJSLogo />
             </div>
 
-            <div className="embla__slide">
+            <div className="skills-carousel-slide">
               <GraphQLLogo />
             </div>
 
-            <div className="embla__slide">
+            <div className="skills-carousel-slide">
               <RestLogo />
             </div>
 
-            <div className="embla__slide">
+            <div className="skills-carousel-slide">
               <MongodbLogo />
             </div>
 
-            <div className="embla__slide">
+            <div className="skills-carousel-slide">
               <PostGresLogo />
             </div>
 
-            <div className="embla__slide">
+            <div className="skills-carousel-slide">
               <SocketIOLogo style={{ fill: isDarkMode ? "white" : "black" }} />
             </div>
 
-            <div className="embla__slide">
+            <div className="skills-carousel-slide">
               <DenoLogo style={{ fill: isDarkMode ? "white" : "black" }} />
             </div>
 
-            <div className="embla__slide">
+            <div className="skills-carousel-slide">
               <DockerLogo />
             </div>
 
-            <div className="embla__slide">
+            <div className="skills-carousel-slide">
               <HerokuLogo />
             </div>
           </div>
