@@ -29,7 +29,7 @@ const educationSteps = [
   {
     label: "STI College Balagtas",
     description: "Computer Engineering",
-    date: "Jun 2014 - Oct 2020",
+    date: "Jun 2014 - Oct 2019",
   },
   {
     label: "Balagtas National Agricultural High School",
