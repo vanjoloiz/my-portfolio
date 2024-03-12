@@ -30,7 +30,7 @@ const News = ({ newsProps }: any) => {
 
   return (
     <>
-      <HeadTags title="Reviews" />
+      <HeadTags title="News" />
       <Typography align="left" variant="h4" mt={5} mb={3} fontWeight="bold">
         Latest News
       </Typography>
