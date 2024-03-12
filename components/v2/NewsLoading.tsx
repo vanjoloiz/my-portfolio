@@ -8,7 +8,7 @@ const ReviewLoading = () => {
   return (
     <>
       <Typography align="left" variant="h4" my={4.5} fontWeight="bold">
-        Reviews
+        Latest News
       </Typography>
       <Grid container spacing={2}>
         {[1, 2, 3, 4].map((num: any) => (
