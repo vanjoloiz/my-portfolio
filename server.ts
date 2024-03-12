@@ -18,6 +18,7 @@ import reviewRouter from "./api/review";
 import getInTouchRouter from "./api/getInTouch";
 import messageRouter from "./api/message";
 import countRouter from "./api/count";
+import newsRouter from "./api/news";
 import { corsOptionsDelegate, socketIOCors } from "./utils/cors";
 import { BASE_URL } from "./utils/baseUrl";
 
@@ -79,6 +80,7 @@ nextApp.prepare().then(async () => {
   app.use("/api/v1/getInTouch", getInTouchRouter);
   app.use("/api/v1/message", messageRouter);
   app.use("/api/v1/count", countRouter);
+  app.use("/api/v1/news", newsRouter);
 
   app.get("/health", (req, res) => {
     res.status(200).send("Ok");

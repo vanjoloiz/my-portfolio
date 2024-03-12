@@ -33,6 +33,7 @@
     "jsonwebtoken": "^9.0.0",
     "juice": "^9.1.0",
     "mongoose": "^7.0.3",
+    "newsapi": "^2.4.1",
     "next": "12.2.2",
     "nodemailer": "^6.9.1",
     "nodemailer-sendgrid": "^1.0.3",

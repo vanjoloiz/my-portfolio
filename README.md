@@ -50,6 +50,7 @@ TWILIO_ACCOUNT_SID={twilioaccountsid}
 TWILIO_ACCOUNT_TOKEN={twilioaccounttoken}
 TWILIO_PHONE_NUMBER=+{twiliophonenumber}
 ADMIN_ID={adminid}
+NEWS_API_KEY={newsapikey}
 ```
 
 ## Usage
