@@ -13,6 +13,7 @@ router.get("/", async (req, res) => {
       language: "en",
       page: 1,
       pageSize: 20,
+      sortBy: "popularity",
     });
 
     res.status(200).json(news);

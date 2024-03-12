@@ -1,5 +1,6 @@
 import { useState } from "react";
 import useSWR from "swr";
+import { format } from "date-fns";
 import Card from "@mui/material/Card";
 import Slide from "@mui/material/Slide";
 import CardActions from "@mui/material/CardActions";
@@ -58,9 +59,17 @@ const News = ({ newsProps }: any) => {
                 <CardContent sx={{ height: "200px" }}>
                   <Typography
                     lineHeight={1.2}
-                    sx={{ fontSize: 22, fontWeight: "bold", mb: 2 }}
+                    sx={{ fontSize: 22, fontWeight: "bold", mb: 1 }}
                   >
                     {news.title}
+                  </Typography>
+                  <Typography
+                    variant="body2"
+                    color="text.secondary"
+                    fontStyle="italic"
+                    gutterBottom
+                  >
+                    {format(news.publishedAt, "d MMMM yyyy")}
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
                     {news.description}
@@ -71,7 +80,7 @@ const News = ({ newsProps }: any) => {
                   <CardActions>
                     <Button
                       sx={{
-                        pb: 1,
+                        pt: 5,
                         "&:hover": {
                           bgcolor: "transparent",
                           zIndex: 0,
