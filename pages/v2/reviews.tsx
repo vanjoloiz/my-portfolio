@@ -4,11 +4,11 @@ import { Review } from "@interfaces/Review";
 
 import { BASE_URL } from "@utils/baseUrl";
 
-const Portfolio = ({ reviews, user }: any) => {
+const Reviews = ({ reviews, user }: any) => {
   return <LandingPage reviews={reviews} user={user} />;
 };
 
-export default Portfolio;
+export default Reviews;
 
 export const getServerSideProps = async () => {
   const { data } = await axios.get<Review[]>(

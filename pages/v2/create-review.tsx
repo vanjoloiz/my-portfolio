@@ -1,7 +1,7 @@
 import LandingPage from "@/components/v2/LandingPage";
 
-const Services = ({ user }: any) => {
+const CreateReview = ({ user }: any) => {
   return <LandingPage user={user} />;
 };
 
-export default Services;
+export default CreateReview;
