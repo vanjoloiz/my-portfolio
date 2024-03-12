@@ -13,8 +13,10 @@ import NewsLoading from "./NewsLoading";
 import HeadTags from "./HeadTags";
 import defaultCardImg from "../../public/javascript.png";
 
-const News = () => {
-  const { data: news, isLoading } = useSWR("/api/v1/news");
+const News = ({ newsProps }: any) => {
+  const { data: news, isLoading } = useSWR("/api/v1/news", {
+    fallbackData: newsProps,
+  });
 
   const [isShowReadMoreButton, setIsShowReadMoreButton] = useState(-1);
 

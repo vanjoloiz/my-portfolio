@@ -18,7 +18,7 @@ import CreateReview from "./CreateReview";
 import About from "./About";
 import News from "./News";
 
-const LandingPage = ({ reviews, user }: any) => {
+const LandingPage = ({ reviews, user, news }: any) => {
   const router = useRouter();
 
   const containerRef = useRef(null);
@@ -66,7 +66,7 @@ const LandingPage = ({ reviews, user }: any) => {
           {router.pathname === "/v2/create-review" && <CreateReview />}
 
           {router.pathname === "/v2/about" && <About />}
-          {router.pathname === "/v2/news" && <News />}
+          {router.pathname === "/v2/news" && <News news={news} />}
         </Container>
       </Slide>
     </Box>
