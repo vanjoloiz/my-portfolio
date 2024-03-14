@@ -65,11 +65,6 @@ nextApp.prepare().then(async () => {
 
         io.emit("updateViewsCount", data.length);
       });
-
-      process.on("SIGINT", async () => {
-        await axios.delete(`${BASE_URL}/api/v1/count/${userId}`);
-        process.exit(0);
-      });
     });
   });
 
