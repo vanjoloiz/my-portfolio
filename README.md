@@ -50,6 +50,8 @@ TWILIO_ACCOUNT_SID={twilioaccountsid}
 TWILIO_ACCOUNT_TOKEN={twilioaccounttoken}
 TWILIO_PHONE_NUMBER=+{twiliophonenumber}
 ADMIN_ID={adminid}
+NEXT_PUBLIC_GOOGLE_RECAPTCHA={nextpublicgooglerecaptcha}
+NEXT_PUBLIC_MICROSOFT_CLARITY={nextpublicmicrosoftclarity}
 NEWS_API_KEY={newsapikey}
 ```
 

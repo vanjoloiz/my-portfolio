@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { clarity } from "react-microsoft-clarity";
 import { SWRConfig } from "swr";
 import Router from "next/router";
 import { parseCookies } from "nookies";
@@ -41,6 +42,10 @@ export default function MyApp(props: MyAppProps) {
 
   // @ts-ignore
   const colorTheme = createTheme(getDesignTokens(mode));
+
+  useEffect(() => {
+    clarity.init(process.env.NEXT_PUBLIC_MICROSOFT_CLARITY!);
+  }, []);
 
   return (
     <CacheProvider value={emotionCache}>
