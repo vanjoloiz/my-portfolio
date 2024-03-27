@@ -1,4 +1,4 @@
-import { FC, ReactNode } from "react";
+import { FC, ReactNode, useState } from "react";
 import { useRouter } from "next/router";
 import Router from "next/router";
 import NProgress from "nprogress";
@@ -7,6 +7,7 @@ import SideNav from "./SideNav";
 import Grid from "@mui/material/Grid";
 import ColorThemeButton from "./ColorThemeButton";
 import AboutSecondSection from "./ui/AboutSecondSection";
+import Banner from "./ui/Banner";
 
 interface User {
   _id: string;
@@ -23,6 +24,8 @@ interface LayoutProps {
 const Layout: FC<LayoutProps> = ({ children, user }) => {
   const isLoggedIn = user !== undefined;
 
+  const [isBannerOpen, setIsBannerOpen] = useState(true);
+
   const router = useRouter();
 
   Router.events.on("routeChangeStart", () => {
@@ -36,6 +39,8 @@ const Layout: FC<LayoutProps> = ({ children, user }) => {
   Router.events.on("routeChangeError", () => {
     NProgress.done();
   });
+
+  const handleBannerCloseClick = () => setIsBannerOpen(false);
 
   return (
     <>
@@ -70,6 +75,13 @@ const Layout: FC<LayoutProps> = ({ children, user }) => {
             <ColorThemeButton />
           </Grid>
         </Grid>
+        {router.pathname === "/v2/reviews" && !isLoggedIn && (
+          <Banner
+            isOpen={isBannerOpen}
+            message="You can create review by logging in."
+            onBannerClose={handleBannerCloseClick}
+          />
+        )}
       </main>
     </>
   );

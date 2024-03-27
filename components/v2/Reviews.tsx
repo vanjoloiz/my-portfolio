@@ -21,6 +21,7 @@ const getKey = (pageIndex: number, previousPageData: any) => {
 
 const Reviews = ({ reviews }: any) => {
   const [isOpenModal, setIsOpenModal] = useState(false);
+
   const [reviewModalData, setReviewModalData] = useState({
     title: "",
     text: "",
