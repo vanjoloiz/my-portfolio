@@ -13,7 +13,7 @@ interface BannerProps {
 
 const Banner: FC<BannerProps> = ({ message, isOpen, onBannerClose }) => {
   return (
-    <Grow in={isOpen}>
+    <Grow in={isOpen} timeout={800}>
       <Snackbar open={isOpen}>
         <Alert
           variant="filled"
