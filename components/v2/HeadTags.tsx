@@ -25,7 +25,7 @@ const HeadTags = ({ title }: { title: string }) => {
       <meta property="og:type" content="website" />
       <meta
         property="og:image"
-        content="https://avatars.githubusercontent.com/u/55220938?v=4"
+        content="https://salvadorloizjr.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fmern-stack.3993ba10.jpg&w=1920&q=75"
       />
       <meta name="author" content="Salvador Loiz" />
       <meta name="robots" content="index, follow" />
