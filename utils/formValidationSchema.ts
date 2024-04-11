@@ -8,8 +8,8 @@ export const loginValidationSchema = yup.object({
 });
 
 export const signUpValidationSchema = yup.object({
-  firstName: yup.string().required("Please enter your first name."),
-  lastName: yup.string().required("Please enter your last name."),
+  firstName: yup.string().trim().required("Please enter your first name."),
+  lastName: yup.string().trim().required("Please enter your last name."),
   username: yup
     .string()
     .trim()
@@ -52,8 +52,8 @@ export const createReviewValidationSchema = yup.object({
 });
 
 export const getInTouchFormValidationSchema = yup.object({
-  firstName: yup.string().required("Please enter your first name."),
-  lastName: yup.string().required("Please enter your last name."),
+  firstName: yup.string().trim().required("Please enter your first name."),
+  lastName: yup.string().trim().required("Please enter your last name."),
   email: yup
     .string()
     .required("Please enter your email.")
@@ -62,7 +62,7 @@ export const getInTouchFormValidationSchema = yup.object({
 });
 
 export const resetPasswordValidationSchema = yup.object({
-  username: yup.string().required("Please enter your username."),
+  username: yup.string().trim().required("Please enter your username."),
 });
 
 export const createNewPasswordValidationSchema = yup.object({
