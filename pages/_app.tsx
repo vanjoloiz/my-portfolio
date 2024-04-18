@@ -44,7 +44,9 @@ export default function MyApp(props: MyAppProps) {
   const colorTheme = createTheme(getDesignTokens(mode));
 
   useEffect(() => {
-    clarity.init(process.env.NEXT_PUBLIC_MICROSOFT_CLARITY!);
+    if (process.env.NODE_ENV === "production") {
+      clarity.init(process.env.NEXT_PUBLIC_MICROSOFT_CLARITY!);
+    }
   }, []);
 
   return (
