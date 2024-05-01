@@ -58,8 +58,8 @@ const About = () => {
         <Divider sx={{ mt: 3, mb: 10 }} />
 
         <Link
-          href="/salvador-loiz-cv.pdf"
-          download="salvador-loiz-cv.pdf"
+          href="/salvador-santos-loiz-jr.-updated.pdf"
+          download="salvador-santos-loiz-jr.-updated.pdf"
           sx={{
             mt: 10,
             backgroundColor: "primary.main",
