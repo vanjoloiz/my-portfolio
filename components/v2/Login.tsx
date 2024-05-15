@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
-import Grid from "@mui/material/Grid";
 import Link from "next/link";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
@@ -188,30 +187,32 @@ const Login = () => {
                   </>
                 )}
               </Formik>
-              <Grid container spacing={3}>
-                <Grid item xs={12} sm={12} md={12}>
-                  <Link
-                    href={signUpAnchorRedirect}
-                    legacyBehavior={false}
-                    style={{ textDecoration: "none" }}
-                  >
-                    <Typography sx={{ color: "primary.main" }}>
-                      Don&apos; t have an account? Sign Up
-                    </Typography>
-                  </Link>
-                </Grid>
-                <Grid item xs={12} sm={12} md={12}>
-                  <Link
-                    href="/v2/forgot-password"
-                    legacyBehavior={false}
-                    style={{ textDecoration: "none" }}
-                  >
-                    <Typography sx={{ color: "primary.main" }}>
-                      Forgot Password?
-                    </Typography>
-                  </Link>
-                </Grid>
-              </Grid>
+              <Box
+                display="flex"
+                justifyContent="space-between"
+                flexWrap="wrap"
+                mt={1}
+                gap={1.5}
+              >
+                <Link
+                  href={signUpAnchorRedirect}
+                  legacyBehavior={false}
+                  style={{ textDecoration: "none" }}
+                >
+                  <Typography sx={{ color: "primary.main" }}>
+                    Don&apos; t have an account? Sign Up
+                  </Typography>
+                </Link>
+                <Link
+                  href="/v2/forgot-password"
+                  legacyBehavior={false}
+                  style={{ textDecoration: "none" }}
+                >
+                  <Typography sx={{ color: "primary.main" }}>
+                    Forgot Password?
+                  </Typography>
+                </Link>
+              </Box>
             </Box>
           </>
         </Box>
