@@ -9,7 +9,7 @@ const firstColumnItems = [
 
   {
     info: "Age",
-    answer: "25",
+    answer: "26",
   },
 
   {
