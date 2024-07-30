@@ -46,7 +46,7 @@ const secondColumnItems = [
 
   {
     info: "Interest",
-    answer: "Gaming, Anime",
+    answer: "Gaming, Anime, Rap, Driving",
   },
 
   {
